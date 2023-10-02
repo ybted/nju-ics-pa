@@ -87,7 +87,7 @@ void fetch_decode(Decode *s, vaddr_t pc) {
 /* Simulate how the CPU works. */
 void cpu_exec(uint64_t n) {
   g_print_step = (n < MAX_INSTR_TO_PRINT);
-  printf("DEBUG: %d\n", (int)n);
+  printf("DEBUG: %u\n", (int)n);
   switch (nemu_state.state) {
     case NEMU_END: case NEMU_ABORT:
       printf("Program execution has ended. To restart the program, exit NEMU and run again.\n");
@@ -99,7 +99,6 @@ void cpu_exec(uint64_t n) {
 
   Decode s;
   for (;n > 0; n --) {
-    printf("DEBUG: %d\n", (int)n);
     fetch_decode_exec_updatepc(&s);
     g_nr_guest_instr ++;
     trace_and_difftest(&s, cpu.pc);
