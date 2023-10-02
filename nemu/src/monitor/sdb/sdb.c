@@ -29,13 +29,13 @@ static char* rl_gets() {
 }
 
 static int cmd_c(char *args) {
-  cpu_exec(9);
+  cpu_exec(-1);
   return 0;
 }
 
 
 static int cmd_q(char *args) {
-  nemu_state.state = NEMU_QUIT;
+  cpu_exec(0);
   return -1;
 }
 
