@@ -85,9 +85,11 @@ static int cmd_help(char *args) {
 static int cmd_si(char *args)
 {
   char *arg = strtok(NULL, " ");
-  int n = atoi(arg);
-  printf("DEBUG: %d\n", n);
-  cpu_exec(1);
+  if (arg == NULL) {
+    cpu_exec(1);
+  } else {
+    cpu_exec(atoi(arg));
+  } 
   return 0;
 }
 
