@@ -8,6 +8,6 @@ void engine_start() {
 #else
   /* Receive commands from user. */
   sdb_mainloop();
-  
+  nemu_state.state = NEMU_QUIT;
 #endif
 }
