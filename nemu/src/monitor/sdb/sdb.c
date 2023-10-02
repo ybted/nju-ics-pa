@@ -35,7 +35,7 @@ static int cmd_c(char *args) {
 
 
 static int cmd_q(char *args) {
-  cpu_exec(1);
+  nemu_state.state = NEMU_QUIT;
   return -1;
 }
 
@@ -84,6 +84,7 @@ static int cmd_help(char *args) {
 
 static int cmd_si(char *args)
 {
+  cpu_exec(1);
   return 0;
 }
 
