@@ -4,6 +4,8 @@
 #include <readline/history.h>
 #include "sdb.h"
 #include "utils.h"
+#include "../../../include/isa.h"
+
 
 static int is_batch_mode = false;
 //extern NEMUState nemu_state; 
@@ -43,6 +45,8 @@ static int cmd_help(char *args);
 
 static int cmd_si(char *args);
 
+static int cmd_info(char *args);
+
 static struct {
   const char *name;
   const char *description;
@@ -51,7 +55,8 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  { "si", "Execute N instructions", cmd_si }
+  { "si", "Execute N instructions", cmd_si },
+  { "info", "Print the state of the instructions", cmd_info}
 
   /* TODO: Add more commands */
 
@@ -89,6 +94,20 @@ static int cmd_si(char *args)
     cpu_exec(1);
   } else {
     cpu_exec(atoi(arg));
+  } 
+  return 0;
+}
+
+static int cmd_info(char *args)
+{
+  char *arg = strtok(NULL, " ");
+  if (arg[0] == 'r') {
+    isa_reg_display();
+  } else if (arg[0] == 'w') {
+
+  } else 
+  {
+    printf("Please enter correct para!\n");
   } 
   return 0;
 }
