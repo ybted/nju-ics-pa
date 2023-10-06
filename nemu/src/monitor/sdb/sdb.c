@@ -131,7 +131,7 @@ static int cmd_mem(char *args)
   // printf("n: %d addr: %x\n", n, addr);
   for (int i = 0; i < n; i ++)
   {
-    printf("%hx %X\n", paddr_read(addr + 4 * i, 4), paddr_read(addr + 4 * i, 4));
+    printf("%x\n", paddr_read(addr + 4 * i, 4));
   } 
   return 0;
 }
