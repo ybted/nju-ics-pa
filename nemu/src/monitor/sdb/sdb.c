@@ -5,6 +5,7 @@
 #include "sdb.h"
 #include "utils.h"
 #include "../../../include/isa.h"
+#include <memory/paddr.h>
 
 
 static int is_batch_mode = false;
@@ -127,7 +128,11 @@ static int cmd_mem(char *args)
     addr += base * (arg2[i] - '0');
     base *= 16;
   }
-  printf("n: %d addr: %x\n", n, addr);
+  // printf("n: %d addr: %x\n", n, addr);
+  for (int i = 0; i < n; i ++)
+  {
+    printf("%x \n", paddr_read(addr, 1));
+  }
   return 0;
 }
 
