@@ -123,7 +123,6 @@ static int cmd_mem(char *args)
   int n = atoi(arg1);
   paddr_t addr = 0;
   sscanf(arg2, "%x", &addr);
-  // printf("n: %d addr: %x\n", n, addr);
   for (int i = 0; i < n; i ++)
   {
     printf("0x%08x\n", paddr_read(addr + 4 * i, 4));
