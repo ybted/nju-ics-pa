@@ -114,10 +114,20 @@ static int cmd_info(char *args)
 
 static int cmd_mem(char *args) 
 {
-  char *arg = strtok(NULL, " ");
-  if (arg == NULL) {
-    cmd_help("x");
+  char *arg1 = strtok(NULL, " ");
+  char *arg2 = strtok(NULL, " ");
+  if (arg1 == NULL || arg2 == NULL) {
+    printf("Please enter correct para!\n");
   }
+  int n = atoi(arg1);
+  int addr = 0;
+  uint64_t base = 1;
+  for (int i = strlen(arg2) - 1; i >= 2; i --)
+  {
+    addr += base * (arg2[i] - '0');
+    base *= 16;
+  }
+  printf("n: %d addr: %x\n", n, addr);
   return 0;
 }
 
