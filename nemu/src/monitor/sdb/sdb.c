@@ -42,10 +42,9 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_help(char *args);
-
 static int cmd_si(char *args);
-
 static int cmd_info(char *args);
+static int cmd_mem(char *args);
 
 static struct {
   const char *name;
@@ -56,7 +55,8 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "Execute N instructions", cmd_si },
-  { "info", "Print the state of the instructions", cmd_info}
+  { "info", "Print the state of the instructions", cmd_info},
+  { "x", "Print the memory in given address", cmd_mem},
 
   /* TODO: Add more commands */
 
@@ -109,6 +109,15 @@ static int cmd_info(char *args)
   {
     printf("Please enter correct para!\n");
   } 
+  return 0;
+}
+
+static int cmd_mem(char *args) 
+{
+  char *arg = strtok(NULL, " ");
+  if (arg == NULL) {
+    cmd_help("x");
+  }
   return 0;
 }
 
