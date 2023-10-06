@@ -122,7 +122,7 @@ static int cmd_mem(char *args)
   }
   int n = atoi(arg1);
   paddr_t addr = 0;
-  sscanf(args, "%x", &addr);
+  sscanf(arg2, "%x", &addr);
   // printf("n: %d addr: %x\n", n, addr);
   for (int i = 0; i < n; i ++)
   {
