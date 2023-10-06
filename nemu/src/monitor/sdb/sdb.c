@@ -121,13 +121,8 @@ static int cmd_mem(char *args)
     printf("Please enter correct para!\n");
   }
   int n = atoi(arg1);
-  int addr = 0;
-  uint64_t base = 1;
-  for (int i = strlen(arg2) - 1; i >= 2; i --)
-  {
-    addr += base * (arg2[i] - '0');
-    base *= 16;
-  }
+  paddr_t addr = 0;
+  sscanf(args, "%x", &addr);
   // printf("n: %d addr: %x\n", n, addr);
   for (int i = 0; i < n; i ++)
   {
