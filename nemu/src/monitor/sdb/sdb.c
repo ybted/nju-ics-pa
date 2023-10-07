@@ -134,6 +134,20 @@ void sdb_set_batch_mode() {
 }
 
 void sdb_mainloop() {
+  FILE* fp = fopen("./input.txt", "r");
+  if (!fp) {
+    printf("Failure open file!\n");
+    exit(0);
+  }
+  char str[10000];
+  while (fgets(str, 10000, fp) != NULL) {
+    char exp[1000];
+    int answer;
+    bool success;
+    sscanf(str, "%d %s", &answer, exp);
+    printf("expr: %s answer: %d  mine: %d \n", exp, answer, expr(exp, &success));
+  }
+  
   if (is_batch_mode) {
     cmd_c(NULL);
     return;
