@@ -21,9 +21,9 @@ static struct rule {
    */
   {"[0-9]", TK_NUM},
   {" )", TK_NOTYPE},
-  {"\\)", ')'},
+  {")", ')'},
   {" (", TK_NOTYPE},
-  {"\\(", '('},
+  {"(", '('},
   {" *", TK_NOTYPE},
   {"\\*", '*'},
   {" /", TK_NOTYPE},
