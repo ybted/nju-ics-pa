@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
   int i;
   for (i = 0; i < loop; i ++) {
     ind = 0;
-    gen_rand_expr(2);
+    gen_rand_expr(5);
     buf[ind] = '\0';
     sprintf(code_buf, code_format, buf);
 
