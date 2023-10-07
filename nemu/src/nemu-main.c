@@ -15,6 +15,9 @@ int main(int argc, char *argv[]) {
   init_monitor(argc, argv);
 #endif
   FILE* fp = fopen("../tools/gen-expr/input", "r");
+  if (!fp) {
+    printf("Failure open file!\n");
+  }
   char str[10000];
   while (fgets(str, 10000, fp) != NULL) {
     char exp[1000];
