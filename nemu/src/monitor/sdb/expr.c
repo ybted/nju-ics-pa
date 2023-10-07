@@ -21,16 +21,16 @@ static struct rule {
    */
   {"[0-9]", TK_NUM},
   {" )", TK_NOTYPE},
-  {")", ')'},
+  {"\\)", ')'},
   {" (", TK_NOTYPE},
-  {"(", '('},
+  {"\\(", '('},
   {" *", TK_NOTYPE},
   {"\\*", '*'},
   {" /", TK_NOTYPE},
   {"\\/", '/'},
   {" -", TK_NOTYPE},
   {"-", '-'},
-  {"[0-9]", TK_NUM},
+  {"^\\d$", TK_NUM},
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
   {"==", TK_EQ},        // equal
