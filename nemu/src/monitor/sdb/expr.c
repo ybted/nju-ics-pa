@@ -21,7 +21,7 @@ static struct rule {
    */
   {" )", TK_NOTYPE},
   {"\\)", ')'},
-  {" \\(", TK_NOTYPE},
+  {" \(", TK_NOTYPE},
   {"\\(", '('},
   {" *", TK_NOTYPE},
   {"\\*", '*'},
