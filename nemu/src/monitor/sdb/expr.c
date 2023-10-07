@@ -1,14 +1,16 @@
-#include <isa.h>
-
+#include <string.h>
+#include <stdbool.h>
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <regex.h>
-
+#include <stdio.h>
+#include <assert.h>
+#include <debug.h>
 enum {
   TK_NOTYPE = 256, TK_EQ,
   /* TODO: Add more token types */
-  TK_NUM,
+  TK_NUM, TK_OP,
 };
 
 static struct rule {
@@ -19,22 +21,18 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-  {" )", TK_NOTYPE},
   {"\\)", ')'},
-  {" \(", TK_NOTYPE},
   {"\\(", '('},
-  {" *", TK_NOTYPE},
   {"\\*", '*'},
-  {" /", TK_NOTYPE},
   {"\\/", '/'},
-  {" -", TK_NOTYPE},
   {"-", '-'},
-  {"\\d", TK_NUM},
+  {"\\+", '+'}, 
+  {"[0-9]+", TK_NUM},
   {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},         // plus
+        // plus
   {"==", TK_EQ},        // equal
 };
-
+#define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0]))
 #define NR_REGEX ARRLEN(rules)
 
 static regex_t re[NR_REGEX] = {};
@@ -51,7 +49,7 @@ void init_regex() {
     ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
     if (ret != 0) {
       regerror(ret, &re[i], error_msg, 128);
-      panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
+      printf("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
     }
   }
 }
@@ -63,6 +61,8 @@ typedef struct token {
 
 static Token tokens[32] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
+int eval(int p, int q);
+int check_parentheses(int p, int q);
 
 static bool make_token(char *e) {
   int position = 0;
@@ -87,11 +87,37 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-
-        switch (rules[i].token_type) {
-          default: TODO();
+        if (substr_len > 32) {
+          printf("Overflow!\n");
+          assert(0);
         }
-
+        Token temp;
+        memset(temp.str, 0, 32);
+        switch (rules[i].token_type) {
+          case TK_NOTYPE:
+            temp.type = TK_NOTYPE;
+            strcpy(temp.str, " ");
+            break;
+          case TK_NUM:
+            temp.type = TK_NUM;
+            strncpy(temp.str, e + position - substr_len, substr_len);
+            break;
+          case TK_EQ:
+            temp.type = TK_EQ;
+            strncpy(temp.str, e + position - substr_len, substr_len);
+            
+            break;
+          case '+':
+          case '-':
+          case '*':
+          case '/':
+          case '(':
+          case ')':
+            temp.type = TK_OP;
+            strncpy(temp.str, e + position - substr_len, substr_len);
+            break;
+        }
+        tokens[nr_token ++] = temp;
         break;
       }
     }
@@ -105,7 +131,6 @@ static bool make_token(char *e) {
   return true;
 }
 
-
 word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
@@ -113,7 +138,86 @@ word_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
+  int val = eval(0, nr_token -1);
+  printf("val: %d\n", val);
+  return val;
+}
 
+int check_parantheses(int p, int q) {
+  int left = 0;
+  for (int i = p; i <= q; i ++)
+  {
+    if (tokens[i].str[0] == '(')
+      left ++;
+    if (tokens[i].str[0] == ')')
+    {
+      if (left == 0)
+        return -1;
+      else left --;
+    }
+  }
+  if (left != 0) 
+    return -1;
+  if (tokens[p].str[0] == '(' && tokens[q].str[0] == ')')
+  {
+    if (check_parantheses(p+1, q-1) != -1)
+      return 1;
+  }
   return 0;
+}
+
+int eval(int p, int q)
+{
+  if (p > q) {
+    return -12345678;
+  } 
+  else if (p == q) {
+    return atoi(tokens[p].str);
+  }
+  else if (check_parentheses(p, q) == 1) {
+    return eval(p + 1, q - 1);
+  } 
+  else if (check_parantheses(p, q) == -1) {
+    assert(0);
+  }
+  else {
+    int main_op_index = p-1;
+    char ops[4] = {'+', '-', '*', '/'};
+    for (int i = p; i <= q; i ++)
+    {
+      if (tokens[i].str[0] == ops[0] || tokens[i].str[0] == ops[1] || tokens[i].str[0] == ops[2] || tokens[i].str[0] == ops[3]) 
+      {
+        int le = 0, ri = 0;
+        for (int k = p; k < i; k ++)
+        {
+          if (tokens[k].str[0] == '(')
+            le = 1;
+        }
+        for (int k = i+1; k <= q; k ++)
+        {
+          if (tokens[k].str[0] == ')')
+            ri = 1;
+        }
+        if (ri && le)
+          continue;
+        else if (main_op_index == -1) {
+          main_op_index = i;
+        } else if (tokens[main_op_index].str[0] == '*' || tokens[main_op_index].str[0] == '/') {
+          main_op_index = i;
+        } else if (tokens[i].str[0] == '+' || tokens[i].str[0] == '-') {
+          main_op_index = i;
+        }
+      }
+    }
+    int val1 = eval(p, main_op_index - 1);
+    int val2 = eval(main_op_index + 1, q);
+    switch (tokens[main_op_index].type)
+    {
+      case '+': return val1 + val2; break;
+      case '-': return val1 - val2; break;
+      case '*': return val1 * val2; break;
+      case '/': return val1 / val2; break;
+      default: assert(0);
+    }
+  }
 }

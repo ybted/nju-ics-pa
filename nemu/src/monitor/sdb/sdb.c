@@ -7,7 +7,6 @@
 #include "../../../include/isa.h"
 #include <memory/paddr.h>
 
-
 static int is_batch_mode = false;
 //extern NEMUState nemu_state; 
 void init_regex();
@@ -139,7 +138,6 @@ void sdb_mainloop() {
     cmd_c(NULL);
     return;
   }
-
   for (char *str; (str = rl_gets()) != NULL; ) {
     char *str_end = str + strlen(str);
 
