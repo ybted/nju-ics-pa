@@ -20,12 +20,17 @@ static struct rule {
    * Pay attention to the precedence level of different rules.
    */
   {"[0-9]", TK_NUM},
-  {" /", TK_NOTYPE},    // spaces
-  {"\\/", '/'},
-  {" *", TK_NOTYPE},    // spaces
+  {" )", TK_NOTYPE},
+  {"\\)", ')'},
+  {" (", TK_NOTYPE},
+  {"\\(", '('},
+  {" *", TK_NOTYPE},
   {"\\*", '*'},
-  {" -", TK_NOTYPE},    // spaces
-  {"\\-", '-'},
+  {" /", TK_NOTYPE},
+  {"\\/", '/'},
+  {" -", TK_NOTYPE},
+  {"-", '-'},
+  {"[0-9]", TK_NUM},
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
   {"==", TK_EQ},        // equal
