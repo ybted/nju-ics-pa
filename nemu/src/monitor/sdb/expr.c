@@ -169,7 +169,7 @@ int check_parentheses(int p, int q) {
 int eval(int p, int q)
 {
   if (p > q) {
-    return -12345678;
+    assert(0);
   } 
   else if (p == q) {
     return atoi(tokens[p].str);
