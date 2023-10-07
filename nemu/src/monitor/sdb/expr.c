@@ -187,18 +187,15 @@ word_t eval(int p, int q)
     {
       if (tokens[i].str[0] == ops[0] || tokens[i].str[0] == ops[1] || tokens[i].str[0] == ops[2] || tokens[i].str[0] == ops[3]) 
       {
-        int le = 0, ri = 0;
+        int le = 0;
         for (int k = p; k < i; k ++)
         {
           if (tokens[k].str[0] == '(')
-            le = 1;
-        }
-        for (int k = i+1; k <= q; k ++)
-        {
+            le ++;
           if (tokens[k].str[0] == ')')
-            ri = 1;
+            le --;
         }
-        if (ri && le)
+        if (le)
           continue;
         else if (main_op_index == p-1) {
           main_op_index = i;
