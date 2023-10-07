@@ -61,7 +61,7 @@ typedef struct token {
 
 static Token tokens[32] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
-int eval(int p, int q);
+word_t eval(int p, int q);
 int check_parentheses(int p, int q);
 
 static bool make_token(char *e) {
@@ -138,8 +138,8 @@ word_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  int val = eval(0, nr_token -1);
-  printf("val: %d\n", val);
+  word_t val = eval(0, nr_token -1);
+  //printf("val: %d\n", val);
   return val;
 }
 
@@ -166,7 +166,7 @@ int check_parentheses(int p, int q) {
   return 0;
 }
 
-int eval(int p, int q)
+word_t eval(int p, int q)
 {
   if (p > q) {
     assert(0);
@@ -210,8 +210,8 @@ int eval(int p, int q)
       }
     }
     
-    int val1 = eval(p, main_op_index - 1);
-    int val2 = eval(main_op_index + 1, q);
+    word_t val1 = eval(p, main_op_index - 1);
+    word_t val2 = eval(main_op_index + 1, q);
     switch (tokens[main_op_index].str[0])
     {
       case '+': return val1 + val2; break;
