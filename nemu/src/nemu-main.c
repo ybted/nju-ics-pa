@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
     int answer;
     bool success;
     sscanf(str, "%d %s", &answer, exp);
-    printf("expr: %s answer: %d  mine: %d \n", exp, answer, expr(exp, &success));
+    printf("expr: %s answer: %u  mine: %u \n", exp, answer, expr(exp, &success));
   }
   
   /* Start engine. */
