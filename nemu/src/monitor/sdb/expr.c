@@ -209,6 +209,7 @@ int eval(int p, int q)
         }
       }
     }
+    
     int val1 = eval(p, main_op_index - 1);
     int val2 = eval(main_op_index + 1, q);
     switch (tokens[main_op_index].str[0])
