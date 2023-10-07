@@ -134,7 +134,7 @@ void sdb_set_batch_mode() {
 }
 
 void sdb_mainloop() {
-  FILE* fp = fopen("./input.txt", "r+");
+  FILE* fp = fopen("/home/ybreeze/course/ics2021/nemu/tools/gen-expr/input", "r+");
   if (!fp) {
     printf("Failure open file!\n");
     exit(0);
