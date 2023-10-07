@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
   FILE* fp = fopen("../tools/gen-expr/input", "r");
   if (!fp) {
     printf("Failure open file!\n");
+    exit(0);
   }
   char str[10000];
   while (fgets(str, 10000, fp) != NULL) {
