@@ -143,7 +143,7 @@ word_t expr(char *e, bool *success) {
   return val;
 }
 
-int check_parantheses(int p, int q) {
+int check_parentheses(int p, int q) {
   int left = 0;
   for (int i = p; i <= q; i ++)
   {
@@ -160,7 +160,7 @@ int check_parantheses(int p, int q) {
     return -1;
   if (tokens[p].str[0] == '(' && tokens[q].str[0] == ')')
   {
-    if (check_parantheses(p+1, q-1) != -1)
+    if (check_parentheses(p+1, q-1) != -1)
       return 1;
   }
   return 0;
@@ -177,7 +177,7 @@ int eval(int p, int q)
   else if (check_parentheses(p, q) == 1) {
     return eval(p + 1, q - 1);
   } 
-  else if (check_parantheses(p, q) == -1) {
+  else if (check_parentheses(p, q) == -1) {
     assert(0);
   }
   else {
