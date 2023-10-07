@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
 #else
   init_monitor(argc, argv);
 #endif
-  FILE* fp = fopen("./input.txt", "r");
+  FILE* fp = fopen("./nemu-main.c", "r");
   if (!fp) {
     printf("Failure open file!\n");
     exit(0);
