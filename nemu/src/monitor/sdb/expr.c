@@ -200,7 +200,7 @@ int eval(int p, int q)
         }
         if (ri && le)
           continue;
-        else if (main_op_index == -1) {
+        else if (main_op_index == p-1) {
           main_op_index = i;
         } else if (tokens[main_op_index].str[0] == '*' || tokens[main_op_index].str[0] == '/') {
           main_op_index = i;
