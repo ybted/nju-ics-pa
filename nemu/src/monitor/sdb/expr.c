@@ -177,7 +177,6 @@ word_t expr(char *e, bool *success) {
       (tokens[i-1].type == TK_AND || tokens[i-1].type == TK_EQ || tokens[i-1].type == TK_NEQ)
       ) ) 
     {
-      printf("Process!\n");
       if (tokens[i+1].type == TK_REG)
       {
         word_t val = paddr_read(atoi(tokens[i].str), 4);
@@ -186,9 +185,8 @@ word_t expr(char *e, bool *success) {
       }
       if (tokens[i+1].type == TK_HEX) 
       {
-        printf("Process hex!\n");
         paddr_t addr = 0;
-        sscanf(tokens[i].str+2, "%x", &addr);
+        sscanf(tokens[i].str+1, "%x", &addr);
         printf("look for %x\n", addr);
         word_t val = paddr_read(addr, 4);
         printf("look for %x, find %u\n", addr, val);
