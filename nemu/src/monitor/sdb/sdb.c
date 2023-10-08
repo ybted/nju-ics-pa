@@ -107,7 +107,7 @@ static int cmd_p(char *args)
     printf("You should enter a expression!\n");
   } else {
     bool succ;
-    printf("%u %x\n", expr(arg, &succ), expr(arg, &succ));
+    printf("%u\n", expr(arg, &succ));
   }
   return 0;
 }
