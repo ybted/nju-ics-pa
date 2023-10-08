@@ -168,7 +168,6 @@ word_t expr(char *e, bool *success) {
       word_t val = isa_reg_str2val(tokens[i].str + 1, &success);
       assert(success == true);
       sprintf(tokens[i].str, "%u", val);
-      printf("tokens.str: %s\n", tokens[i].str);
     }
   }
   for (int i = 0; i < nr_token; i ++) 
@@ -184,6 +183,7 @@ word_t expr(char *e, bool *success) {
         sscanf(tokens[i+1].str, "%u", &addr);
         printf("addr: %x\n", addr);
         word_t val = paddr_read(addr, 4);
+        printf("look for %x, find %x\n", addr, val);
         tokens[i+1].type = TK_NUM;
         sprintf(tokens[i+1].str, "%u", val); 
       }
