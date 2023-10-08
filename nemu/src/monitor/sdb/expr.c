@@ -187,6 +187,7 @@ word_t expr(char *e, bool *success) {
       {
         paddr_t addr = 0;
         sscanf(tokens[i].str+2, "%x", &addr);
+        printf("look for %x\n", addr);
         word_t val = paddr_read(addr, 4);
         printf("look for %x, find %u\n", addr, val);
         tokens[i+1].type = TK_NUM;
