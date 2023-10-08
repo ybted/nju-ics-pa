@@ -177,6 +177,7 @@ word_t expr(char *e, bool *success) {
       (tokens[i-1].type == TK_AND || tokens[i-1].type == TK_EQ || tokens[i-1].type == TK_NEQ)
       ) ) 
     {
+      printf("Process!\n");
       if (tokens[i+1].type == TK_REG)
       {
         word_t val = paddr_read(atoi(tokens[i].str), 4);
