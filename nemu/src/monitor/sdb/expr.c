@@ -183,6 +183,7 @@ word_t expr(char *e, bool *success) {
         tokens[i+1].type = TK_NUM;
         sprintf(tokens[i].str, "%u", val); 
       }
+      tokens[i].type =  TK_NOTYPE;
     }
   }
   word_t val = eval(0, nr_token -1);
