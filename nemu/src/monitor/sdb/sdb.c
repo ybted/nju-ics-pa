@@ -45,6 +45,7 @@ static int cmd_help(char *args);
 static int cmd_si(char *args);
 static int cmd_info(char *args);
 static int cmd_mem(char *args);
+static int cmd_p(char *args);
 
 static struct {
   const char *name;
@@ -57,6 +58,7 @@ static struct {
   { "si", "Execute N instructions", cmd_si },
   { "info", "Print the state of the instructions", cmd_info},
   { "x", "Print the memory in given address", cmd_mem},
+  { "p", "Print the expression", cmd_p}
 
   /* TODO: Add more commands */
 
@@ -95,6 +97,18 @@ static int cmd_si(char *args)
   } else {
     cpu_exec(atoi(arg));
   } 
+  return 0;
+}
+
+static int cmd_p(char *args)
+{
+  char *arg = strtok(NULL, " ");
+  if (arg == NULL) {
+    printf("You should enter a expression!\n");
+  } else {
+    bool succ;
+    printf("%u", expr(arg, &succ));
+  }
   return 0;
 }
 
