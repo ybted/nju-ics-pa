@@ -168,6 +168,7 @@ word_t expr(char *e, bool *success) {
       word_t val = isa_reg_str2val(tokens[i].str + 1, &success);
       assert(success == true);
       sprintf(tokens[i].str, "%u", val);
+      printf("tokens.str: %s\n", tokens[i].str);
     }
   }
   for (int i = 0; i < nr_token; i ++) 
