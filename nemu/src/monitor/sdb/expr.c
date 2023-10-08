@@ -185,6 +185,7 @@ word_t expr(char *e, bool *success) {
       }
       if (tokens[i+1].type == TK_HEX) 
       {
+        printf("Process hex!\n");
         paddr_t addr = 0;
         sscanf(tokens[i].str+2, "%x", &addr);
         printf("look for %x\n", addr);
@@ -196,6 +197,7 @@ word_t expr(char *e, bool *success) {
       tokens[i].type =  TK_NOTYPE;
     }
   }
+  printf("Process over!\n");
   int nr_temp = 0;
   for (int i = 0; i < nr_token; i ++)
   {
