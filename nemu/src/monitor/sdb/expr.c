@@ -186,6 +186,13 @@ word_t expr(char *e, bool *success) {
       tokens[i].type =  TK_NOTYPE;
     }
   }
+  int nr_temp = 0;
+  for (int i = 0; i < nr_token; i ++)
+  {
+    if (tokens[i].type != TK_NOTYPE)
+      tokens[nr_temp ++] = tokens[i];
+  }
+  nr_token = nr_temp;
   word_t val = eval(0, nr_token -1);
   //printf("val: %d\n", val);
   return val;
