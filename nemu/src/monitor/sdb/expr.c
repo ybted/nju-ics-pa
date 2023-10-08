@@ -179,9 +179,11 @@ word_t expr(char *e, bool *success) {
     {
       if (tokens[i+1].type == TK_REG)
       {
-        word_t val = paddr_read(atoi(tokens[i].str), 4);
+        paddr_t addr = 0;
+         sscanf(tokens[i+1].str, "%x", &addr);
+        word_t val = paddr_read(addr, 4);
         tokens[i+1].type = TK_NUM;
-        sprintf(tokens[i].str, "%u", val); 
+        sprintf(tokens[i+1].str, "%u", val); 
       }
       if (tokens[i+1].type == TK_HEX) 
       {
