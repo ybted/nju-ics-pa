@@ -172,7 +172,7 @@ word_t expr(char *e, bool *success) {
   }
   for (int i = 0; i < nr_token; i ++) 
   {
-    if (tokens[i].type == '*' && (i == 0 || 
+    if (tokens[i].str[0] == '*' && (i == 0 || 
       (tokens[i-1].type == TK_OP && tokens[i-1].str[0] != ')') || 
       (tokens[i-1].type == TK_AND || tokens[i-1].type == TK_EQ || tokens[i-1].type == TK_NEQ)
       ) ) 
