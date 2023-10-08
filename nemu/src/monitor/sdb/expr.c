@@ -185,7 +185,10 @@ word_t expr(char *e, bool *success) {
       }
       if (tokens[i+1].type == TK_HEX) 
       {
-        word_t val = paddr_read(atoi(tokens[i].str+2), 4);
+        paddr_t addr = 0;
+        sscanf(tokens[i].str+2, "%x", &addr);
+        word_t val = paddr_read(addr, 4);
+        printf("look for %x, find %u\n", addr, val);
         tokens[i+1].type = TK_NUM;
         sprintf(tokens[i].str, "%u", val); 
       }
