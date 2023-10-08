@@ -165,7 +165,7 @@ word_t expr(char *e, bool *success) {
   {
     if (tokens[i].type == TK_REG) {
       bool success = true;
-      word_t val = isa_reg_str2val(tokens[i+1].str + 1, &success);
+      word_t val = isa_reg_str2val(tokens[i].str + 1, &success);
       assert(success == true);
       sprintf(tokens[i].str, "%u", val);
     }
