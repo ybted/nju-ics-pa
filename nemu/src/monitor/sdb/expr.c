@@ -161,6 +161,15 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
 
+  for (int i = 0; i < nr_token; i ++)
+  {
+    if (tokens[i].type == TK_REG) {
+      bool success = true;
+      word_t val = isa_reg_str2val(tokens[i+1].str, &success);
+      assert(success == true);
+      sprintf(tokens[i].str, "%u", val);
+    }
+  }
   for (int i = 0; i < nr_token; i ++) 
   {
     if (tokens[i].type == '*' && (i == 0 || 
@@ -170,11 +179,7 @@ word_t expr(char *e, bool *success) {
     {
       if (tokens[i+1].type == TK_REG)
       {
-        bool success;
-        word_t val = isa_reg_str2val(tokens[i+1].str, &success);
-        if (!success) {
-          assert(0);
-        }
+        word_t val = paddr_read(atoi(tokens[i].str), 4);
         tokens[i+1].type = TK_NUM;
         sprintf(tokens[i].str, "%u", val); 
       }
