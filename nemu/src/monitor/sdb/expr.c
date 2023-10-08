@@ -23,6 +23,7 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
+  {"\\$[a-z][0-9]+", TK_REG},
   {"\\$[a-z]+", TK_REG},
   {"0x[0-9]+", TK_HEX},
   {"&&", TK_AND},
