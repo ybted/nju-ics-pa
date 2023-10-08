@@ -187,16 +187,15 @@ word_t expr(char *e, bool *success) {
       {
         paddr_t addr = 0;
         sscanf(tokens[i+1].str, "%x", &addr);
-        printf("look for %x\n", addr);
+        //printf("look for %x\n", addr);
         word_t val = paddr_read(addr, 4);
-        printf("look for %x, find %x\n", addr, val);
+        //printf("look for %x, find %x\n", addr, val);
         tokens[i+1].type = TK_NUM;
         sprintf(tokens[i+1].str, "%u", val); 
       }
       tokens[i].type =  TK_NOTYPE;
     }
   }
-  printf("Process over!\n");
   int nr_temp = 0;
   for (int i = 0; i < nr_token; i ++)
   {
