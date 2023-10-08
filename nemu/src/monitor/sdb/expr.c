@@ -7,10 +7,12 @@
 #include <stdio.h>
 #include <assert.h>
 #include <debug.h>
+#include "../../../include/isa.h"
+#include <memory/paddr.h>
 enum {
   TK_NOTYPE = 256, TK_EQ,
   /* TODO: Add more token types */
-  TK_NUM, TK_OP,
+  TK_NUM, TK_OP, TK_NEQ, TK_AND, TK_REG, TK_HEX, DEREF
 };
 
 static struct rule {
@@ -21,6 +23,10 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
+  {"\\$[a-z]+", TK_REG},
+  {"0x[0-9]+", TK_HEX},
+  {"&&", TK_AND},
+  {"!=", TK_NEQ},
   {"\\)", ')'},
   {"\\(", '('},
   {"\\*", '*'},
@@ -105,7 +111,22 @@ static bool make_token(char *e) {
           case TK_EQ:
             temp.type = TK_EQ;
             strncpy(temp.str, e + position - substr_len, substr_len);
-            
+            break;
+          case TK_AND:
+            temp.type = TK_AND;
+            strncpy(temp.str, e + position - substr_len, substr_len);
+            break;
+          case TK_NEQ:
+            temp.type = TK_NEQ;
+            strncpy(temp.str, e + position - substr_len, substr_len);
+            break;
+          case TK_HEX:
+            temp.type = TK_HEX;
+            strncpy(temp.str, e + position - substr_len, substr_len);
+            break;
+          case TK_REG:
+            temp.type = TK_REG;
+            strncpy(temp.str, e + position - substr_len, substr_len);
             break;
           case '+':
           case '-':
@@ -138,6 +159,32 @@ word_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
+
+  for (int i = 0; i < nr_token; i ++) 
+  {
+    if (tokens[i].type == '*' && (i == 0 || 
+      (tokens[i-1].type == TK_OP && tokens[i-1].str[0] != ')') || 
+      (tokens[i-1].type == TK_AND || tokens[i-1].type == TK_EQ || tokens[i-1].type == TK_NEQ)
+      ) ) 
+    {
+      if (tokens[i+1].type == TK_REG)
+      {
+        bool success;
+        word_t val = isa_reg_str2val(tokens[i+1].str, &success);
+        if (!success) {
+          assert(0);
+        }
+        tokens[i+1].type = TK_NUM;
+        sprintf(tokens[i].str, "%u", val); 
+      }
+      if (tokens[i+1].type == TK_HEX) 
+      {
+        word_t val = paddr_read(atoi(tokens[i].str+2), 4);
+        tokens[i+1].type = TK_NUM;
+        sprintf(tokens[i].str, "%u", val); 
+      }
+    }
+  }
   word_t val = eval(0, nr_token -1);
   //printf("val: %d\n", val);
   return val;
