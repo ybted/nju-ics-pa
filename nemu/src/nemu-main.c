@@ -14,19 +14,19 @@ int main(int argc, char *argv[]) {
 #else
   init_monitor(argc, argv);
 #endif
-  //  FILE* fp = fopen("/home/ybreeze/course/ics2021/nemu/tools/gen-expr/input", "r+");
-  // if (!fp) {
-  //   printf("Failure open file!\n");
-  //   exit(0);
-  // }
-  // char str[10000];
-  // while (fgets(str, 10000, fp) != NULL) {
-  //   char exp[1000];
-  //   int answer;
-  //   bool success;
-  //   sscanf(str, "%d %s", &answer, exp);
-  //   printf("expr: %s answer: %u  mine: %u \n", exp, answer, expr(exp, &success));
-  // }
+   FILE* fp = fopen("/home/ybreeze/course/ics2021/nemu/tools/gen-expr/input", "r+");
+  if (!fp) {
+    printf("Failure open file!\n");
+    exit(0);
+  }
+  char str[10000];
+  while (fgets(str, 10000, fp) != NULL) {
+    char exp[1000];
+    int answer;
+    bool success;
+    sscanf(str, "%d %s", &answer, exp);
+    printf("expr: %s answer: %u  mine: %u \n", exp, answer, expr(exp, &success));
+  }
   
   /* Start engine. */
   engine_start();
