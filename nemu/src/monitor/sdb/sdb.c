@@ -46,6 +46,8 @@ static int cmd_si(char *args);
 static int cmd_info(char *args);
 static int cmd_mem(char *args);
 static int cmd_p(char *args);
+static int cmd_w(char *args);
+static int cmd_d(char *args);
 
 static struct {
   const char *name;
@@ -58,8 +60,9 @@ static struct {
   { "si", "Execute N instructions", cmd_si },
   { "info", "Print the state of the instructions", cmd_info},
   { "x", "Print the memory in given address", cmd_mem},
-  { "p", "Print the expression", cmd_p}
-
+  { "p", "Print the expression", cmd_p},
+  { "w", "make a watchpoint based on expr", cmd_w},
+  { "d", "delete watchpoints", cmd_d}
   /* TODO: Add more commands */
 
 };
@@ -112,13 +115,49 @@ static int cmd_p(char *args)
   return 0;
 }
 
+static int cmd_w(char *args)
+{
+  char *arg = strtok(NULL, " ");
+  if (arg == NULL) {
+    printf("You should enter a expression!\n");
+  } else {
+    WP* new_w = new_wp();
+    strcpy(new_w->expr, arg);
+    bool succ;
+    new_w->val = expr(arg, &succ);
+  }
+  return 0;
+}
+
+static int cmd_d(char *args)
+{
+  char *arg = strtok(NULL, " ");
+  if (arg == NULL) {
+    printf("You should enter a expression!\n");
+  } else {
+    int i = atoi(arg);
+    WP* p = head;
+    while (p && i) {
+      p = p->next;
+    }
+    assert(p != NULL);
+    free_wp(p);
+  }
+  return 0;
+}
+
 static int cmd_info(char *args)
 {
   char *arg = strtok(NULL, " ");
   if (arg[0] == 'r') {
     isa_reg_display();
   } else if (arg[0] == 'w') {
-
+    WP* p = head;
+    int index = 0;
+    while (p) {
+      printf("index: %d expr: %s \n", index ++, p->expr);
+      p = p->next;
+    }
   } else 
   {
     printf("Please enter correct para!\n");
