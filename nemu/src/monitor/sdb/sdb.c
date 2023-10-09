@@ -122,11 +122,11 @@ static int cmd_w(char *args)
     printf("You should enter a expression!\n");
   } else {
     WP* new_w = new_wp();
+    assert(free_ != NULL);
+    assert(head != NULL);
     strcpy(new_w->expr, arg);
     bool succ;
     new_w->val = expr(arg, &succ);
-    
-    printf("yb: %s\n", new_w->expr);
   }
   return 0;
 }
@@ -196,6 +196,7 @@ void sdb_mainloop() {
     return;
   }
   init_wp_pool();
+  assert(head != NULL);
   for (char *str; (str = rl_gets()) != NULL; ) {
     char *str_end = str + strlen(str);
 
