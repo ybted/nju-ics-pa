@@ -125,7 +125,8 @@ static int cmd_w(char *args)
     strcpy(new_w->expr, arg);
     bool succ;
     new_w->val = expr(arg, &succ);
-    printf("yb: %s\n", head->expr);
+    assert(head != NULL);
+    printf("yb: %s\n", new_w->expr);
   }
   return 0;
 }
