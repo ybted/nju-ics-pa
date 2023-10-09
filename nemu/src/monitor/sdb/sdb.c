@@ -196,7 +196,7 @@ void sdb_mainloop() {
     return;
   }
   init_wp_pool();
-  assert(head != NULL);
+  assert(free_ != NULL);
   for (char *str; (str = rl_gets()) != NULL; ) {
     char *str_end = str + strlen(str);
 
