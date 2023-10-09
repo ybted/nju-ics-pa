@@ -122,8 +122,6 @@ static int cmd_w(char *args)
     printf("You should enter a expression!\n");
   } else {
     WP* new_w = new_wp();
-    assert(free_ != NULL);
-    assert(head != NULL);
     strcpy(new_w->expr, arg);
     bool succ;
     new_w->val = expr(arg, &succ);
@@ -138,12 +136,7 @@ static int cmd_d(char *args)
     printf("You should enter a expression!\n");
   } else {
     int i = atoi(arg);
-    WP* p = head;
-    while (p && i) {
-      p = p->next;
-    }
-    assert(p != NULL);
-    free_wp(p);
+    watchpoint_display(i);
   }
   return 0;
 }
@@ -154,13 +147,7 @@ static int cmd_info(char *args)
   if (arg[0] == 'r') {
     isa_reg_display();
   } else if (arg[0] == 'w') {
-    WP* p = head;
-    int index = 0;
-    assert(head != NULL);
-    while (p) {
-      printf("index: %d expr: %s \n", index ++, p->expr);
-      p = p->next;
-    }
+    watchpoint_display();
   } else 
   {
     printf("Please enter correct para!\n");
@@ -196,7 +183,6 @@ void sdb_mainloop() {
     return;
   }
   init_wp_pool();
-  assert(free_ != NULL);
   for (char *str; (str = rl_gets()) != NULL; ) {
     char *str_end = str + strlen(str);
 
