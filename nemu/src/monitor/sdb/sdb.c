@@ -136,7 +136,7 @@ static int cmd_d(char *args)
     printf("You should enter a expression!\n");
   } else {
     int i = atoi(arg);
-    watchpoint_display(i);
+    watchpoint_delete(i);
   }
   return 0;
 }
