@@ -122,6 +122,7 @@ static int cmd_w(char *args)
     printf("You should enter a expression!\n");
   } else {
     WP* new_w = new_wp();
+    assert(free_ != NULL);
     assert(head != NULL);
     strcpy(new_w->expr, arg);
     bool succ;
