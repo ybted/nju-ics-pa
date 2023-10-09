@@ -23,6 +23,7 @@ WP* new_wp() {
     temp->next = head;
     head = temp;
     assert(head != NULL);
+    
     return head;
   }
   return NULL;
