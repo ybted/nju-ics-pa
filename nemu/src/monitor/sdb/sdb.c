@@ -154,6 +154,7 @@ static int cmd_info(char *args)
   } else if (arg[0] == 'w') {
     WP* p = head;
     int index = 0;
+    printf("I'm here!\n");
     while (p) {
       printf("index: %d expr: %s \n", index ++, p->expr);
       p = p->next;
