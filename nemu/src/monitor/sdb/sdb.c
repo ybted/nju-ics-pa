@@ -122,10 +122,11 @@ static int cmd_w(char *args)
     printf("You should enter a expression!\n");
   } else {
     WP* new_w = new_wp();
+    assert(head != NULL);
     strcpy(new_w->expr, arg);
     bool succ;
     new_w->val = expr(arg, &succ);
-    assert(head != NULL);
+    
     printf("yb: %s\n", new_w->expr);
   }
   return 0;
