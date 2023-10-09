@@ -125,6 +125,7 @@ static int cmd_w(char *args)
     strcpy(new_w->expr, arg);
     bool succ;
     new_w->val = expr(arg, &succ);
+    printf("%s\n", new_w->expr);
   }
   return 0;
 }

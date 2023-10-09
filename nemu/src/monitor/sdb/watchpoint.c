@@ -22,8 +22,8 @@ WP* new_wp() {
     free_ = free_->next;
     temp->next = head;
     head = temp;
-    if (head)
-      printf("YB !!\n");
+    //if (head)
+    //  printf("YB !!\n");
     return head;
   }
   return NULL;
