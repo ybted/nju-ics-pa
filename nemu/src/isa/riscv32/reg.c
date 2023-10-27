@@ -14,7 +14,7 @@ void isa_reg_display() {
   {
     printf("%s: 0x%x %d\n", reg_name(i, 32), gpr(i), gpr(i));
   }
-  printf("pc: 0x%x", nemu_state.halt_pc);
+  printf("pc: 0x%x\n", nemu_state.halt_pc);
 }
 
 word_t isa_reg_str2val(const char *s, bool *success) {
