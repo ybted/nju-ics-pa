@@ -254,7 +254,7 @@ word_t eval(int p, int q)
     char ops[4] = {'+', '-', '*', '/'};
     for (int i = p; i <= q; i ++)
     {
-      if (tokens[i].str[0] == ops[0] || tokens[i].str[0] == ops[1] || tokens[i].str[0] == ops[2] || tokens[i].str[0] == ops[3]) 
+      if (tokens[i].str[0] == ops[0] || tokens[i].str[0] == ops[1] || tokens[i].str[0] == ops[2] || tokens[i].str[0] == ops[3] || tokens[i].type == TK_EQ) 
       {
         int le = 0;
         for (int k = p; k < i; k ++)
@@ -272,6 +272,8 @@ word_t eval(int p, int q)
           main_op_index = i;
         } else if (tokens[i].str[0] == '+' || tokens[i].str[0] == '-') {
           main_op_index = i;
+        } else if (tokens[i].type == TK_EQ) {
+          main_op_index = i;
         }
       }
     }
@@ -284,6 +286,7 @@ word_t eval(int p, int q)
       case '-': return val1 - val2; break;
       case '*': return val1 * val2; break;
       case '/': return val1 / val2; break;
+      case '=': return val1 == val2; break;
       default: assert(0);
     }
   }
