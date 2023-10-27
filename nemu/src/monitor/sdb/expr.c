@@ -173,6 +173,11 @@ word_t expr(char *e, bool *success) {
         val = isa_reg_str2val(tokens[i].str + 1, &success);
       assert(success == true);
       sprintf(tokens[i].str, "%u", val);
+    } 
+    if (tokens[i].type == TK_HEX) {
+      word_t val;
+      sscanf(tokens[i].str, "%x", &val);
+      sprintf(tokens[i].str, "%u", val);
     }
   }
   for (int i = 0; i < nr_token; i ++) 
