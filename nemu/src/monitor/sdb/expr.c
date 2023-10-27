@@ -254,7 +254,7 @@ word_t eval(int p, int q)
     char ops[4] = {'+', '-', '*', '/'};
     for (int i = p; i <= q; i ++)
     {
-      if (tokens[i].str[0] == ops[0] || tokens[i].str[0] == ops[1] || tokens[i].str[0] == ops[2] || tokens[i].str[0] == ops[3] || tokens[i].type == TK_EQ) 
+      if (tokens[i].str[0] == ops[0] || tokens[i].str[0] == ops[1] || tokens[i].str[0] == ops[2] || tokens[i].str[0] == ops[3] || tokens[i].type == TK_EQ ) 
       {
         int le = 0;
         for (int k = p; k < i; k ++)
