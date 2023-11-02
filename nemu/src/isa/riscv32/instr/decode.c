@@ -41,7 +41,6 @@ static def_DHelper(S) {
 
 static def_DHelper(J) {
   decode_op_i(s, id_src1, s->isa.instr.j.imm21_30, true);
-  printf("DEBUG: %x\n", id_src1->imm);
   decode_op_r(s, id_dest, s->isa.instr.j.rd, true);
 }
 
