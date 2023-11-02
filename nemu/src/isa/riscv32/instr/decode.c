@@ -40,7 +40,7 @@ static def_DHelper(S) {
 }
 
 static def_DHelper(J) {
-  decode_op_i(s, id_src1, (s->isa.instr.j.imm21_30 + (s->isa.instr.j.imm31 << 19) + (s->isa.instr.j.imm20 << 10) + (s->isa.instr.j.imm12_19 << 11)) << 12, true);
+  decode_op_i(s, id_src1, (int)((s->isa.instr.j.imm21_30 + (s->isa.instr.j.imm31 << 19) + (s->isa.instr.j.imm20 << 10) + (s->isa.instr.j.imm12_19 << 11)) << 1), true);
   decode_op_r(s, id_dest, s->isa.instr.j.rd, true);
 }
 
