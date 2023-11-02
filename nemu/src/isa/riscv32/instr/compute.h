@@ -4,7 +4,7 @@ def_EHelper(lui) {
 }
 
 def_EHelper(addi) {
-  printf("DEBUF addi %x %u\n", *id_src1->preg, id_src2->imm);
+  printf("DEBUF addi %x %d\n", *id_src1->preg, id_src2->imm);
   rtl_addi(s, ddest, id_src1->preg, id_src2->imm);
 
   printf("DEBUG addi: %x\n", *ddest);
