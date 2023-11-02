@@ -1,9 +1,10 @@
 #include <cpu/cpu.h>
 #include <cpu/exec.h>
 #include <cpu/difftest.h>
-#include <isa-all-instr.h>
 #include <locale.h>
 #include "../../monitor/sdb/sdb.h"
+#include <isa-all-instr.h>
+//#include "../isa/riscv32/include/isa-all-instr.h"
 /* The assembly code of instructions executed is only output to the screen
  * when the number of instructions executed is less than this value.
  * This is useful when you use the `si' command.
