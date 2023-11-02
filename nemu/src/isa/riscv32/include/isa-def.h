@@ -41,8 +41,8 @@ typedef struct {
       uint32_t opcode1_0 : 2;
       uint32_t opcode6_2 : 5;
       uint32_t rd        : 5;
-      uint32_t imm12     : 1;
-      uint32_t imm13_19  : 7;
+      uint32_t imm12_19  : 8;
+      uint32_t imm20     : 1;
       uint32_t imm21_30  : 10;
       uint32_t imm31     : 1;
     } j;
