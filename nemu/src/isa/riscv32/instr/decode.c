@@ -42,7 +42,7 @@ static def_DHelper(S) {
 static def_DHelper(J) {
   uint32_t target = 0;
   if (s->isa.instr.j.imm31) {
-    target = 0xffe0000 | ( (s->isa.instr.j.imm21_30 + (s->isa.instr.j.imm31 << 19) + (s->isa.instr.j.imm20 << 10) + (s->isa.instr.j.imm12_19 << 11)) << 1);
+    target = 0xffe00000 | ( (s->isa.instr.j.imm21_30 + (s->isa.instr.j.imm31 << 19) + (s->isa.instr.j.imm20 << 10) + (s->isa.instr.j.imm12_19 << 11)) << 1);
   } else {
     target = (s->isa.instr.j.imm21_30 + (s->isa.instr.j.imm31 << 19) + (s->isa.instr.j.imm20 << 10) + (s->isa.instr.j.imm12_19 << 11)) << 1;
   }
