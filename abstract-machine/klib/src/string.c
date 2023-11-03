@@ -45,10 +45,11 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 }
 
 void *memset(void *s, int c, size_t n) {
+  
   unsigned char *xs =  s;
   while (n--) 
     *xs++ = c;
-  
+  assert(memcmp(s, "#####", 5) == 0) ;
   return s;
 }
 
