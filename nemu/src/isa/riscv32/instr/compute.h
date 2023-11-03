@@ -10,10 +10,10 @@ def_EHelper(addi) {
 }
 
 def_EHelper(sltiu) {
-  rtl_subi(s, t0, dsrc1, id_src2->imm);
+  rtl_subi(s, 0, dsrc1, id_src2->imm);
   printf("DEBUG sltiu: %u %u\n", *dsrc1, id_src2->imm);
 
-  if ((*t0) > *dsrc1) {
+  if ((*s0) > *dsrc1) {
     rtl_addi(s, ddest, rz, 1);
   } else {
     rtl_addi(s, ddest, rz, 0);
