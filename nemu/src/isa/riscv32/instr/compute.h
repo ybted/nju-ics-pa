@@ -14,6 +14,7 @@ def_EHelper(sltiu) {
   printf("DEBUG sltiu: %u %u\n", *dsrc1, id_src2->imm);
 
   if ((*s0) > *dsrc1) {
+    rtl_addi(s, ddest, rz, 1);
   } else {
     rtl_addi(s, ddest, rz, 0);
   }
