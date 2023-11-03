@@ -16,7 +16,7 @@ def_EHelper(sltiu) {
   } else {
     rtl_addi(s, ddest, rz, 0);
   }
-  // printf("DEBUG sltiu: %x %u %u\n", *ddest. *(id_src1->preg), id_src2->imm);
+  printf("DEBUG sltiu: %u %u %u\n", *ddest, *(id_src1->preg), id_src2->imm);
 }
 
 def_EHelper(add) {
