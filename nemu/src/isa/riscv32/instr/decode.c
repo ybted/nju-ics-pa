@@ -53,6 +53,7 @@ static def_DHelper(J) {
 static def_DHelper(R) {
   decode_op_r(s, id_src1, s->isa.instr.r.rs1, false);
   decode_op_r(s, id_src2, s->isa.instr.r.rs2, false);
+  printf("DEBUG R\n");
   // sword_t func3 = s->isa.instr.r.func3;
   // sword_t func7 = s->isa.instr.r.func7;
   decode_op_r(s, id_dest, s->isa.instr.r.rd, true);
