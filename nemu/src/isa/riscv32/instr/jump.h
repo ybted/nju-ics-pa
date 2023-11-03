@@ -41,3 +41,9 @@ def_EHelper(bgeu) {
     rtl_j(s, id_dest->imm + s->pc);
   }
 }
+
+def_EHelper(bltu) {
+  if (*dsrc1 < *dsrc2) {
+    rtl_j(s, id_dest->imm + s->pc);
+  }
+}
