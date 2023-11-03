@@ -63,9 +63,16 @@ def_EHelper(rem) {
   rtl_divu_r(s, ddest, dsrc1, dsrc2);
 }
 
+def_EHelper(slt) {
+  if ((int32_t) (*dsrc1) < (int32_t) (*dsrc2)) {
+    rtl_addi(s, ddest, rz, 1);
+  } else {
+    rtl_addi(s, ddest, rz, 0);
+  }
+}
+
 def_EHelper(sltu) {
-  rtl_sub(s, s0, dsrc1, dsrc2);
-   if ((*s0) > *dsrc1) {
+   if (*dsrc1 < *dsrc2) {
     rtl_addi(s, ddest, rz, 1);
   } else {
     rtl_addi(s, ddest, rz, 0);
