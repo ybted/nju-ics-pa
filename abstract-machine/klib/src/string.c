@@ -77,7 +77,7 @@ int memcmp(const void *s1, const void *s2, size_t n) {
       p1 ++;
       p2 ++; 
   }
-  return *(const unsigned char*)p1 - *(const unsigned char*)p2;
+  return n == 0 ? 0 : *(const unsigned char*)p1 - *(const unsigned char*)p2;
 }
 
 #endif
