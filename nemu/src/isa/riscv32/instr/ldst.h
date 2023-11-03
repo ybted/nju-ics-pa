@@ -1,10 +1,10 @@
 def_EHelper(lw) {
-  rtl_lm(s, ddest, dsrc1, id_src2->imm, 4);
+  rtl_lms(s, ddest, dsrc1, id_src2->imm, 4);
   //printf("DEBUG lw: %x\n", *ddest);
 }
 
 def_EHelper(lh) {
-  rtl_lm(s, ddest, dsrc1, id_src2->imm, 2);
+  rtl_lms(s, ddest, dsrc1, id_src2->imm, 2);
 }
 
 
