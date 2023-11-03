@@ -5,8 +5,18 @@ def_EHelper(lui) {
 
 def_EHelper(addi) {
   //printf("DEBUF addi %x %x\n", *id_src1->preg, id_src2->imm);
-  rtl_addi(s, ddest, id_src1->preg, id_src2->imm);
+  rtl_addi(s, ddest, dsrc1, id_src2->imm);
   //printf("DEBUG addi: %x\n", *ddest);
+}
+
+def_EHelper(sltiu) {
+  rtl_subi(s, s0, id_src1->preg, id_src2->imm);
+  if ((*s0) < 0) {
+    rtl_addi(s, ddest, rz, 1);
+  } else {
+    rtl_addi(s, ddest, rz, 0);
+  }
+  // printf("DEBUG sltiu: %x %u %u\n", *ddest. *(id_src1->preg), id_src2->imm);
 }
 
 def_EHelper(add) {
