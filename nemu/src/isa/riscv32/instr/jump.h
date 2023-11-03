@@ -30,6 +30,12 @@ def_EHelper(bge) {
   }
 }
 
+def_EHelper(blt) {
+  if ((int32_t)*dsrc1 < (int32_t)*dsrc2) {
+    rtl_j(s, id_dest->imm + s->pc);
+  }
+}
+
 def_EHelper(bgeu) {
   if (*dsrc1 >= *dsrc2) {
     rtl_j(s, id_dest->imm + s->pc);
