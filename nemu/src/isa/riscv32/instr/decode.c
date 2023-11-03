@@ -25,6 +25,7 @@ static def_DHelper(I) {
   decode_op_r(s, id_src1, s->isa.instr.i.rs1, false);
   decode_op_i(s, id_src2, s->isa.instr.i.simm11_0, false);
   decode_op_r(s, id_dest, s->isa.instr.i.rd, true);
+  assert(id_dest != id_src1);
 }
 
 static def_DHelper(U) {
