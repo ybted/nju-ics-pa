@@ -23,12 +23,11 @@ char *strncpy(char *dst, const char *src, size_t n) {
 }
 
 char *strcat(char *dst, const char *src) {
-  // char* p = dst + strlen(dst);
-  // while (*src) {
-  //   *p ++ = *src ++;
-  // }
-  // *p = '\0';
-  // return dst;
+  char* p = dst + strlen(dst);
+  while (*src) {
+    *p ++ = *src ++;
+  }
+  *p = '\0';
   return dst;
 }
 
