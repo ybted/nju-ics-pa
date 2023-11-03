@@ -31,6 +31,15 @@ def_EHelper(sub) {
   rtl_sub(s, ddest, dsrc1, dsrc2);
 }
 
+def_EHelper(sltu) {
+  rtl_sub(s, s0, dsrc1, dsrc2);
+   if ((*s0) > *dsrc1) {
+    rtl_addi(s, ddest, rz, 1);
+  } else {
+    rtl_addi(s, ddest, rz, 0);
+  }
+}
+
 def_EHelper(auipc) {
   rtl_li(s, ddest, id_src1->imm + s->pc);
   //printf("DEBUG auipc: %x\n", *ddest);
