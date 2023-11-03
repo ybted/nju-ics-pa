@@ -51,6 +51,10 @@ def_EHelper(sub) {
   rtl_sub(s, ddest, dsrc1, dsrc2);
 }
 
+def_EHelper(mul) {
+  rtl_mulu_lo(s, ddest, dsrc1, dsrc2);
+}
+
 def_EHelper(sltu) {
   rtl_sub(s, s0, dsrc1, dsrc2);
    if ((*s0) > *dsrc1) {
