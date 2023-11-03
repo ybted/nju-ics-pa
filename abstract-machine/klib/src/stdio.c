@@ -31,8 +31,8 @@ int to_string(char* out, int num) {
     int base = 1;
     for (int j = 0; j < i; j ++)
       base *= 10;
-    *out++ = num % base + '0';
-    num -= (num % base) * base;
+    *out++ = num / base + '0';
+    num -= (num / base) * base;
   }
   len += tmp;
   return len;
