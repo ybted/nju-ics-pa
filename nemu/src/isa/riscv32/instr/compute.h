@@ -15,6 +15,7 @@ def_EHelper(sltiu) {
 
   if ((*s0) > *dsrc1) {
     printf("DEBUG sltiu: %u %u %u\n", *ddest, *dsrc1, id_src2->imm);
+    assert(ddest != dsrc1);
     rtl_li(s, ddest, 1);
     printf("DEBUG sltiu: %u %u %u\n", *ddest, *dsrc1, id_src2->imm);
   } else {
