@@ -11,8 +11,9 @@ def_EHelper(jalr) {
 }
 
 def_EHelper(beq) {
+  printf("DEBUG beq: %u %x\n", id_dest->imm, id_dest->imm + s->pc);
   if (*dsrc1 == *dsrc2) {
-    printf("DEBUG beq: %u %x\n", id_dest->imm, id_dest->imm + s->pc);
+    
     rtl_j(s, id_dest->imm + s->pc);
   }
 }
