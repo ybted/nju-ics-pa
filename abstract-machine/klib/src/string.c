@@ -78,7 +78,7 @@ int memcmp(const void *s1, const void *s2, size_t n) {
     p1 ++;
     p2 ++; 
   }
-  return p1 - p2;
+  return *p1 == *p2 || n == 0 ? 0 : p1 - p2;
 }
 
 #endif
