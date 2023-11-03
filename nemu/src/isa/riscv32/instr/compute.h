@@ -21,9 +21,15 @@ def_EHelper(sltiu) {
   // printf("DEBUG sltiu: %u %u %u\n", *ddest, *dsrc1, id_src2->imm);
 }
 
+def_EHelper(andi) {
+  rtl_andi(s, ddest, dsrc1, id_src2->imm);
+}
+
+
 def_EHelper(srai) {
   rtl_srai(s, ddest, dsrc1, id_src2->imm & 0x01f);
 }
+
 
 def_EHelper(add) {
   // printf("DEBUG ADD: %x %x %x\n", *ddest, *id_src1->preg, *id_src2->preg);
