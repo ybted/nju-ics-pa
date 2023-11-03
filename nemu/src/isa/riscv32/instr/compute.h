@@ -5,7 +5,6 @@ def_EHelper(lui) {
 
 def_EHelper(addi) {
   //printf("DEBUF addi: %u %u %u\n", *ddest, *dsrc1, id_src2->imm);
-  assert(ddest != dsrc1);
   rtl_addi(s, ddest, dsrc1, id_src2->imm);
   //printf("DEBUF addi: %u %u %u\n", *ddest, *dsrc1, id_src2->imm);
 }
