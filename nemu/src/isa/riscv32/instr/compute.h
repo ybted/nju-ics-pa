@@ -10,6 +10,7 @@ def_EHelper(addi) {
 }
 
 def_EHelper(sltiu) {
+  assert(ddest != dsrc1);
   rtl_subi(s, s0, dsrc1, id_src2->imm);
   printf("DEBUG sltiu: %u %u\n", *dsrc1, id_src2->imm);
 
