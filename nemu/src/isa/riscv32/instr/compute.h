@@ -11,7 +11,7 @@ def_EHelper(addi) {
 
 def_EHelper(sltiu) {
   rtl_subi(s, s0, dsrc1, id_src2->imm);
-  if ((*s0) < 0) {
+  if ((*s0) > *dsrc1) {
     rtl_addi(s, ddest, rz, 1);
   } else {
     rtl_addi(s, ddest, rz, 0);
