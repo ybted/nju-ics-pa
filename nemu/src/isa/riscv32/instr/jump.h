@@ -23,3 +23,9 @@ def_EHelper(bne) {
     rtl_j(s, id_dest->imm + s->pc);
   }
 }
+
+def_EHelper(bge) {
+  if (*dsrc1 >= *dsrc2) {
+    rtl_j(s, id_dest->imm + s->pc);
+  }
+}
