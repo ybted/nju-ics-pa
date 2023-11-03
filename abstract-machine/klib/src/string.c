@@ -72,9 +72,14 @@ int memcmp(const void *s1, const void *s2, size_t n) {
   assert(s1 && s2 && n >= 0);
   const char* p1 = (const char*)s1;
   const char* p2 = (const char*)s2;
-  while ( n-- && *p1 && *p2 && (*p1 == *p2) ) {
-    p1 ++; 
-    p2 ++;
+
+  while (n --) {
+    if (*p1 && *p2 && (*p1 == *p2)) {
+      p1 ++;
+      p2 ++;
+      continue;
+    } else 
+      break;
   }
   return *p1 - *p2;
 }
