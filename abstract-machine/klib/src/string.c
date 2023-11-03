@@ -48,9 +48,11 @@ void *memset(void *s, int c, size_t n) {
   if (s == NULL) 
     return s;
   unsigned char *xs =  s;
-  while (n--) 
-    *xs++ = c;
-  
+  while (n != 0) {
+    --n;
+    *xs = c;
+    ++xs;
+  } 
   return s;
 }
 
