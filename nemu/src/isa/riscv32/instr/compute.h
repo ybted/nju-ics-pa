@@ -11,14 +11,14 @@ def_EHelper(addi) {
 
 def_EHelper(sltiu) {
   rtl_subi(s, s0, dsrc1, id_src2->imm);
-  printf("DEBUG sltiu: %u %u\n", *dsrc1, id_src2->imm);
+  // printf("DEBUG sltiu: %u %u\n", *dsrc1, id_src2->imm);
 
   if ((*s0) > *dsrc1) {
     rtl_addi(s, ddest, rz, 1);
   } else {
     rtl_addi(s, ddest, rz, 0);
   }
-  printf("DEBUG sltiu: %u %u %u\n", *ddest, *dsrc1, id_src2->imm);
+  // printf("DEBUG sltiu: %u %u %u\n", *ddest, *dsrc1, id_src2->imm);
 }
 
 def_EHelper(add) {
