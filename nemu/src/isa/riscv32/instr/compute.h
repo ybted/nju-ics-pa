@@ -37,6 +37,10 @@ def_EHelper(srli) {
   rtl_srli(s, ddest, dsrc1, id_src2->imm & 0x01f);
 }
 
+def_EHelper(slli) {
+  rtl_slli(s, ddest, dsrc1, id_src2->imm & 0x01f);
+}
+
 def_EHelper(add) {
   // printf("DEBUG ADD: %x %x %x\n", *ddest, *id_src1->preg, *id_src2->preg);
   rtl_add(s, ddest, dsrc1, dsrc2);
