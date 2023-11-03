@@ -48,7 +48,8 @@ void *memset(void *s, int c, size_t n) {
   assert(s && n >= 0);
   char *tmp = (char *) s;
   while (n-- > 0) {
-    *tmp++ = c;
+    *tmp = c;
+    tmp ++;
   }
   return s;
 }
