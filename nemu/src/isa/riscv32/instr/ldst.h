@@ -7,6 +7,10 @@ def_EHelper(lh) {
   rtl_lms(s, ddest, dsrc1, id_src2->imm, 2);
 }
 
+def_EHelper(lhu) {
+  rtl_lm(s, ddest, dsrc1, id_src2->imm, 2);
+}
+
 
 def_EHelper(lbu) {
   rtl_lm(s, ddest, dsrc1, id_src2->imm, 1);
