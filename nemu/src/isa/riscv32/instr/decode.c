@@ -65,7 +65,8 @@ static def_DHelper(B) {
   if (s->isa.instr.b.imm31) {
     imm = imm | 0xffe00000;
   } 
-  printf("b_imm: %u\n", imm);
+  decode_op_i(s, id_dest, imm, true);
+  // printf("b_imm: %u\n", imm);
 }
 
 def_THelper(load) {
@@ -92,6 +93,7 @@ def_THelper(immop) {
 }
 
 def_THelper(bop) {
+  def_INSTR_TAB("?????? ????? ????? 000 ????? ????? ??", beq);
   return EXEC_ID_inv;
 }
 

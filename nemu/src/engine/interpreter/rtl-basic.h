@@ -22,7 +22,7 @@
 
 // compute
 
-static inline void rtl_add(Decode *s, rtlreg_t* dest, const rtlreg_t* src1, const rtlreg_t* src2) { *dest = ((*src1) + (*src2)); } static inline void rtl_addi(Decode *s, rtlreg_t* dest, const rtlreg_t* src1, const sword_t imm) { *dest = ((*src1) + (imm)); }
+def_rtl_compute_reg_imm(add)
 def_rtl_compute_reg_imm(sub)
 def_rtl_compute_reg_imm(and)
 def_rtl_compute_reg_imm(or)
