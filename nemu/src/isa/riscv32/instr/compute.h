@@ -10,7 +10,7 @@ def_EHelper(addi) {
 }
 
 def_EHelper(sltiu) {
-  rtl_subi(s, s0, id_src1->preg, id_src2->imm);
+  rtl_subi(s, s0, dsrc1, id_src2->imm);
   if ((*s0) < 0) {
     rtl_addi(s, ddest, rz, 1);
   } else {
@@ -21,12 +21,12 @@ def_EHelper(sltiu) {
 
 def_EHelper(add) {
   // printf("DEBUG ADD: %x %x %x\n", *ddest, *id_src1->preg, *id_src2->preg);
-  rtl_add(s, ddest, id_src1->preg, id_src2->preg);
+  rtl_add(s, ddest, dsrc1, dsrc2);
   // printf("DEBUG ADD: %x %x %x\n", *ddest, *id_src1->preg, *id_src2->preg);
 }
 
 def_EHelper(sub) {
-  rtl_sub(s, ddest, id_src1->preg, id_src2->preg);
+  rtl_sub(s, ddest, dsrc1, dsrc2);
 }
 
 def_EHelper(auipc) {
