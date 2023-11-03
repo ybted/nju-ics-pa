@@ -49,6 +49,7 @@ int sprintf(char *out, const char *fmt, ...) {
         int num = va_arg(args, int);
         int inc = to_string(out, num);
         len += inc;
+        out += inc;
       } else if (*fmt == 's') {
         char* str = va_arg(args, char*);
         int tmp = strlen(str);
