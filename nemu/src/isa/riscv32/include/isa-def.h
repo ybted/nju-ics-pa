@@ -46,6 +46,15 @@ typedef struct {
       uint32_t imm21_30  : 10;
       uint32_t imm31     : 1;
     } j;
+    struct {
+      uint32_t opcode1_0 : 2;
+      uint32_t opcpde6_2 : 5;
+      uint32_t rd        : 5;
+      uint32_t func3     : 3;
+      uint32_t rs1       : 5;
+      uint32_t rs2       : 5;
+      uint32_t func7     : 7;
+    } r;
     uint32_t val;
   } instr;
 } riscv32_ISADecodeInfo;

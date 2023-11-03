@@ -9,6 +9,11 @@ def_EHelper(addi) {
   //printf("DEBUG addi: %x\n", *ddest);
 }
 
+def_EHelper(add) {
+  rtl_add(s, ddest, id_src1->preg, id_src2->preg);
+  printf("DEBUG ADD: %x %x %x", *ddest, *id_src1->preg, *id_src2->preg);
+}
+
 def_EHelper(auipc) {
   rtl_li(s, ddest, id_src1->imm + s->pc);
   //printf("DEBUG auipc: %x\n", *ddest);
