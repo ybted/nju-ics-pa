@@ -63,7 +63,7 @@ static def_DHelper(B) {
   decode_op_r(s, id_src2, s->isa.instr.b.rs2, false);
   sword_t imm = s->isa.instr.b.imm31 << 12 | s->isa.instr.b.imm25_30 << 5 | s->isa.instr.b.imm7 << 11 | s->isa.instr.b.imm8_11 << 1;
   if (s->isa.instr.b.imm31) {
-    imm = imm | 0xffe00000;
+    imm = imm | 0xffffe000;
   } 
   decode_op_i(s, id_dest, imm, true);
   // printf("b_imm: %u\n", imm);
