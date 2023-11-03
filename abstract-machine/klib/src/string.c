@@ -45,14 +45,10 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 }
 
 void *memset(void *s, int c, size_t n) {
-  if (s == NULL) 
-    return s;
   unsigned char *xs =  s;
-  while (n != 0) {
-    --n;
-    *xs = c;
-    ++xs;
-  } 
+  while (n--) 
+    *xs++ = c;
+  
   return s;
 }
 
@@ -84,7 +80,7 @@ int memcmp(const void *s1, const void *s2, size_t n) {
     } else 
       break;
   }
-  return *p1 - *p2;
+  return *(const unsigned char*)p1 - *(const unsigned char*)p2;
 }
 
 #endif
