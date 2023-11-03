@@ -25,6 +25,12 @@ def_EHelper(bne) {
 }
 
 def_EHelper(bge) {
+  if ((int32_t)*dsrc1 >= (int32_t)*dsrc2) {
+    rtl_j(s, id_dest->imm + s->pc);
+  }
+}
+
+def_EHelper(bgeu) {
   if (*dsrc1 >= *dsrc2) {
     rtl_j(s, id_dest->imm + s->pc);
   }
