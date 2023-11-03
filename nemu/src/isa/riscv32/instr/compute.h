@@ -40,6 +40,10 @@ def_EHelper(sltu) {
   }
 }
 
+def_EHelper(xor) {
+  rtl_xor(s, ddest, dsrc1, dsrc2);
+}
+
 def_EHelper(auipc) {
   rtl_li(s, ddest, id_src1->imm + s->pc);
   //printf("DEBUG auipc: %x\n", *ddest);
