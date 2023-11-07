@@ -102,7 +102,16 @@ $(info INCFLAGS: $(INCFLAGS))
 
 ### Paste in arch-specific configurations (e.g., from `scripts/x86_64-qemu.mk`)
 -include $(AM_HOME)/scripts/$(ARCH).mk
-
+$(info AM_SRCS: $(AM_SRCS))
+$(info WORK_DIR: $(WORK_DIR))
+$(info DST_DIR: $(DST_DIR))
+$(info IMAGE_REL: $(IMAGE_REL))
+$(info IMAGE: $(IMAGE))
+$(info ARCHIVE: $(ARCHIVE))
+$(info OBJS: $(OBJS))
+$(info LIBS: $(LIBS))
+$(info LINKAGE: $(LINKAGE))
+$(info INCFLAGS: $(INCFLAGS))
 ### Fall back to native gcc/binutils if there is no cross compiler
 ifeq ($(wildcard $(shell which $(CC))),)
   $(info #  $(CC) not found; fall back to default gcc and binutils)
