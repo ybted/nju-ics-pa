@@ -63,7 +63,14 @@ LINKAGE   = $(OBJS) \
   $(addsuffix -$(ARCH).a, $(join \
     $(addsuffix /build/, $(addprefix $(AM_HOME)/, $(LIBS))), \
     $(LIBS) ))
-
+$(info WORK_DIR: $(WORK_DIR))
+$(info DST_DIR: $(DST_DIR))
+$(info IMAGE_REL: $(IMAGE_REL))
+$(info IMAGE: $(IMAGE))
+$(info ARCHIVE: $(ARCHIVE))
+$(info OBJS: $(OBJS))
+$(info LIBS: $(LIBS))
+$(info LINKAGE: $(LINKAGE))
 ## 3. General Compilation Flags
 
 ### (Cross) compilers, e.g., mips-linux-gnu-g++
