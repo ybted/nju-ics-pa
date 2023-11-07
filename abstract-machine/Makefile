@@ -92,7 +92,7 @@ ASFLAGS  += -MMD $(INCFLAGS)
 
 ### Paste in arch-specific configurations (e.g., from `scripts/x86_64-qemu.mk`)
 -include $(AM_HOME)/scripts/$(ARCH).mk
-$(info AM_SRCS: $(AM_SRCS))
+$(info SRCS: $(SRCS))
 $(info WORK_DIR: $(WORK_DIR))
 $(info DST_DIR: $(DST_DIR))
 $(info IMAGE_REL: $(IMAGE_REL))
