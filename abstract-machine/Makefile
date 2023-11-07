@@ -102,7 +102,7 @@ ASFLAGS  += -MMD $(INCFLAGS)
 # $(info LIBS: $(LIBS))
 # $(info LINKAGE: $(LINKAGE))
 # $(info INCFLAGS: $(INCFLAGS))
-$(info LDFLAGS: $(LDFLAGS))
+# $(info LDFLAGS: $(LDFLAGS))
 ### Fall back to native gcc/binutils if there is no cross compiler
 ifeq ($(wildcard $(shell which $(CC))),)
   $(info #  $(CC) not found; fall back to default gcc and binutils)
