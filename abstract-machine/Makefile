@@ -95,7 +95,7 @@ $(info ARCHIVE: $(ARCHIVE))
 $(info OBJS: $(OBJS))
 $(info LIBS: $(LIBS))
 $(info LINKAGE: $(LINKAGE))
-$(info INCFLAGS: )
+$(info INCFLAGS: $(INCFLAGS))
 
 ## 4. Arch-Specific Configurations
 
