@@ -87,15 +87,15 @@ CFLAGS   += -O2 -MMD -Wall -Werror $(INCFLAGS) \
             -Wno-main -U_FORTIFY_SOURCE
 CXXFLAGS +=  $(CFLAGS) -ffreestanding -fno-rtti -fno-exceptions
 ASFLAGS  += -MMD $(INCFLAGS)
-# $(info WORK_DIR: $(WORK_DIR))
-# $(info DST_DIR: $(DST_DIR))
-# $(info IMAGE_REL: $(IMAGE_REL))
-# $(info IMAGE: $(IMAGE))
-# $(info ARCHIVE: $(ARCHIVE))
-# $(info OBJS: $(OBJS))
-# $(info LIBS: $(LIBS))
-# $(info LINKAGE: $(LINKAGE))
-# $(info INCFLAGS: )
+$(info WORK_DIR: $(WORK_DIR))
+$(info DST_DIR: $(DST_DIR))
+$(info IMAGE_REL: $(IMAGE_REL))
+$(info IMAGE: $(IMAGE))
+$(info ARCHIVE: $(ARCHIVE))
+$(info OBJS: $(OBJS))
+$(info LIBS: $(LIBS))
+$(info LINKAGE: $(LINKAGE))
+$(info INCFLAGS: )
 ## 4. Arch-Specific Configurations
 
 ### Paste in arch-specific configurations (e.g., from `scripts/x86_64-qemu.mk`)
