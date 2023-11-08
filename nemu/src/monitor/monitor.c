@@ -166,13 +166,11 @@ void init_monitor(int argc, char *argv[]) {
               sectionHeaders[i].sh_name, sectionHeaders[i].sh_type, sectionHeaders[i].sh_size);
   }
 
-    // 释放分配的内存
-    free(programHeaders);
-    free(sectionHeaders);
+  // 释放分配的内存
+  free(programHeaders);
+  free(sectionHeaders);
 
-    // 关闭文件
-    fclose(file);
-  
+
   fclose(file);
 
   /* Set random seed. */
