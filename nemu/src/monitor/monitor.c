@@ -47,6 +47,31 @@ typedef struct {
     uint16_t e_shstrndx;
 } ElfHeader;
 
+typedef struct {
+    uint32_t p_type;
+    uint32_t p_flags;
+    uint64_t p_offset;
+    uint64_t p_vaddr;
+    uint64_t p_paddr;
+    uint64_t p_filesz;
+    uint64_t p_memsz;
+    uint64_t p_align;
+} ProgramHeader;
+
+// 段头表项结构
+typedef struct {
+    uint32_t sh_name;
+    uint32_t sh_type;
+    uint64_t sh_flags;
+    uint64_t sh_addr;
+    uint64_t sh_offset;
+    uint64_t sh_size;
+    uint32_t sh_link;
+    uint32_t sh_info;
+    uint64_t sh_addralign;
+    uint64_t sh_entsize;
+} SectionHeader;
+
 static long load_img() {
   if (img_file == NULL) {
     Log("No image is given. Use the default build-in image.");
@@ -114,19 +139,39 @@ void init_monitor(int argc, char *argv[]) {
   }
   ElfHeader header;
   int n = fread(&header, sizeof(ElfHeader), 1, file);
-  n = n + 1;
-  printf("ELF 文件类型: 0x%04X\n", header.e_type);
-    printf("机器类型: 0x%04X\n", header.e_machine);
-    printf("入口地址: 0x%016X\n", header.e_entry);
-    printf("程序头表偏移: 0x%016X\n", header.e_phoff);
-    printf("段表偏移: 0x%016X\n", header.e_shoff);
-    printf("标志: 0x%08X\n", header.e_flags);
-    printf("ELF头部大小: %d bytes\n", header.e_ehsize);
-    printf("程序头表中每个条目大小: %d bytes\n", header.e_phentsize);
-    printf("程序头表中的条目数量: %d\n", header.e_phnum);
-    printf("段表中每个条目大小: %d bytes\n", header.e_shentsize);
-    printf("段表中的条目数量: %d\n", header.e_shnum);
-    printf("节头字符串表索引: %d\n", header.e_shstrndx);
+  ProgramHeader *programHeaders = NULL;
+  SectionHeader *sectionHeaders = NULL;
+  int i;
+  // 读取程序头表
+  programHeaders = (ProgramHeader *)malloc(header.e_phnum * sizeof(ProgramHeader));
+  fseek(file, header.e_phoff, SEEK_SET);
+  n = fread(programHeaders, sizeof(ProgramHeader), header.e_phnum, file);
+
+  // 读取段头表
+  sectionHeaders = (SectionHeader *)malloc(header.e_shnum * sizeof(SectionHeader));
+  fseek(file, header.e_shoff, SEEK_SET);
+  n = fread(sectionHeaders, sizeof(SectionHeader), header.e_shnum, file);
+
+  // 打印程序头表信息
+  printf("程序头表：\n");
+  for (i = 0; i < header.e_phnum; i++) {
+      printf("类型: 0x%08X, 偏移: 0x%016lX, 文件大小: %lu bytes\n",
+              programHeaders[i].p_type, programHeaders[i].p_offset, programHeaders[i].p_filesz);
+  }
+ n ++;
+  // 打印段头表信息
+  printf("\n段头表：\n");
+  for (i = 0; i < header.e_shnum; i++) {
+      printf("名称索引: %d, 类型: 0x%08X, 大小: %lu bytes\n",
+              sectionHeaders[i].sh_name, sectionHeaders[i].sh_type, sectionHeaders[i].sh_size);
+  }
+
+    // 释放分配的内存
+    free(programHeaders);
+    free(sectionHeaders);
+
+    // 关闭文件
+    fclose(file);
   
   fclose(file);
 
