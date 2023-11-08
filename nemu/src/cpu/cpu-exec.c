@@ -20,8 +20,8 @@ const rtlreg_t rzero = 0;
 rtlreg_t tmp_reg[4];
 
 // ring buffer
-char ring_buffer[10][128];
-int cur = 0;
+// char ring_buffer[10][128];
+// int cur = 0;
 
 void device_update();
 void fetch_decode(Decode *s, vaddr_t pc);
@@ -91,19 +91,19 @@ void fetch_decode(Decode *s, vaddr_t pc) {
       MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.instr.val, ilen);
 
   // iringbuf
-  p = ring_buffer[cur];
-  p += snprintf(p, sizeof(ring_buffer[0]), FMT_WORD ":", s->pc);
-  for (i = 0; i < ilen; i ++) {
-    p += snprintf(p, 4, " %02x", instr[i]);
-  }
-  memset(p, ' ', space_len);
-  p += space_len;
+  // p = ring_buffer[cur];
+  // p += snprintf(p, sizeof(ring_buffer[0]), FMT_WORD ":", s->pc);
+  // for (i = 0; i < ilen; i ++) {
+  //   p += snprintf(p, 4, " %02x", instr[i]);
+  // }
+  // memset(p, ' ', space_len);
+  // p += space_len;
 
-  void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
-  disassemble(p, ring_buffer[cur] + sizeof(ring_buffer[cur]) - p,
-      MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.instr.val, ilen);
-  cur ++;
-  cur %= 10;
+  // void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
+  // disassemble(p, ring_buffer[cur] + sizeof(ring_buffer[cur]) - p,
+  //     MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.instr.val, ilen);
+  // cur ++;
+  // cur %= 10;
 #endif
 
 
