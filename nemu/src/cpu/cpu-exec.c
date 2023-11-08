@@ -75,7 +75,6 @@ void fetch_decode(Decode *s, vaddr_t pc) {
   for (i = 0; i < ilen; i ++) {
     p += snprintf(p, 4, " %02x", instr[i]);
   }
-  p += snprintf(p, 20, "%s", "ybhhh");
   int ilen_max = MUXDEF(CONFIG_ISA_x86, 8, 4);
   int space_len = ilen_max - ilen;
   if (space_len < 0) space_len = 0;
