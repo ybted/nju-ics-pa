@@ -70,7 +70,7 @@ void fetch_decode(Decode *s, vaddr_t pc) {
   int idx = isa_fetch_decode(s);
   s->dnpc = s->snpc;
   s->EHelper = g_exec_table[idx];
-  #ifdef MTRACE
+  #ifdef CONFIG_MTRACE
   printf("Memory yes!!\n");
   #endif
 #ifdef CONFIG_ITRACE
