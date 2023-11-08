@@ -97,7 +97,7 @@ void init_monitor(int argc, char *argv[]) {
   }
   int byte;
   while((byte = fgetc(file)) != EOF) {
-    putchar(byte);
+    printf("%x", byte);
   }
 
   fclose(file);
