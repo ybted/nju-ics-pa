@@ -95,9 +95,9 @@ void init_monitor(int argc, char *argv[]) {
     printf("can not open file\n");
     return ;
   }
-  char line[100];
-  while(fgets(line, sizeof(line), file) != NULL) {
-    printf("%s", line);
+  int byte;
+  while((byte = fgetc(file)) != EOF) {
+    putchar(byte);
   }
 
   fclose(file);
