@@ -115,9 +115,19 @@ void init_monitor(int argc, char *argv[]) {
   ElfHeader header;
   int n = fread(&header, sizeof(ElfHeader), 1, file);
   n = n + 1;
-  printf("e_ident: %s\n", header.e_ident);
-  printf("e_machine: 0x%04X\n", header.e_type);
-  printf("e_version: 0x%04X\n", header.e_version);
+  printf("ELF 文件类型: 0x%04X\n", header.e_type);
+    printf("机器类型: 0x%04X\n", header.e_machine);
+    printf("入口地址: 0x%016X\n", header.e_entry);
+    printf("程序头表偏移: 0x%016X\n", header.e_phoff);
+    printf("段表偏移: 0x%016X\n", header.e_shoff);
+    printf("标志: 0x%08X\n", header.e_flags);
+    printf("ELF头部大小: %d bytes\n", header.e_ehsize);
+    printf("程序头表中每个条目大小: %d bytes\n", header.e_phentsize);
+    printf("程序头表中的条目数量: %d\n", header.e_phnum);
+    printf("段表中每个条目大小: %d bytes\n", header.e_shentsize);
+    printf("段表中的条目数量: %d\n", header.e_shnum);
+    printf("节头字符串表索引: %d\n", header.e_shstrndx);
+  
   fclose(file);
 
   /* Set random seed. */
