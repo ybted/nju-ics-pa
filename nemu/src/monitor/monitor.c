@@ -30,6 +30,23 @@ static char *img_file = NULL;
 static char *elf_file = NULL;
 static int difftest_port = 1234;
 
+typedef struct {
+    unsigned char e_ident[16];
+    uint16_t e_type;
+    uint16_t e_machine;
+    uint32_t e_version;
+    uint32_t e_entry;
+    uint32_t e_phoff;
+    uint32_t e_shoff;
+    uint32_t e_flags;
+    uint16_t e_ehsize;
+    uint16_t e_phentsize;
+    uint16_t e_phnum;
+    uint16_t e_shentsize;
+    uint16_t e_shnum;
+    uint16_t e_shstrndx;
+} ElfHeader;
+
 static long load_img() {
   if (img_file == NULL) {
     Log("No image is given. Use the default build-in image.");
@@ -95,11 +112,12 @@ void init_monitor(int argc, char *argv[]) {
     printf("can not open file\n");
     return ;
   }
-  int byte;
-  while((byte = fgetc(file)) != EOF) {
-    printf("%x", byte);
-  }
-
+  ElfHeader header;
+  int n = fread(&header, sizeof(ElfHeader), 1, file);
+  n = n + 1;
+  printf("ELF 文件类型: 0x%04X\n", header.e_type);
+  printf("机器类型: 0x%04X\n", header.e_machine);
+  printf("入口地址: 0x%08X\n", header.e_entry);
   fclose(file);
 
   /* Set random seed. */
