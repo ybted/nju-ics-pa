@@ -90,6 +90,17 @@ void init_monitor(int argc, char *argv[]) {
 
   /* Parse arguments. */
   parse_args(argc, argv);
+  FILE* file = fopen(elf_file, "r");
+  if (file == NULL) {
+    printf("can not open file\n");
+    return ;
+  }
+  char line[100];
+  while(fgets(line, sizeof(line), file) != NULL) {
+    printf("%s", line);
+  }
+
+  fclose(file);
 
   /* Set random seed. */
   init_rand();
