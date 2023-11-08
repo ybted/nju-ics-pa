@@ -115,6 +115,8 @@ void init_monitor(int argc, char *argv[]) {
   ElfHeader header;
   int n = fread(&header, sizeof(ElfHeader), 1, file);
   n = n + 1;
+  printf("e_ident: %s\n", header.e_ident);
+  printf("e_machine: %x04X\n", header.e_type);
   printf("ELF 文件类型: 0x%04X\n", header.e_type);
   printf("机器类型: 0x%04X\n", header.e_machine);
   printf("入口地址: 0x%08X\n", header.e_entry);
