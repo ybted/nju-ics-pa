@@ -35,7 +35,7 @@ def_EHelper(jalr) {
       if(elf_func[i].func_name[0] == '\0') {
         break;
       }
-      if (elf_func[i].start == *id_src1->preg) {
+      if (elf_func[i].start <= *id_src1->preg && *id_src1->preg <= elf_func[i].start + elf_func[i].size) {
        
         for (int i = 0; i < space; i ++)
           printf(" ");
