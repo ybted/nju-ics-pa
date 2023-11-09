@@ -21,8 +21,8 @@ def_EHelper(jalr) {
   //printf("DEBUF jalr: %x %x %x\n", *id_src1->preg, id_src2->imm, s->pc);
   rtl_j(s,  *id_src1->preg);
   #ifdef CONFIG_FTRACE
-  // printf("JAL: %x\n", id_src1->imm + s->pc);
-  printf("%u %u\n", s->isa.instr.i.rs1, s->isa.instr.i.rd);
+  if (s->isa.instr.i.rs1 == 1 && s->isa.instr.i.rd == 0)
+    printf("ret\n");
   #endif
 }
 
