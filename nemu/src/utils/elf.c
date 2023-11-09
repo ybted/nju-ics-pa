@@ -72,7 +72,7 @@ static int readSection(Elf32_Ehdr *elfHead32, FILE *fp)
   size_t secNum = elfHead32->e_shnum;
   int secindex = elfHead32->e_shoff;
 
-  printf("SHT_STRTAB = 0x%x\n", elfHead32->e_shoff+ elfHead32->e_shentsize * elfHead32->e_shstrndx);
+  // printf("SHT_STRTAB = 0x%x\n", elfHead32->e_shoff+ elfHead32->e_shentsize * elfHead32->e_shstrndx);
   Elf32_Shdr shstrtab;
   fseek(fp, elfHead32->e_shoff+ elfHead32->e_shentsize * elfHead32->e_shstrndx, SEEK_SET);
   int n = fread(&shstrtab, sizeof(Elf32_Shdr), 1, fp);
@@ -126,7 +126,7 @@ static int readSection(Elf32_Ehdr *elfHead32, FILE *fp)
      * 其次，.dynstr .strtab的区分，可根据sh_name找到在.shstrtab节中的位置，读取其第二个字符，判断是否d和s 
     */
     if (elf32Sec.sh_type == SHT_STRTAB) {
-      printf("offset = 0x%x\n", elf32Sec.sh_offset);
+      // printf("offset = 0x%x\n", elf32Sec.sh_offset);
       if (i == elfHead32->e_shstrndx) {
         // 为shstrtab
         continue;
@@ -196,7 +196,6 @@ static void parse_elf(const char *elf_file) {
   }
 
   Elf32_Ehdr elfHead32 = read_elf_head(fp);
-  printf("%s\n", elfHead32.e_ident);
   readSection(&elfHead32, fp);
 
   return ;
