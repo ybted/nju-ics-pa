@@ -1,3 +1,4 @@
+int space = 0;
 def_EHelper(jal) {
   #ifdef CONFIG_FTRACE
   for (int i = 0; i < 1024; ++i) {
@@ -5,7 +6,10 @@ def_EHelper(jal) {
       break;
     }
     if (elf_func[i].start == id_src1->imm + s->pc) {
+      for (int i = 0; i < space; i ++)
+        printf(" ");
       printf("%x: call [%s@0x%lx]\n", s->pc, elf_func[i].func_name, elf_func[i].start);
+      space += 4;
     }
   }
   #endif
@@ -21,7 +25,13 @@ def_EHelper(jalr) {
   rtl_j(s,  *id_src1->preg);
   #ifdef CONFIG_FTRACE
   if (s->isa.instr.i.rs1 == 1 && s->isa.instr.i.rd == 0)
+  {
+    for (int i = 0; i < space; i ++)
+      printf(" ");
     printf("ret\n");
+    space --;
+  }
+    
   #endif
 }
 
