@@ -5,7 +5,7 @@ def_EHelper(jal) {
       break;
     }
     if (elf_func[i].start == id_src1->imm + s->pc) {
-      printf("%x: call [%s@0x%lu]\n", s->pc, elf_func[i].func_name, elf_func[i].start);
+      printf("%x: call [%s@0x%lx]\n", s->pc, elf_func[i].func_name, elf_func[i].start);
     }
   }
   #endif
