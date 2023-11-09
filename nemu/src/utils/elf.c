@@ -56,7 +56,7 @@ static int readStrTab(const Elf32_Sym *elf32Sym, size_t n, Elf32_Shdr *elf32Sec,
     fseek(fp, sh_offset + offset, SEEK_SET);
     int temp = fscanf(fp, "%63s", elf_func[index].func_name);
     temp ++;
-    printf("offset = 0x%x, file offset = 0x%lx\n", elf32Sym[i].st_name, elf32Sym[i].st_name + sh_offset);
+    // printf("offset = 0x%x, file offset = 0x%lx\n", elf32Sym[i].st_name, elf32Sym[i].st_name + sh_offset);
     index++;
   }
   rewind(fp);
