@@ -23,9 +23,12 @@ def_EHelper(jalr) {
   rtl_li(s, ddest, s->snpc);
   //printf("DEBUF jalr: %x %x %x\n", *id_src1->preg, id_src2->imm, s->pc);
   rtl_j(s,  *id_src1->preg);
+  
   #ifdef CONFIG_FTRACE
   if (s->isa.instr.i.rs1 == 1 && s->isa.instr.i.rd == 0)
   {
+    
+    space -= 4;
     for (int i = 0; i < space; i ++)
       printf(" ");
     for (int i = 0; i < 1024; ++i) {
@@ -33,7 +36,7 @@ def_EHelper(jalr) {
         break;
       }
       if (elf_func[i].start == *id_src1->preg) {
-        space -= 4;
+       
         for (int i = 0; i < space; i ++)
           printf(" ");
         printf("ret [%s]\n", elf_func[i].func_name);
