@@ -28,8 +28,18 @@ def_EHelper(jalr) {
   {
     for (int i = 0; i < space; i ++)
       printf(" ");
-    printf("ret\n");
-    space -= 4;
+    for (int i = 0; i < 1024; ++i) {
+      if(elf_func[i].func_name[0] == '\0') {
+        break;
+      }
+      if (elf_func[i].start == *id_src1->preg) {
+        space -= 4;
+        for (int i = 0; i < space; i ++)
+          printf(" ");
+        printf("ret [%s]\n", elf_func[i].func_name);
+      }
+    }
+    
   }
     
   #endif
