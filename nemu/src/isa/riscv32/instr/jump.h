@@ -22,7 +22,7 @@ def_EHelper(jalr) {
   rtl_j(s,  *id_src1->preg);
   #ifdef CONFIG_FTRACE
   // printf("JAL: %x\n", id_src1->imm + s->pc);
-  printf("%x %x\n", id_src1->imm, id_dest->imm);
+  printf("%u %u\n", s->isa.instr.i.rs1, s->isa.instr.i.rd);
   #endif
 }
 
