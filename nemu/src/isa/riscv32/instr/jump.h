@@ -4,7 +4,6 @@ def_EHelper(jal) {
   rtl_j(s, id_src1->imm + s->pc);
   #ifdef CONFIG_FTRACE
   // printf("JAL: %x\n", id_src1->imm + s->pc);
-  printf("Num:       Value       Size Name\n");
   for (int i = 0; i < 1024; ++i) {
     if(elf_func[i].func_name[0] == '\0') {
       break;
