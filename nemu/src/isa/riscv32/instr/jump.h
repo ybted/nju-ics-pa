@@ -38,7 +38,7 @@ def_EHelper(jalr) {
        
         for (int i = 0; i < space; i ++)
           printf(" ");
-        printf("ret [%s]\n", elf_func[i].func_name);
+        printf("%x: ret [%s]\n", s->pc, elf_func[i].func_name);
       }
     }
     
