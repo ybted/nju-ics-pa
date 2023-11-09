@@ -29,7 +29,7 @@ def_EHelper(jalr) {
     for (int i = 0; i < space; i ++)
       printf(" ");
     printf("ret\n");
-    space --;
+    space -= 4;
   }
     
   #endif
