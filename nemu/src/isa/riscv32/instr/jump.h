@@ -29,7 +29,7 @@ def_EHelper(jalr) {
     if(elf_func[i].func_name[0] == '\0') {
       break;
     }
-    if (elf_func[i].start == id_src1->imm + s->pc) {
+    if (elf_func[i].start == *id_src1->preg) {
       for (int i = 0; i < space; i ++)
         printf(" ");
       printf("%x: call [%s@0x%lx]\n", s->pc, elf_func[i].func_name, elf_func[i].start);
