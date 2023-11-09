@@ -205,13 +205,7 @@ static void parse_elf(const char *elf_file) {
 void init_elf(const char* elf_file)
 {
   parse_elf(elf_file);
-  printf("Num:       Value       Size Name\n");
-  for (int i = 0; i < 1024; ++i) {
-    if(elf_func[i].func_name[0] == '\0') {
-      break;
-    }
-    printf("%3d: %016lx %5ld %s\n", i, elf_func[i].start, elf_func[i].size, elf_func[i].func_name);
-  }
+  
 }
 
 
