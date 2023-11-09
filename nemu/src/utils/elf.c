@@ -205,7 +205,6 @@ static void parse_elf(const char *elf_file) {
 void init_elf(const char* elf_file)
 {
   parse_elf(elf_file);
-  
 }
 
 
