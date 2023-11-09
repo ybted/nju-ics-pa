@@ -90,7 +90,6 @@ static int parse_args(int argc, char *argv[]) {
 void init_monitor(int argc, char *argv[]) {
   /* Perform some global initialization. */
   #ifdef CONFIG_FTRACE
-  printf("HHHHHHHHHHHHHHHHHHH\n");
   init_elf(elf_file);
   #endif
   /* Parse arguments. */
