@@ -10,7 +10,7 @@ def_EHelper(jal) {
       break;
     }
     if (elf_func[i].start == id_src1->imm + s->pc) {
-      printf("%3d: %016lx %5ld %s\n", i, elf_func[i].start, elf_func[i].size, elf_func[i].func_name);
+      printf("call %s\n",  elf_func[i].func_name);
     }
   }
   #endif
