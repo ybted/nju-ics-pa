@@ -93,6 +93,7 @@ void init_monitor(int argc, char *argv[]) {
   printf("HHHHHHHHHHHHHHHHHHH\n");
   init_elf(elf_file);
   #endif
+  printf("HHHHHHHHHHHHHHHHHHH\n");
   /* Parse arguments. */
   parse_args(argc, argv);
 
