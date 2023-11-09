@@ -9,7 +9,7 @@ def_EHelper(jal) {
       for (int i = 0; i < space; i ++)
         printf(" ");
       printf("%x: call [%s@0x%lx]\n", s->pc, elf_func[i].func_name, elf_func[i].start);
-      space += 4;
+      space += 2;
     }
   }
   #endif
@@ -33,12 +33,12 @@ def_EHelper(jalr) {
       for (int i = 0; i < space; i ++)
         printf(" ");
       printf("%x: call [%s@0x%lx]\n", s->pc, elf_func[i].func_name, elf_func[i].start);
-      space += 4;
+      space += 2;
     }
   }
   if (s->isa.instr.i.rs1 == 1 && s->isa.instr.i.rd == 0)
   {
-    space -= 4;
+    space -= 2;
     for (int i = 0; i < space; i ++)
       printf(" ");
     for (int i = 0; i < 1024; ++i) {
