@@ -196,7 +196,7 @@ static void parse_elf(const char *elf_file) {
   }
 
   Elf32_Ehdr elfHead32 = read_elf_head(fp);
-
+  printf("%s\n", elfHead32.e_ident);
   readSection(&elfHead32, fp);
 
   return ;
