@@ -105,15 +105,6 @@ void fetch_decode(Decode *s, vaddr_t pc) {
   // cur ++;
   // cur %= 10;
 #endif
-#ifdef CONFIG_FTRACE
-  printf("Num:       Value       Size Name\n");
-  for (int i = 0; i < 1024; ++i) {
-    if(elf_func[i].func_name[0] == '\0') {
-      break;
-    }
-    printf("%3d: %016lx %5ld %s\n", i, elf_func[i].start, elf_func[i].size, elf_func[i].func_name);
-  }
-#endif
 
 }
 

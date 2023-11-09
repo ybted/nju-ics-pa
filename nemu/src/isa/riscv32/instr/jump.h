@@ -2,6 +2,16 @@ def_EHelper(jal) {
   rtl_li(s, ddest, s->snpc);
   //printf("DEBUG jal: %x %x\n", id_src1->imm, s->pc);
   rtl_j(s, id_src1->imm + s->pc);
+  #ifdef CONFIG_FTRACE
+  printf("Num:       Value       Size Name\n");
+  for (int i = 0; i < 1024; ++i) {
+    if(elf_func[i].func_name[0] == '\0') {
+      break;
+    }
+    printf("%3d: %016lx %5ld %s\n", i, elf_func[i].start, elf_func[i].size, elf_func[i].func_name);
+  }
+  #endif
+
 }
 
 def_EHelper(jalr) {
@@ -47,3 +57,5 @@ def_EHelper(bltu) {
     rtl_j(s, id_dest->imm + s->pc);
   }
 }
+
+
