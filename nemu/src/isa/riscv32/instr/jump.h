@@ -20,6 +20,10 @@ def_EHelper(jalr) {
   rtl_li(s, ddest, s->snpc);
   //printf("DEBUF jalr: %x %x %x\n", *id_src1->preg, id_src2->imm, s->pc);
   rtl_j(s,  *id_src1->preg);
+  #ifdef CONFIG_FTRACE
+  // printf("JAL: %x\n", id_src1->imm + s->pc);
+  printf("%d", *id_src1->preg);
+  #endif
 }
 
 def_EHelper(beq) {
