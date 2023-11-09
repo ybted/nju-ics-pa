@@ -132,46 +132,46 @@ void init_monitor(int argc, char *argv[]) {
 
   /* Parse arguments. */
   parse_args(argc, argv);
-  FILE* file = fopen(elf_file, "r");
-  if (file == NULL) {
-    printf("can not open file\n");
-    return ;
-  }
-  ElfHeader header;
-  int n = fread(&header, sizeof(ElfHeader), 1, file);
-  ProgramHeader *programHeaders = NULL;
-  SectionHeader *sectionHeaders = NULL;
-  int i;
-  // 读取程序头表
-  programHeaders = (ProgramHeader *)malloc(header.e_phnum * sizeof(ProgramHeader));
-  fseek(file, header.e_phoff, SEEK_SET);
-  n = fread(programHeaders, sizeof(ProgramHeader), header.e_phnum, file);
+//   FILE* file = fopen(elf_file, "r");
+//   if (file == NULL) {
+//     printf("can not open file\n");
+//     return ;
+//   }
+//   ElfHeader header;
+//   int n = fread(&header, sizeof(ElfHeader), 1, file);
+//   ProgramHeader *programHeaders = NULL;
+//   SectionHeader *sectionHeaders = NULL;
+//   int i;
+//   // 读取程序头表
+//   programHeaders = (ProgramHeader *)malloc(header.e_phnum * sizeof(ProgramHeader));
+//   fseek(file, header.e_phoff, SEEK_SET);
+//   n = fread(programHeaders, sizeof(ProgramHeader), header.e_phnum, file);
 
-  // 读取段头表
-  sectionHeaders = (SectionHeader *)malloc(header.e_shnum * sizeof(SectionHeader));
-  fseek(file, header.e_shoff, SEEK_SET);
-  n = fread(sectionHeaders, sizeof(SectionHeader), header.e_shnum, file);
+//   // 读取段头表
+//   sectionHeaders = (SectionHeader *)malloc(header.e_shnum * sizeof(SectionHeader));
+//   fseek(file, header.e_shoff, SEEK_SET);
+//   n = fread(sectionHeaders, sizeof(SectionHeader), header.e_shnum, file);
 
-  // 打印程序头表信息
-  printf("程序头表：\n");
-  for (i = 0; i < header.e_phnum; i++) {
-      printf("类型: 0x%08X, 偏移: 0x%016lX, 文件大小: %lu bytes\n",
-              programHeaders[i].p_type, programHeaders[i].p_offset, programHeaders[i].p_filesz);
-  }
- n ++;
-  // 打印段头表信息
-  printf("\n段头表：\n");
-  for (i = 0; i < header.e_shnum; i++) {
-      printf("名称索引: %d, 类型: 0x%08X, 大小: %lu bytes\n",
-              sectionHeaders[i].sh_name, sectionHeaders[i].sh_type, sectionHeaders[i].sh_size);
-  }
+//   // 打印程序头表信息
+//   printf("程序头表：\n");
+//   for (i = 0; i < header.e_phnum; i++) {
+//       printf("类型: 0x%08X, 偏移: 0x%016lX, 文件大小: %lu bytes\n",
+//               programHeaders[i].p_type, programHeaders[i].p_offset, programHeaders[i].p_filesz);
+//   }
+//  n ++;
+//   // 打印段头表信息
+//   printf("\n段头表：\n");
+//   for (i = 0; i < header.e_shnum; i++) {
+//       printf("名称索引: %d, 类型: 0x%08X, 大小: %lu bytes\n",
+//               sectionHeaders[i].sh_name, sectionHeaders[i].sh_type, sectionHeaders[i].sh_size);
+//   }
 
-  // 释放分配的内存
-  free(programHeaders);
-  free(sectionHeaders);
+//   // 释放分配的内存
+//   free(programHeaders);
+//   free(sectionHeaders);
 
 
-  fclose(file);
+  // fclose(file);
 
   /* Set random seed. */
   init_rand();
