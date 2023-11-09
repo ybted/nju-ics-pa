@@ -27,7 +27,7 @@ def_EHelper(jalr) {
   #ifdef CONFIG_FTRACE
   if (s->isa.instr.i.rs1 == 1 && s->isa.instr.i.rd == 0)
   {
-    printf("ret\n");
+    printf("ret %u\n", *id_src1->preg);
     space -= 4;
     for (int i = 0; i < space; i ++)
       printf(" ");
