@@ -1,18 +1,17 @@
 def_EHelper(jal) {
-  rtl_li(s, ddest, s->snpc);
-  //printf("DEBUG jal: %x %x\n", id_src1->imm, s->pc);
-  rtl_j(s, id_src1->imm + s->pc);
   #ifdef CONFIG_FTRACE
-  // printf("JAL: %x\n", id_src1->imm + s->pc);
   for (int i = 0; i < 1024; ++i) {
     if(elf_func[i].func_name[0] == '\0') {
       break;
     }
     if (elf_func[i].start == id_src1->imm + s->pc) {
-      printf("call %s\n",  elf_func[i].func_name);
+      printf("%x: call [%s@0x%lu]\n", s->pc, elf_func[i].func_name, elf_func[i].start);
     }
   }
   #endif
+  rtl_li(s, ddest, s->snpc);
+  //printf("DEBUG jal: %x %x\n", id_src1->imm, s->pc);
+  rtl_j(s, id_src1->imm + s->pc);
 
 }
 
