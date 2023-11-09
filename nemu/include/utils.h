@@ -58,5 +58,13 @@ uint64_t get_time();
     log_write(__VA_ARGS__); \
   } while (0)
 
+// ----------- elf -----------
+typedef struct {
+  char func_name[64];
+  size_t start;
+  size_t size;
+}funcInfo;
+extern funcInfo elf_func[1024];
+
 
 #endif

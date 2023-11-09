@@ -7,6 +7,7 @@ void init_mem();
 void init_difftest(char *ref_so_file, long img_size, int port);
 void init_device();
 void init_sdb();
+void init_elf(const char *elf_file);
 void init_disasm(const char *triple);
 
 static void welcome() {
@@ -88,7 +89,9 @@ static int parse_args(int argc, char *argv[]) {
 
 void init_monitor(int argc, char *argv[]) {
   /* Perform some global initialization. */
-
+  #ifdef FTARCE_COND
+  init_elf(elf_file);
+  #endif
   /* Parse arguments. */
   parse_args(argc, argv);
 
