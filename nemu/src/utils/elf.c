@@ -204,7 +204,6 @@ static void parse_elf(const char *elf_file) {
 
 void init_elf(const char* elf_file)
 {
-  printf("%s\n", elf_file);
   parse_elf(elf_file);
   printf("Num:       Value       Size Name\n");
   for (int i = 0; i < 1024; ++i) {
