@@ -1,4 +1,5 @@
 #include "sim.h"
+#include "mmu.h"
 #include "../../include/common.h"
 #include <difftest-def.h>
 
