@@ -1,5 +1,4 @@
 #include "sim.h"
-#include "mmu.h"
 #include "../../include/common.h"
 #include <difftest-def.h>
 
@@ -15,7 +14,7 @@ static std::vector<std::pair<reg_t, mem_t*>> difftest_mem(
 static std::vector<int> difftest_hartids;
 static debug_module_config_t difftest_dm_config = {
   .progbufsize = 2,
-  .max_bus_master_bits = 0,
+  // .max_bus_master_bits = 0,
   .require_authentication = false,
   .abstract_rti = 0,
   .support_hasel = true,
