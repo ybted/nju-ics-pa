@@ -5,68 +5,61 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
+
 int printf(const char *fmt, ...) {
   panic("Not implemented");
-  
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
-  panic("Not implemented");
+  char *start = out;
+  
+  for (; *fmt != '\0'; ++fmt) {
+    if (*fmt != '%') {
+      *out = *fmt;
+      ++out;
+    } else {
+      switch (*(++fmt)) {
+      case '%': *out = *fmt; ++out; break;
+      case 'd': out += itoa(va_arg(ap, int), out, 10); break;
+      case 's':
+        char *s = va_arg(ap, char*);
+        strcpy(out, s);
+        out += strlen(out);
+        break;
+      }
+    }
+  }
+  
+  *out = '\0';
+  return out - start;
 }
 
-int to_string(char* out, int num) {
-  int len = 0;
-  if (num < 0) {
-    *out++ = '-';
-    num *= -1;
-    len ++;
-  }
-  int tmp = 0;
-  int tmpnum = num;
-  while (tmpnum) {
-    tmpnum /= 10;
-    tmp ++;
-  }
-  for (int i = tmp; i > 0; i --) {
-    int base = 1;
-    for (int j = 1; j < i; j ++)
-      base *= 10;
-    *out++ = num / base + '0';
-    num -= (num / base) * base;
-  }
-  len += tmp;
-  return len;
-}
 
 int sprintf(char *out, const char *fmt, ...) {
-  va_list args;
-  va_start(args, fmt);
-  int len = 0;
-  while (*fmt) {
-    if (*fmt == '%') {
-      fmt ++;
-      if (*fmt == 'd') {
-        int num = va_arg(args, int);
-        int inc = to_string(out, num);
-        len += inc;
-        out += inc;
-      } else if (*fmt == 's') {
-        char* str = va_arg(args, char*);
-        int tmp = strlen(str);
-        len += tmp;
-        for (int i = 0; i < tmp; i ++){
-          *out ++ = str[i];
-        }
-      }
-      fmt ++;
+  va_list pArgs;
+  va_start(pArgs, fmt);
+  char *start = out;
+  
+  for (; *fmt != '\0'; ++fmt) {
+    if (*fmt != '%') {
+      *out = *fmt;
+      ++out;
     } else {
-      *out++ = *fmt++;
-      len ++;
+      switch (*(++fmt)) {
+      case '%': *out = *fmt; ++out; break;
+      case 'd': out += itoa(va_arg(pArgs, int), out, 10); break;
+      case 's':
+        char *s = va_arg(pArgs, char*);
+        strcpy(out, s);
+        out += strlen(out);
+        break;
+      }
     }
   }
   *out = '\0';
-  va_end(args);
-  return len;
+  va_end(pArgs);
+
+  return out - start;
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {

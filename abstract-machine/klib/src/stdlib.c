@@ -19,6 +19,17 @@ int abs(int x) {
   return (x < 0 ? -x : x);
 }
 
+static void reverse(char *s, int len) {
+  char *end = s + len - 1;
+  char tmp;
+  while (s < end) {
+    tmp = *s;
+    *s = *end;
+    *end = tmp;
+  }
+}
+
+
 int atoi(const char* nptr) {
   int x = 0;
   while (*nptr == ' ') { nptr ++; }
@@ -28,6 +39,24 @@ int atoi(const char* nptr) {
   }
   return x;
 }
+
+int itoa(int n, char *s, int base) {
+  assert(base <= 16);
+
+  int i = 0, sign = n, bit;
+  if (sign < 0) n = -n;
+  do {
+    bit = n % base;
+    if (bit >= 10) s[i++] = 'a' + bit - 10;
+    else s[i++] = '0' + bit;
+  } while ((n /= base) > 0);
+  if (sign < 0) s[i++] = '-';
+  s[i] = '\0';
+  reverse(s, i);
+
+  return i;
+}
+
 
 void *malloc(size_t size) {
   // On native, malloc() will be called during initializaion of C runtime.
