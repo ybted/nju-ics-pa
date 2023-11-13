@@ -5,9 +5,19 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
+static char printf_buf[1024];
+
 int printf(const char *fmt, ...) {
-  panic("Not implemented");
-  
+  va_list args;
+  int n;
+  va_start(args, fmt);
+  n = vsprintf(printf_buf, fmt, args);
+  va_end(args);
+  for (char* p = printf_buf; *p != '\0'; p ++)
+  {
+    putch(*p);
+  }
+  return n;
 }
 
 
