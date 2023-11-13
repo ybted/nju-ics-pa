@@ -2,6 +2,7 @@
 #include <nemu.h>
 #include <klib.h>
 void __am_timer_init() {
+  outb(RTC_ADDR, 0);
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
