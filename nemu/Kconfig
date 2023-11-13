@@ -150,9 +150,9 @@ config FTRACE
   default n
 
 config DTRACE
-depends on TRACE && TARGET_NATIVE_ELF && ENGINE_INTERPRETER && DEVICE
-bool "Enable device tracer"
-default n
+  depends on TRACE && TARGET_NATIVE_ELF && ENGINE_INTERPRETER
+  bool "Enable device tracer"
+  default n
 
 
 config ITRACE_COND
