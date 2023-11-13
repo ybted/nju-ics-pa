@@ -21,6 +21,18 @@ def_EHelper(sltiu) {
   // printf("DEBUG sltiu: %u %u %u\n", *ddest, *dsrc1, id_src2->imm);
 }
 
+def_EHelper(slti) {
+  rtl_subi(s, s0, dsrc1, id_src2->imm);
+  // printf("DEBUG sltiu: %u %u\n", *dsrc1, id_src2->imm);
+
+  if ((int32_t)(*s0) > (int32_t)*dsrc1) {
+    rtl_addi(s, ddest, rz, 1);
+  } else {
+    rtl_addi(s, ddest, rz, 0);
+  }
+  // printf("DEBUG sltiu: %u %u %u\n", *ddest, *dsrc1, id_src2->imm);
+}
+
 def_EHelper(andi) {
   rtl_andi(s, ddest, dsrc1, id_src2->imm);
 }
@@ -44,6 +56,8 @@ def_EHelper(srli) {
 def_EHelper(slli) {
   rtl_slli(s, ddest, dsrc1, id_src2->imm & 0x01f);
 }
+
+
 
 def_EHelper(add) {
   // printf("DEBUG ADD: %x %x %x\n", *ddest, *id_src1->preg, *id_src2->preg);
