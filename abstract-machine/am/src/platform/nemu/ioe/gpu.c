@@ -9,7 +9,7 @@ void __am_gpu_init() {
   // int h = 9 * 32;  // TODO: get the correct height
   
   uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
-  for (i = 0; i < 0x200000; i ++) fb[i] = i;
+  for (i = 0; i < 0x200000 -10; i ++) fb[i] = i;
   outl(SYNC_ADDR, 1);
 }
 
