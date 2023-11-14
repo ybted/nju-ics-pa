@@ -1,9 +1,10 @@
 #include <cpu/cpu.h>
 #include <cpu/exec.h>
 #include <cpu/difftest.h>
-#include <isa-all-instr.h>
 #include <locale.h>
-
+#include "../../monitor/sdb/sdb.h"
+#include <isa-all-instr.h>
+//#include "../isa/riscv32/include/isa-all-instr.h"
 /* The assembly code of instructions executed is only output to the screen
  * when the number of instructions executed is less than this value.
  * This is useful when you use the `si' command.
@@ -18,6 +19,10 @@ static bool g_print_step = false;
 const rtlreg_t rzero = 0;
 rtlreg_t tmp_reg[4];
 
+// ring buffer
+// char ring_buffer[10][128];
+// int cur = 0;
+
 void device_update();
 void fetch_decode(Decode *s, vaddr_t pc);
 
@@ -27,6 +32,9 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+  if (wp_changed_if()) {
+    nemu_state.state = NEMU_STOP;
+  }
 }
 
 #include <isa-exec.h>
@@ -81,7 +89,23 @@ void fetch_decode(Decode *s, vaddr_t pc) {
   void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
   disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
       MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.instr.val, ilen);
+
+  // iringbuf
+  // p = ring_buffer[cur];
+  // p += snprintf(p, sizeof(ring_buffer[0]), FMT_WORD ":", s->pc);
+  // for (i = 0; i < ilen; i ++) {
+  //   p += snprintf(p, 4, " %02x", instr[i]);
+  // }
+  // memset(p, ' ', space_len);
+  // p += space_len;
+
+  // void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
+  // disassemble(p, ring_buffer[cur] + sizeof(ring_buffer[cur]) - p,
+  //     MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.instr.val, ilen);
+  // cur ++;
+  // cur %= 10;
 #endif
+
 }
 
 /* Simulate how the CPU works. */

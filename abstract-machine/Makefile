@@ -92,7 +92,17 @@ ASFLAGS  += -MMD $(INCFLAGS)
 
 ### Paste in arch-specific configurations (e.g., from `scripts/x86_64-qemu.mk`)
 -include $(AM_HOME)/scripts/$(ARCH).mk
-
+# $(info SRCS: $(SRCS))
+# $(info WORK_DIR: $(WORK_DIR))
+# $(info DST_DIR: $(DST_DIR))
+# $(info IMAGE_REL: $(IMAGE_REL))
+# $(info IMAGE: $(IMAGE))
+# $(info ARCHIVE: $(ARCHIVE))
+# $(info OBJS: $(OBJS))
+# $(info LIBS: $(LIBS))
+# $(info LINKAGE: $(LINKAGE))
+# $(info INCFLAGS: $(INCFLAGS))
+# $(info LDFLAGS: $(LDFLAGS))
 ### Fall back to native gcc/binutils if there is no cross compiler
 ifeq ($(wildcard $(shell which $(CC))),)
   $(info #  $(CC) not found; fall back to default gcc and binutils)
@@ -105,6 +115,7 @@ endif
 $(DST_DIR)/%.o: %.c
 	@mkdir -p $(dir $@) && echo + CC $<
 	@$(CC) -std=gnu11 $(CFLAGS) -c -o $@ $(realpath $<)
+
 
 ### Rule (compile): a single `.cc` -> `.o` (g++)
 $(DST_DIR)/%.o: %.cc

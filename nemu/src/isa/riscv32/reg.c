@@ -9,8 +9,23 @@ const char *regs[] = {
 };
 
 void isa_reg_display() {
+  int length = sizeof(regs) / sizeof(regs[0]);
+  for (int i = 0; i < length; i ++) 
+  {
+    printf("%s: 0x%x %d\n", reg_name(i, 32), gpr(i), gpr(i));
+  }
+  printf("pc: 0x%x\n", cpu.pc);
 }
 
 word_t isa_reg_str2val(const char *s, bool *success) {
+  int length = sizeof(regs) / sizeof(regs[0]);
+  for (int i = 0; i < length; i ++)
+  {
+    if (strcmp(regs[i], s) == 0) {
+      *success = true;
+      return gpr(i);
+    }
+  }
+  success = false;
   return 0;
 }

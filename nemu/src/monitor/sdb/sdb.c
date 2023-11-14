@@ -3,9 +3,12 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
+#include "utils.h"
+#include "../../../include/isa.h"
+#include <memory/paddr.h>
 
 static int is_batch_mode = false;
-
+//extern NEMUState nemu_state; 
 void init_regex();
 void init_wp_pool();
 
@@ -34,10 +37,17 @@ static int cmd_c(char *args) {
 
 
 static int cmd_q(char *args) {
+  nemu_state.state = NEMU_QUIT;
   return -1;
 }
 
 static int cmd_help(char *args);
+static int cmd_si(char *args);
+static int cmd_info(char *args);
+static int cmd_mem(char *args);
+static int cmd_p(char *args);
+static int cmd_w(char *args);
+static int cmd_d(char *args);
 
 static struct {
   const char *name;
@@ -47,7 +57,12 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-
+  { "si", "Execute N instructions", cmd_si },
+  { "info", "Print the state of the instructions", cmd_info},
+  { "x", "Print the memory in given address", cmd_mem},
+  { "p", "Print the expression", cmd_p},
+  { "w", "make a watchpoint based on expr", cmd_w},
+  { "d", "delete watchpoints", cmd_d}
   /* TODO: Add more commands */
 
 };
@@ -77,16 +92,97 @@ static int cmd_help(char *args) {
   return 0;
 }
 
+static int cmd_si(char *args)
+{
+  char *arg = strtok(NULL, " ");
+  if (arg == NULL) {
+    cpu_exec(1);
+  } else {
+    cpu_exec(atoi(arg));
+  } 
+  return 0;
+}
+
+static int cmd_p(char *args)
+{
+  char *arg = strtok(NULL, " ");
+  if (arg == NULL) {
+    printf("You should enter a expression!\n");
+  } else {
+    bool succ;
+    printf("%u\n", expr(arg, &succ));
+  }
+  return 0;
+}
+
+static int cmd_w(char *args)
+{
+  char *arg = strtok(NULL, " ");
+  if (arg == NULL) {
+    printf("You should enter a expression!\n");
+  } else {
+    WP* new_w = new_wp();
+    strcpy(new_w->expr, arg);
+    bool succ;
+    new_w->val = expr(arg, &succ);
+  }
+  return 0;
+}
+
+static int cmd_d(char *args)
+{
+  char *arg = strtok(NULL, " ");
+  if (arg == NULL) {
+    printf("You should enter a expression!\n");
+  } else {
+    int i = atoi(arg);
+    watchpoint_delete(i);
+  }
+  return 0;
+}
+
+static int cmd_info(char *args)
+{
+  char *arg = strtok(NULL, " ");
+  if (arg[0] == 'r') {
+    isa_reg_display();
+  } else if (arg[0] == 'w') {
+    watchpoint_display();
+  } else 
+  {
+    printf("Please enter correct para!\n");
+  } 
+  return 0;
+}
+
+static int cmd_mem(char *args) 
+{
+  char *arg1 = strtok(NULL, " ");
+  char *arg2 = strtok(NULL, " ");
+  if (arg1 == NULL || arg2 == NULL) {
+    printf("Please enter correct para!\n");
+  }
+  int n = atoi(arg1);
+  paddr_t addr = 0;
+  sscanf(arg2, "%x", &addr);
+  for (int i = 0; i < n; i ++)
+  {
+    printf("0x%08x\n", paddr_read(addr + 4 * i, 4));
+  } 
+  return 0;
+}
+
 void sdb_set_batch_mode() {
   is_batch_mode = true;
 }
 
 void sdb_mainloop() {
+ 
   if (is_batch_mode) {
     cmd_c(NULL);
     return;
   }
-
+  init_wp_pool();
   for (char *str; (str = rl_gets()) != NULL; ) {
     char *str_end = str + strlen(str);
 

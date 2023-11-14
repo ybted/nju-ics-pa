@@ -15,11 +15,46 @@ static char *code_format =
 "  printf(\"%%u\", result); "
 "  return 0; "
 "}";
-
-static void gen_rand_expr() {
-  buf[0] = '\0';
+int ind = 0;
+void gen(char c) {
+  buf[ind ++] = c;
+  if (ind >= 65536) 
+    assert(0);
 }
 
+void gen_num() {
+  int random_number = rand() % 100;
+  if (random_number > 9) {
+    buf[ind ++] = '0' + random_number / 10;
+    buf[ind ++] = '0' + random_number % 10;
+    if (ind >= 65536) 
+      assert(0);
+  } else {
+    buf[ind ++] = '0' + random_number % 10;
+    if (ind >= 65536) 
+      assert(0);
+  }
+}
+
+void gen_rand_op() {
+  char ops[4] = {'-', '+', '*', '/'};
+  int in = rand() % 4;
+  buf[ind ++] = ops[in];
+  if (ind >= 65536) 
+    assert(0);
+}
+
+static void gen_rand_expr(int i) {
+  if (i == 0) {
+    gen_num();
+    return ;
+  }
+  switch (rand() % 3) {
+    case 0: gen_num(); break;
+    case 1: gen('('); gen_rand_expr(i-1); gen(')'); break;
+    default: gen_rand_expr(i-1); gen_rand_op(); gen_rand_expr(i-1); break;
+  }
+}
 int main(int argc, char *argv[]) {
   int seed = time(0);
   srand(seed);
@@ -29,8 +64,9 @@ int main(int argc, char *argv[]) {
   }
   int i;
   for (i = 0; i < loop; i ++) {
-    gen_rand_expr();
-
+    ind = 0;
+    gen_rand_expr(5);
+    buf[ind] = '\0';
     sprintf(code_buf, code_format, buf);
 
     FILE *fp = fopen("/tmp/.code.c", "w");
