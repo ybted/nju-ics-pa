@@ -5,10 +5,11 @@
 
 void __am_gpu_init() {
   int i;
-  int w = 12 * 33;  // TODO: get the correct width
-  int h = 9 * 34;  // TODO: get the correct height
+  // int w = 12 * 32;  // TODO: get the correct width
+  // int h = 9 * 32;  // TODO: get the correct height
+  
   uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
-  for (i = 0; i < w * h; i ++) fb[i] = i;
+  for (i = 0; i < 2097152; i ++) fb[i] = i;
   outl(SYNC_ADDR, 1);
 }
 
