@@ -7,7 +7,7 @@ typedef struct {
   union {
     uint64_t _64;
   } gpr[32];
-
+ 
   vaddr_t pc;
 } riscv64_CPU_state;
 
