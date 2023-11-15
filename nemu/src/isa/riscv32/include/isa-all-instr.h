@@ -7,7 +7,7 @@
   f(jal) f(jalr) f(beq) f(bne) f(bge) f(blt) f(bgeu) f(bltu)\
   f(lb) f(lh) f(lw) f(lbu) f(lhu) f(sb) f(sh) f(sw)\
   f(inv) f(nemu_trap)\
-  f(ecall) f(csrrw)\
+  f(ecall) f(csrrw) f(csrrs)\
  
 
 def_all_EXEC_ID();
