@@ -11,3 +11,11 @@ def_EHelper(ecall) {
   word_t epc = isa_raise_intr( 1, cpu.pc);
   rtl_j(s, epc);
 }
+
+
+def_EHelper(mret) {
+  if (cpu.mcause == 1)
+    rtl_j(s, cpu.mepc + 4);
+  else 
+    rtl_j(s, cpu.mepc);
+}
