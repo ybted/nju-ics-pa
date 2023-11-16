@@ -94,4 +94,9 @@ def_EHelper(bltu) {
   }
 }
 
-
+def_EHelper(mret) {
+  if (cpu.mcause == 1)
+    rtl_j(s, cpu.mepc + 4);
+  else 
+    rtl_j(s, cpu.mepc);
+}
