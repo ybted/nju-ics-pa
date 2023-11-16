@@ -14,6 +14,7 @@ def_EHelper(ecall) {
 
 
 def_EHelper(mret) {
+  printf("mret!!\n");
   if (cpu.mcause == 1)
     rtl_j(s, cpu.mepc + 4);
   else 
