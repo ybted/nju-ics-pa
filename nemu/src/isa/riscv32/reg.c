@@ -15,6 +15,9 @@ void isa_reg_display() {
     printf("%s: 0x%x %d\n", reg_name(i, 32), gpr(i), gpr(i));
   }
   printf("pc: 0x%x\n", cpu.pc);
+  printf("mepc: %d\n", cpu.mepc);
+  printf("mcause: %d\n", cpu.mcause);
+  printf("mtvec: %d\n", cpu.mtvec);
 }
 
 word_t isa_reg_str2val(const char *s, bool *success) {
