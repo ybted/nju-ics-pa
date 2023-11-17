@@ -14,9 +14,9 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   memcpy(&elf, &ramdisk_start, sizeof(Elf_Ehdr));
   printf("%s\n", elf.e_ident);
   assert(elf.e_ident[0] == 0x7f &&
-         elf.e_ident[0] == 0x45 &&
-         elf.e_ident[0] == 0x4c &&
-         elf.e_ident[0] == 0x46);
+         elf.e_ident[1] == 0x45 &&
+         elf.e_ident[2] == 0x4c &&
+         elf.e_ident[3] == 0x46);
 
   return 0;
 }
