@@ -10,8 +10,9 @@
 #endif
 extern uint8_t ramdisk_start;
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  
-  assert((&ramdisk_start)[0] == 0x7f );
+  Elf_Ehdr elf;
+  memcpy(&elf, &ramdisk_start, sizeof(Elf_Ehdr));
+  assert(elf.e_ident[0] == 0x7f);
 
   return 0;
 }
