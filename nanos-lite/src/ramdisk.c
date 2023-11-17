@@ -2,6 +2,7 @@
 
 extern uint8_t ramdisk_start;
 extern uint8_t ramdisk_end;
+
 #define RAMDISK_SIZE ((&ramdisk_end) - (&ramdisk_start))
 
 /* The kernel is monolithic, therefore we do not need to

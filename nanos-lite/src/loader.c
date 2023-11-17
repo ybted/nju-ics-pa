@@ -1,6 +1,6 @@
 #include <proc.h>
 #include <elf.h>
-
+#include <stdio.h>
 #ifdef __LP64__
 # define Elf_Ehdr Elf64_Ehdr
 # define Elf_Phdr Elf64_Phdr
@@ -8,15 +8,18 @@
 # define Elf_Ehdr Elf32_Ehdr
 # define Elf_Phdr Elf32_Phdr
 #endif
-
+extern uint8_t ramdisk_start;
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  TODO();
+  
+  assert((&ramdisk_start)[0] == 0x7 );
+
   return 0;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
+
   uintptr_t entry = loader(pcb, filename);
-  Log("Jump to entry = %p", entry);
+  Log("Jump to entry = %p", (void *)entry);
   ((void(*)())entry) ();
 }
 
