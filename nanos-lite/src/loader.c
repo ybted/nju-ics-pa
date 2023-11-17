@@ -13,7 +13,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr elf;
   memcpy(&elf, &ramdisk_start, sizeof(Elf_Ehdr));
   printf("%s\n", elf.e_ident);
-  assert(elf.e_ident[0] == 0x7f);
+  assert(elf.e_ident[0] == 0x7f &&
+         elf.e_ident[0] == 0x45 &&
+         elf.e_ident[0] == 0x4c &&
+         elf.e_ident[0] == 0x46);
 
   return 0;
 }
