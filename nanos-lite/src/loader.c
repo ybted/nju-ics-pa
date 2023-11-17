@@ -11,7 +11,7 @@
 extern uint8_t ramdisk_start;
 static uintptr_t loader(PCB *pcb, const char *filename) {
   
-  assert((&ramdisk_start)[0] == 0x7 );
+  assert((&ramdisk_start)[0] == 0x7f );
 
   return 0;
 }
