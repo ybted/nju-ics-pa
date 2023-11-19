@@ -8,10 +8,11 @@
 # define Elf_Ehdr Elf32_Ehdr
 # define Elf_Phdr Elf32_Phdr
 #endif
-extern uint8_t ramdisk_start;
+size_t ramdisk_read(void *buf, size_t offset, size_t len);
+size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr elf;
-  memcpy(&elf, &ramdisk_start, sizeof(Elf_Ehdr));
+  ramdisk_read(&elf, SEEK_SET, sizeof(Elf_Ehdr));
   printf("%s\n", elf.e_ident);
   assert(elf.e_ident[0] == 0x7f &&
          elf.e_ident[1] == 0x45 &&
