@@ -4,7 +4,6 @@
 #ifdef __LP64__
 # define Elf_Ehdr Elf64_Ehdr
 # define Elf_Phdr Elf64_Phdr
-# error Unsupported
 #else
 # define Elf_Ehdr Elf32_Ehdr
 # define Elf_Phdr Elf32_Phdr
@@ -14,8 +13,8 @@ size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr elf;
   // Elf_Phdr ph;
-  ramdisk_read(&elf, 0, sizeof(Elf_Ehdr));
-  printf("%s\n", elf.e_ident);
+  int size = ramdisk_read(&elf, 0, sizeof(Elf_Ehdr));
+  printf("size: %d  sizeof(Elf_Ehdr): %d\n", size, sizeof(Elf_Ehdr));
   printf("elf.e_type: %d\n", (int)elf.e_type);
   printf("elf.e_machine: %d\n", (int)elf.e_machine);
   printf("elf.e_entry: %d\n", (int)elf.e_entry);
