@@ -61,6 +61,7 @@ void* new_page(size_t nr_page);
 void naive_uload(PCB *pcb, const char *filename) {
 
   uintptr_t entry = loader(pcb, filename);
+  assert(0);
   Log("Jump to entry = %p", (void *)entry);
   ((void(*)())entry) ();
 }
