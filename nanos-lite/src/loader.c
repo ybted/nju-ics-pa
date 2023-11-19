@@ -1,10 +1,13 @@
 #include <proc.h>
 #include <elf.h>
 #include <stdio.h>
-
+#ifdef __LP64__
+# define Elf_Ehdr Elf64_Ehdr
+# define Elf_Phdr Elf64_Phdr
+#else
 # define Elf_Ehdr Elf32_Ehdr
 # define Elf_Phdr Elf32_Phdr
-
+#endif
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 static uintptr_t loader(PCB *pcb, const char *filename) {
@@ -15,7 +18,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   printf("elf.e_type: %d\n", (int)elf.e_type);
   printf("elf.e_machine: %d\n", (int)elf.e_machine);
   printf("elf.e_entry: %d\n", (int)elf.e_entry);
-  printf("elf.e_phoff: %d\n", (int)elf.e_shentsize);
+  printf("elf.e_phoff: %d\n", (int)elf.e_shoff);
   ramdisk_read(&ph, sizeof(Elf_Ehdr), sizeof(Elf_Phdr));
   
   assert(elf.e_ident[0] == 0x7f &&
