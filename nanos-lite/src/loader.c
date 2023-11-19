@@ -16,9 +16,17 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   ramdisk_read(&elf, 0, sizeof(Elf_Ehdr));
   printf("elf.e_type: %d\n", (int)elf.e_type);
   printf("elf.e_machine: %d\n", (int)elf.e_machine);
+  printf("elf.e_version: %d\n", (int)elf.e_version);
   printf("elf.e_entry: %d\n", (int)elf.e_entry);
+  printf("elf.e_phoff: %d\n", (int)elf.e_phoff);
   printf("elf.e_shoff: %d\n", (int)elf.e_shoff);
   printf("elf.e_flags: %d\n", (int)elf.e_flags);
+  printf("elf.e_ehsize: %d\n", (int)elf.e_ehsize);
+  printf("elf.e_phentize: %d\n", (int)elf.e_phentsize);
+  printf("elf.e_phnum: %d\n", (int)elf.e_phnum);
+  printf("elf.e_shentsize: %d\n", (int)elf.e_shentsize);
+  printf("elf.e_shnum: %d\n", (int)elf.e_shnum);
+  printf("elf.e_shstrndx: %d\n", (int)elf.e_shstrndx);
   assert(elf.e_phoff != 0);
   // ramdisk_read(&ph, sizeof(Elf_Ehdr), sizeof(Elf_Phdr));
   
