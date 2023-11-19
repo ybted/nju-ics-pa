@@ -8,27 +8,27 @@
 # define Elf_Ehdr Elf32_Ehdr
 # define Elf_Phdr Elf32_Phdr
 #endif
-extern uint8_t ramdisk_start;
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr elf;
   // Elf_Phdr ph;
-
-  memcpy(&elf, &ramdisk_start , sizeof(Elf_Ehdr));
   ramdisk_read(&elf, 0, sizeof(Elf_Ehdr));
   printf("elf.e_type: %d\n", (int)elf.e_type);
   printf("elf.e_machine: %d\n", (int)elf.e_machine);
   printf("elf.e_entry: %d\n", (int)elf.e_entry);
   printf("elf.e_shoff: %d\n", (int)elf.e_shoff);
-  printf("elf.e_ehsize: %d\n", (int)elf.e_ehsize);
-  assert(elf.e_phoff != 0);
+  printf("elf.e_flags: %d\n", (int)elf.e_flags);
+  // assert(elf.e_phoff != 0);
   // ramdisk_read(&ph, sizeof(Elf_Ehdr), sizeof(Elf_Phdr));
   
   assert(elf.e_ident[0] == 0x7f &&
          elf.e_ident[1] == 0x45 &&
          elf.e_ident[2] == 0x4c &&
-         elf.e_ident[3] == 0x46);
+         elf.e_ident[3] == 0x46 && 
+         elf.e_ident[4] == 0x02 &&
+         elf.e_ident[5] == 0x01 &&
+         elf.e_ident[6] == 0x01);
   // printf("ph.p_type: %d\n", ph.p_type);
   // assert(ph.p_flags == (PF_X | PF_W | PF_R));
   // ramdisk_read(pf + VirtualAddress, start_of_load,Memsize);
