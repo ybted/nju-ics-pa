@@ -55,14 +55,12 @@ void* new_page(size_t nr_page);
   assert(ph[3].p_flags == (PF_R | PF_W));
   // ramdisk_read(pf + VirtualAddress, start_of_load,Memsize);
   assert(elf.e_entry == 0x8300024c);
-  assert(0);
   return elf.e_entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
 
   uintptr_t entry = loader(pcb, filename);
-  assert(0);
   Log("Jump to entry = %p", (void *)entry);
   ((void(*)())entry) ();
 }
