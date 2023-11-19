@@ -10,6 +10,7 @@
 #endif
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t ramdisk_write(const void *buf, size_t offset, size_t len);
+void* new_page(size_t nr_page);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr elf;
   // Elf_Phdr ph;
@@ -32,13 +33,14 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   int offset = elf.e_phoff;
   int size = elf.e_phentsize;
   Elf_Phdr ph[num];
+  void* pf = new_page(0);
   for (int i = 0; i < num; i ++) {
     ramdisk_read(&ph[i], offset + i * size, size);
   }
   for (int i = 0; i < num; i ++) {
     if(ph[i].p_type == PT_LOAD) {
-      printf("%d\n", i);
-
+      ramdisk_read(pf+ph[i].p_vaddr, ph[i].p_offset, ph[i].p_memsz);
+      memset(pf+ph[i].p_vaddr+ph[i].p_filesz, 0, ph[i].p_memsz - ph[i].p_filesz);
     }
   }
   
@@ -52,7 +54,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   assert(ph[2].p_flags == (PF_R | PF_W));
   assert(ph[3].p_flags == (PF_R | PF_W));
   // ramdisk_read(pf + VirtualAddress, start_of_load,Memsize);
-  return 0;
+  return ph[1].p_vaddr;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
