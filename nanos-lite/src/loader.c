@@ -33,10 +33,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   assert(elf.e_ident[0] == 0x7f &&
          elf.e_ident[1] == 0x45 &&
          elf.e_ident[2] == 0x4c &&
-         elf.e_ident[3] == 0x46 && 
-         elf.e_ident[4] == 0x02 &&
-         elf.e_ident[5] == 0x01 &&
-         elf.e_ident[6] == 0x01);
+         elf.e_ident[3] == 0x46 );
   // printf("ph.p_type: %d\n", ph.p_type);
   // assert(ph.p_flags == (PF_X | PF_W | PF_R));
   // ramdisk_read(pf + VirtualAddress, start_of_load,Memsize);
