@@ -32,7 +32,6 @@ void* new_page(size_t nr_page);
   int num = elf.e_phnum;
   int offset = elf.e_phoff;
   int size = elf.e_phentsize;
-  uint32_t entry = elf.e_entry;
   Elf_Phdr ph[num];
 
   for (int i = 0; i < num; i ++) {
@@ -40,8 +39,8 @@ void* new_page(size_t nr_page);
   }
   for (int i = 0; i < num; i ++) {
     if(ph[i].p_type == PT_LOAD) {
-      ramdisk_read((void *)(entry+ph[i].p_vaddr), ph[i].p_offset, ph[i].p_memsz);
-      memset((void*)(entry+ph[i].p_vaddr+ph[i].p_filesz), 0, ph[i].p_memsz - ph[i].p_filesz);
+      ramdisk_read((void *)(ph[i].p_vaddr), ph[i].p_offset, ph[i].p_memsz);
+      memset((void*)(ph[i].p_vaddr+ph[i].p_filesz), 0, ph[i].p_memsz - ph[i].p_filesz);
     }
   }
   
