@@ -35,7 +35,12 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   for (int i = 0; i < num; i ++) {
     ramdisk_read(&ph[i], offset + i * size, size);
   }
-  
+  for (int i = 0; i < num; i ++) {
+    if(ph[i].p_type == PT_LOAD) {
+      printf("%d\n", i);
+
+    }
+  }
   
   assert(elf.e_ident[0] == 0x7f &&
          elf.e_ident[1] == 0x45 &&
