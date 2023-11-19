@@ -4,6 +4,7 @@
 #ifdef __LP64__
 # define Elf_Ehdr Elf64_Ehdr
 # define Elf_Phdr Elf64_Phdr
+# error Unsupported
 #else
 # define Elf_Ehdr Elf32_Ehdr
 # define Elf_Phdr Elf32_Phdr
