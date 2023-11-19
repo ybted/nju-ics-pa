@@ -14,7 +14,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr elf;
   Elf_Phdr ph;
   ramdisk_read(&elf, SEEK_SET, sizeof(Elf_Ehdr));
-  ramdisk_read(&ph, SEEK_SET + elf.e_phoff + elf.e_phentsize, sizeof(Elf_Phdr));
+  ramdisk_read(&ph, SEEK_SET + elf.e_phoff , sizeof(Elf_Phdr));
   printf("%s\n", elf.e_ident);
   assert(elf.e_ident[0] == 0x7f &&
          elf.e_ident[1] == 0x45 &&
