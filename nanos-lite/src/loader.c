@@ -54,6 +54,7 @@ void* new_page(size_t nr_page);
   assert(ph[2].p_flags == (PF_R | PF_W));
   assert(ph[3].p_flags == (PF_R | PF_W));
   // ramdisk_read(pf + VirtualAddress, start_of_load,Memsize);
+  assert(elf.e_entry == 0x8300024c);
   return elf.e_entry;
 }
 
