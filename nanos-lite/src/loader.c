@@ -13,7 +13,7 @@ size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr elf;
   // Elf_Phdr ph;
-  ramdisk_read(&elf, 0, sizeof(Elf_Ehdr));
+  ramdisk_read(&elf, 0, sizeof(Elf_Ehdr) * 2);
   printf("elf.e_type: %d\n", (int)elf.e_type);
   printf("elf.e_machine: %d\n", (int)elf.e_machine);
   printf("elf.e_version: %d\n", (int)elf.e_version);
