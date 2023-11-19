@@ -12,13 +12,16 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr elf;
+  Elf_Phdr ph;
   ramdisk_read(&elf, SEEK_SET, sizeof(Elf_Ehdr));
+  ramdisk_read(&ph, SEEK_SET + elf.e_phoff + elf.e_phentsize, sizeof(Elf_Phdr));
   printf("%s\n", elf.e_ident);
   assert(elf.e_ident[0] == 0x7f &&
          elf.e_ident[1] == 0x45 &&
          elf.e_ident[2] == 0x4c &&
          elf.e_ident[3] == 0x46);
-
+  assert(ph.p_flags == (PF_X | PF_W | PF_R));
+  // ramdisk_read(pf + VirtualAddress, start_of_load,Memsize);
   return 0;
 }
 
