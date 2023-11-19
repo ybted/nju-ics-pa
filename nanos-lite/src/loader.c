@@ -32,15 +32,16 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   int num = elf.e_phnum;
   int offset = elf.e_phoff;
   int size = elf.e_phentsize;
+  uint32_t entry = elf.e_entry;
   Elf_Phdr ph[num];
-  void* pf = new_page(0);
+
   for (int i = 0; i < num; i ++) {
     ramdisk_read(&ph[i], offset + i * size, size);
   }
   for (int i = 0; i < num; i ++) {
     if(ph[i].p_type == PT_LOAD) {
-      ramdisk_read(pf+ph[i].p_vaddr, ph[i].p_offset, ph[i].p_memsz);
-      memset(pf+ph[i].p_vaddr+ph[i].p_filesz, 0, ph[i].p_memsz - ph[i].p_filesz);
+      ramdisk_read((void *)(entry+ph[i].p_vaddr), ph[i].p_offset, ph[i].p_memsz);
+      memset((void*)(entry+ph[i].p_vaddr+ph[i].p_filesz), 0, ph[i].p_memsz - ph[i].p_filesz);
     }
   }
   
@@ -54,7 +55,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   assert(ph[2].p_flags == (PF_R | PF_W));
   assert(ph[3].p_flags == (PF_R | PF_W));
   // ramdisk_read(pf + VirtualAddress, start_of_load,Memsize);
-  return ph[1].p_vaddr;
+  return elf.e_entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
