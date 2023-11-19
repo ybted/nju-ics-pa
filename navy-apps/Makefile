@@ -44,7 +44,9 @@ $(shell mkdir -p $(DST_DIR))
 APP     ?= $(WORK_DIR)/build/$(NAME)-$(ISA)
 ARCHIVE  = $(WORK_DIR)/build/$(NAME)-$(ISA).a
 
-
+# $(info workdir: $(WORK_DIR))
+# $(info app: $(APP))
+# $(info archive: $(ARCHIVE))
 ### Add default libraries for ISA != native
 ifneq ($(ISA), native)
 LIBS += libc libos
@@ -60,7 +62,7 @@ endif
 
 ### All libraries to add to the include path
 LIBS_INC := $(sort $(LIBS) $(LIB_DEP))
-
+# $(info LIBS_INC: $(LIBS_INC))
 ifeq ($(MAKECMDGOALS),archive)
 LIBS := $(LIB_DEP) # overwrite here to only build and archive the dependent libraries
 endif
@@ -69,7 +71,6 @@ endif
 OBJS      = $(addprefix $(DST_DIR)/, $(addsuffix .o, $(basename $(SRCS))))
 LIBS     := $(sort $(LIBS)) # lazy evaluation ("=") causes infinite recursions
 LINKAGE   = $(OBJS) $(foreach l,$(LIBS),$(NAVY_HOME)/libs/$(l)/build/$(l)-$(ISA).a)
-
 ## 3. General Compilation Flags
 
 ### (Cross) compilers, e.g., mips-linux-gnu-g++
