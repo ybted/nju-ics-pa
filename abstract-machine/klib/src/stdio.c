@@ -45,6 +45,17 @@ int to_string(char* out, int num) {
   return len;
 }
 
+int to_hex(char* out, int num) 
+{
+  char temp[100];
+  sprintf(temp, "%x", num);
+  for (int i = 0; i < strlen(temp); i ++) {
+    *out ++ = temp[i];
+  }
+
+  return strlen(temp);
+}
+
 int vsprintf(char *out, const char *fmt, va_list args) {
   int len = 0;
   while (*fmt) {
@@ -62,7 +73,13 @@ int vsprintf(char *out, const char *fmt, va_list args) {
         for (int i = 0; i < tmp; i ++){
           *out ++ = str[i];
         }
-      } 
+      } else if (*fmt == 'p') {
+        *out++ = '0';
+        *out++ = 'x';
+        int num = va_arg(args, int);
+        int inc = to_hex(out, num);
+        len += inc;
+      }
       fmt ++;
     } else {
       *out++ = *fmt++;
