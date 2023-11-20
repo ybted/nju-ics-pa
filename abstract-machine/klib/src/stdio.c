@@ -45,23 +45,7 @@ int to_string(char* out, int num) {
   return len;
 }
 
-int to_hex(char* out, unsigned long num) 
-{
-  char hexadecimalChars[] = "0123456789ABCDEF";
-  char hexResult[20];
-  int remainder;
-  int i = 0;
-  while (num > 0) {
-    remainder = num % 16;
-    hexResult[i++] = hexadecimalChars[remainder];
-    num /= 16;
-  }
-  for (int j = i - 1; j >= 0; j --) {
-    *out++ = hexResult[j];
-  }
-  *out++ = 'x';
-  return i;
-}
+
 
 int vsprintf(char *out, const char *fmt, va_list args) {
   int len = 0;
@@ -84,8 +68,19 @@ int vsprintf(char *out, const char *fmt, va_list args) {
         *out++ = '0';
         *out++ = 'x';
         unsigned long num = va_arg(args, unsigned long);
-        int inc = to_hex(out, num);
-        len += inc;
+        char hexadecimalChars[] = "0123456789ABCDEF";
+        char hexResult[20];
+        int remainder;
+        int i = 0;
+        while (num > 0) {
+          remainder = num % 16;
+          hexResult[i++] = hexadecimalChars[remainder];
+          num /= 16;
+        }
+        for (int j = i - 1; j >= 0; j --) {
+          *out++ = hexResult[j];
+        }
+        len += i;
       }
       fmt ++;
     } else {
