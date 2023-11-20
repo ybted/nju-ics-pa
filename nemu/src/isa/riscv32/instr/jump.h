@@ -21,8 +21,12 @@ def_EHelper(jal) {
 
 def_EHelper(jalr) {
   rtl_li(s, ddest, s->snpc);
-  //printf("DEBUF jalr: %x %x %x\n", *id_src1->preg, id_src2->imm, s->pc);
-  rtl_j(s,  *id_src1->preg);
+  unsigned int temp = id_src2->imm;
+  printf("DEBUF jalr: %x %x %x\n", *id_src1->preg, id_src2->imm, s->pc);
+  if (temp >> 11) 
+    temp |= 0xffffff000;
+  
+  rtl_j(s,  (*id_src1->preg) + temp);
   
   #ifdef CONFIG_FTRACE
   for (int i = 0; i < 1024; ++i) {
