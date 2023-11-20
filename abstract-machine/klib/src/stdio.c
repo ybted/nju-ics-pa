@@ -79,6 +79,7 @@ int vsprintf(char *out, const char *fmt, va_list args) {
         *out++ = 'x';
         unsigned long num = va_arg(args, unsigned long);
         int inc = to_hex(out, num);
+        assert(inc);
         len += inc;
       }
       fmt ++;
