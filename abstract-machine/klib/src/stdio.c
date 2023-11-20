@@ -53,9 +53,10 @@ int to_hex(char* out, unsigned long num)
   int i = 0;
   while (num > 0) {
     remainder = num % 16;
+    printf("1");
     hexResult[i++] = hexadecimalChars[remainder];
     num /= 16;
-}
+  }
   for (int j = i - 1; j >= 0; j --) {
     *out ++ = hexResult[j];
   }
