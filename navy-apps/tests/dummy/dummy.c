@@ -8,5 +8,5 @@
 extern int _syscall_(int, uintptr_t, uintptr_t, uintptr_t);
 
 int main() {
-  return _syscall_(12, 0, 0, 0);
+  return _syscall_(122131, 0, 0, 0);
 }
