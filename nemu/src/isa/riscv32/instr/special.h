@@ -16,8 +16,8 @@ def_EHelper(ecall) {
 
 def_EHelper(mret) {
   // printf("mret!!\n");
-  if (cpu.mcause == 1 || cpu.mcause == 2)
+  // if (cpu.mcause == 1 || cpu.mcause == 2)
     rtl_j(s, cpu.mepc + 4);
-  else 
-    rtl_j(s, cpu.mepc);
+  // else 
+  //   rtl_j(s, cpu.mepc);
 }
