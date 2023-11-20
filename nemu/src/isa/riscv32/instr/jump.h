@@ -22,7 +22,7 @@ def_EHelper(jal) {
 def_EHelper(jalr) {
   rtl_li(s, ddest, s->snpc);
   unsigned int temp = id_src2->imm;
-  printf("DEBUF jalr: %x %x %x\n", *id_src1->preg, id_src2->imm, s->pc);
+  // printf("DEBUF jalr: %x %x %x\n", *id_src1->preg, id_src2->imm, s->pc);
   if (temp >> 11) 
     temp |= 0xffffff000;
   
