@@ -25,7 +25,6 @@ def_EHelper(jalr) {
   // printf("DEBUF jalr: %x %x %x\n", *id_src1->preg, id_src2->imm, s->pc);
   if (temp >> 11) 
     temp |= 0xffffff000;
-  printf("id_src1->preg: %ls\n", id_src1->preg);
   rtl_j(s,  (*id_src1->preg) + temp);
   
   #ifdef CONFIG_FTRACE
