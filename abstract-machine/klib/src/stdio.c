@@ -61,7 +61,7 @@ int vsprintf(char *out, const char *fmt, va_list args) {
   while (*fmt) {
     if (*fmt == '%') {
       fmt ++;
-      if (*fmt == 'd' || *fmt == 'p') {
+      if (*fmt == 'd') {
         int num = va_arg(args, int);
         int inc = to_string(out, num);
         len += inc;
