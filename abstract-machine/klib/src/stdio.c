@@ -45,7 +45,7 @@ int to_string(char* out, int num) {
   return len;
 }
 
-int to_hex(char* out, int num) 
+int to_hex(char* out, unsigned long num) 
 {
   char temp[100];
   sprintf(temp, "%x", num);
@@ -76,7 +76,7 @@ int vsprintf(char *out, const char *fmt, va_list args) {
       } else if (*fmt == 'p') {
         *out++ = '0';
         *out++ = 'x';
-        int num = va_arg(args, int);
+        unsigned long num = va_arg(args, unsigned long);
         int inc = to_hex(out, num);
         len += inc;
       }
