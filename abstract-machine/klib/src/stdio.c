@@ -50,7 +50,7 @@ int vsprintf(char *out, const char *fmt, va_list args) {
   while (*fmt) {
     if (*fmt == '%') {
       fmt ++;
-      if (*fmt == 'd') {
+      if (*fmt == 'd' || *fmt == 'p') {
         int num = va_arg(args, int);
         int inc = to_string(out, num);
         len += inc;
@@ -62,7 +62,7 @@ int vsprintf(char *out, const char *fmt, va_list args) {
         for (int i = 0; i < tmp; i ++){
           *out ++ = str[i];
         }
-      }
+      } 
       fmt ++;
     } else {
       *out++ = *fmt++;
