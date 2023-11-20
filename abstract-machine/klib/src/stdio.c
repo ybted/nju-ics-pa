@@ -47,14 +47,20 @@ int to_string(char* out, int num) {
 
 int to_hex(char* out, unsigned long num) 
 {
-  char temp[100];
-  assert(num);
-  sprintf(temp, "123123%d", num);
-  for (int i = 0; i < strlen(temp); i ++) {
-    *out ++ = temp[i];
+  char hexadecimalChars[] = "0123456789ABCDEF";
+  char hexResult[20];
+  int remainder;
+  int i = 0;
+  while (num > 0) {
+    remainder = num % 16;
+    hexResult[i++] = hexadecimalChars[remainder];
+    num /= 16;
+}
+  for (int j = i - 1; j >= 0; j --) {
+    *out ++ = hexResult[j];
   }
 
-  return strlen(temp);
+  return i;
 }
 
 int vsprintf(char *out, const char *fmt, va_list args) {
@@ -79,7 +85,6 @@ int vsprintf(char *out, const char *fmt, va_list args) {
         *out++ = 'x';
         unsigned long num = va_arg(args, unsigned long);
         int inc = to_hex(out, num);
-        assert(inc);
         len += inc;
       }
       fmt ++;
