@@ -59,7 +59,7 @@ int to_hex(char* out, unsigned long num)
   for (int j = i - 1; j >= 0; j --) {
     *out++ = hexResult[j];
   }
-
+  *out++ = 'x';
   return i;
 }
 
