@@ -49,7 +49,7 @@ int to_hex(char* out, unsigned long num)
 {
   char temp[100];
   assert(num);
-  sprintf(temp, "%u", num);
+  sprintf(temp, "123123%d", num);
   for (int i = 0; i < strlen(temp); i ++) {
     *out ++ = temp[i];
   }
