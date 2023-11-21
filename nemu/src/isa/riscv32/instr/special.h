@@ -8,7 +8,6 @@ def_EHelper(nemu_trap) {
 
 
 def_EHelper(ecall) {
-  printf("ecall a7: %u\n", gpr(17));
   word_t epc = isa_raise_intr( 1, cpu.pc);
   rtl_j(s, epc);
 }
@@ -17,7 +16,7 @@ def_EHelper(ecall) {
 def_EHelper(mret) {
   // printf("mret!!\n");
   // if (cpu.mcause == 1 || cpu.mcause == 2)
-    rtl_j(s, cpu.mepc+4);
+    rtl_j(s, cpu.mepc);
   // else 
   //   rtl_j(s, cpu.mepc);
 }
