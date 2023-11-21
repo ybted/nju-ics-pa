@@ -47,13 +47,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
          elf.e_ident[1] == 0x45 &&
          elf.e_ident[2] == 0x4c &&
          elf.e_ident[3] == 0x46 );
-  // printf("ph.p_type: %d\n", ph.p_type);
-  assert(ph[0].p_flags == PF_R);
-  assert(ph[1].p_flags == (PF_R | PF_X));
-  assert(ph[2].p_flags == (PF_R | PF_W));
-  assert(ph[3].p_flags == (PF_R | PF_W));
-  // ramdisk_read(pf + VirtualAddress, start_of_load,Memsize);
-  // assert(elf.e_entry == 0x8300024c);
   return elf.e_entry;
 }
 
