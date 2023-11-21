@@ -9,6 +9,31 @@ def_EHelper(addi) {
   //printf("DEBUF addi: %u %u %u\n", *ddest, *dsrc1, id_src2->imm);
 }
 
+def_EHelper(andi) {
+  rtl_andi(s, ddest, dsrc1, id_src2->imm);
+}
+
+def_EHelper(xori) {
+  rtl_xori(s, ddest, dsrc1, id_src2->imm);
+}
+
+def_EHelper(ori) {
+  rtl_ori(s, ddest, dsrc1, id_src2->imm);
+}
+
+def_EHelper(srai) {
+  rtl_srai(s, ddest, dsrc1, id_src2->imm & 0x01f);
+}
+
+def_EHelper(srli) {
+  rtl_srli(s, ddest, dsrc1, id_src2->imm & 0x01f);
+}
+
+def_EHelper(slli) {
+  rtl_slli(s, ddest, dsrc1, id_src2->imm & 0x01f);
+}
+
+
 def_EHelper(sltiu) {
   rtl_subi(s, s0, dsrc1, id_src2->imm);
   // printf("DEBUG sltiu: %u %u\n", *dsrc1, id_src2->imm);
@@ -33,29 +58,6 @@ def_EHelper(slti) {
   // printf("DEBUG sltiu: %u %u %u\n", *ddest, *dsrc1, id_src2->imm);
 }
 
-def_EHelper(andi) {
-  rtl_andi(s, ddest, dsrc1, id_src2->imm);
-}
-
-def_EHelper(xori) {
-  rtl_xori(s, ddest, dsrc1, id_src2->imm);
-}
-
-def_EHelper(ori) {
-  rtl_ori(s, ddest, dsrc1, id_src2->imm);
-}
-
-def_EHelper(srai) {
-  rtl_srai(s, ddest, dsrc1, id_src2->imm & 0x01f);
-}
-
-def_EHelper(srli) {
-  rtl_srli(s, ddest, dsrc1, id_src2->imm & 0x01f);
-}
-
-def_EHelper(slli) {
-  rtl_slli(s, ddest, dsrc1, id_src2->imm & 0x01f);
-}
 
 
 
@@ -106,11 +108,7 @@ def_EHelper(slt) {
 }
 
 def_EHelper(sltu) {
-   if (*dsrc1 < *dsrc2) {
-    rtl_addi(s, ddest, rz, 1);
-  } else {
-    rtl_addi(s, ddest, rz, 0);
-  }
+  rtl_setrelop(s, RELOP_LTU, ddest, dsrc1, dsrc2);
 }
 
 def_EHelper(xor) {
