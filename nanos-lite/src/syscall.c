@@ -12,7 +12,14 @@ void sys_exit(Context *c) {
 }
 
 void sys_write(Context *c) {
-  printf("Write!\n");
+  int fd = c->GPR2;
+  void* buf = (void*)c->GPR3;
+  int count = c->GPR4;
+  if (fd == 1 || fd == 2) {
+    for (int i = 0; i < count; i ++) {
+      putch(*(char *)(buf+i));
+    }
+  }
   c->GPRx = 0;
 }
 
