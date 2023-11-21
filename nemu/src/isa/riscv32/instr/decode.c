@@ -15,6 +15,7 @@ static def_DopHelper(i) {
   op->imm = val;
 }
 
+
 static def_DopHelper(r) {
   bool is_write = flag;
   static word_t zero_null = 0;
