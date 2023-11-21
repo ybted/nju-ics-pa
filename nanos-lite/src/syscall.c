@@ -20,7 +20,7 @@ void sys_write(Context *c) {
       putch(*(char *)(buf+i));
     }
   }
-  c->GPRx = 0;
+  c->GPRx = count;
 }
 
 void do_syscall(Context *c) {
