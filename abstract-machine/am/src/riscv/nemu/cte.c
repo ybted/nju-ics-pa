@@ -13,6 +13,8 @@ Context* __am_irq_handle(Context *c) {
   // printf("mepc: %d\n", c->mepc);
   if (c->GPR1 == 0) 
     printf("yes it's 0\n");
+  int a = 0;
+  printf("a: %d\n", a);
   printf("a7: %d  a0: %d  a1: %d  a2: %d\n", c->GPR1, c->GPR2, c->GPR3,c->GPR4);
   if (user_handler) {
     Event ev = {0};
