@@ -23,6 +23,10 @@ int printf(const char *fmt, ...) {
 
 int to_string(char* out, int num) {
   int len = 0;
+  if (num == 0) {
+    *out++ = '0';
+    return 1;
+  }
   if (num < 0) {
     *out++ = '-';
     num *= -1;
