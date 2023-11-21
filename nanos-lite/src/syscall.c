@@ -11,6 +11,10 @@ void sys_exit(Context *c) {
   halt(0);
 }
 
+void sys_write(Context *c) {
+  printf("Write!\n");
+}
+
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
@@ -20,6 +24,9 @@ void do_syscall(Context *c) {
       break;
     case SYS_yield:
       sys_yield(c);
+      break;
+    case SYS_write:
+      sys_write(c);
       break;
   }
 }
