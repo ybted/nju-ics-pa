@@ -13,9 +13,8 @@ def_EHelper(jal) {
     }
   }
   #endif
-  rtl_li(s, ddest, s->snpc);
-  //printf("DEBUG jal: %x %x\n", id_src1->imm, s->pc);
-  rtl_j(s, id_src1->imm + s->pc);
+  rtl_addi(s, ddest, &s->pc, 4);
+  rtl_addi(s, &s->dnpc, &s->pc, id_src1->imm);
 
 }
 
