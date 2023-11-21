@@ -1,6 +1,7 @@
 #include <common.h>
 void do_syscall(Context *c);
 static Context* do_event(Event e, Context* c) {
+  assert(c->GPR1);
   switch (e.event) {
     case EVENT_YIELD:
       printf("event yield!\n");
