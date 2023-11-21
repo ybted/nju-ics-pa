@@ -20,13 +20,10 @@ def_EHelper(jal) {
 }
 
 def_EHelper(jalr) {
-  rtl_li(s, ddest, s->snpc);
-  unsigned int temp = id_src2->imm;
-  // printf("DEBUF jalr: %x %x %x\n", *id_src1->preg, id_src2->imm, s->pc);
-  if (temp >> 11) 
-    temp |= 0xffffff000;
-  rtl_j(s,  (*id_src1->preg) + temp);
-  
+  rtl_addi(s, s0, &s->pc, 4);
+  rtl_addi(s, &s->dnpc, dsrc1, id_src2->imm);
+  rtl_andi(s, &s->dnpc, &s->dnpc, ~1);
+  rtl_addi(s, ddest, s0, 0);
   #ifdef CONFIG_FTRACE
   for (int i = 0; i < 1024; ++i) {
     if(elf_func[i].func_name[0] == '\0') {
