@@ -13,6 +13,7 @@ void sys_exit(Context *c) {
 
 void sys_write(Context *c) {
   printf("Write!\n");
+  c->GPRx = 0;
 }
 
 void do_syscall(Context *c) {
