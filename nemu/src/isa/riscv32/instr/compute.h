@@ -35,26 +35,12 @@ def_EHelper(slli) {
 
 
 def_EHelper(sltiu) {
-  rtl_subi(s, s0, dsrc1, id_src2->imm);
-  // printf("DEBUG sltiu: %u %u\n", *dsrc1, id_src2->imm);
-
-  if ((*s0) > *dsrc1) {
-    rtl_addi(s, ddest, rz, 1);
-  } else {
-    rtl_addi(s, ddest, rz, 0);
-  }
+  rtl_setrelopi(s, RELOP_LTU, ddest, dsrc1, id_src2->imm);
   // printf("DEBUG sltiu: %u %u %u\n", *ddest, *dsrc1, id_src2->imm);
 }
 
 def_EHelper(slti) {
-  rtl_subi(s, s0, dsrc1, id_src2->imm);
-  // printf("DEBUG sltiu: %u %u\n", *dsrc1, id_src2->imm);
-
-  if ((int32_t)(*s0) > (int32_t)*dsrc1) {
-    rtl_addi(s, ddest, rz, 1);
-  } else {
-    rtl_addi(s, ddest, rz, 0);
-  }
+  rtl_setrelopi(s, RELOP_LT, ddest, dsrc1, id_src2->imm);
   // printf("DEBUG sltiu: %u %u %u\n", *ddest, *dsrc1, id_src2->imm);
 }
 
@@ -132,6 +118,6 @@ def_EHelper(and) {
 }
 
 def_EHelper(auipc) {
-  rtl_li(s, ddest, id_src1->imm + s->pc);
+  rtl_addi(s, ddest, &s->pc, id_src1->imm);
   //printf("DEBUG auipc: %x\n", *ddest);
 }
