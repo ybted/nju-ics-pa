@@ -22,15 +22,15 @@ def_EHelper(ori) {
 }
 
 def_EHelper(srai) {
-  rtl_srai(s, ddest, dsrc1, id_src2->imm & 0x01f);
+  rtl_srai(s, ddest, dsrc1, id_src2->imm  & 0b111111u);
 }
 
 def_EHelper(srli) {
-  rtl_srli(s, ddest, dsrc1, id_src2->imm & 0x01f);
+  rtl_srli(s, ddest, dsrc1, id_src2->imm  & 0b111111u);
 }
 
 def_EHelper(slli) {
-  rtl_slli(s, ddest, dsrc1, id_src2->imm & 0x01f);
+  rtl_slli(s, ddest, dsrc1, id_src2->imm  & 0b111111u);
 }
 
 
@@ -100,11 +100,7 @@ def_EHelper(remu) {
 }
 
 def_EHelper(slt) {
-  if ((int32_t) (*dsrc1) < (int32_t) (*dsrc2)) {
-    rtl_addi(s, ddest, rz, 1);
-  } else {
-    rtl_addi(s, ddest, rz, 0);
-  }
+  rtl_setrelop(s, RELOP_LT, ddest, dsrc1, dsrc2);
 }
 
 def_EHelper(sltu) {
