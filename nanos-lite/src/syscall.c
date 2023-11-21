@@ -3,7 +3,7 @@
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
-
+  assert(a[0]);
   switch (a[0]) {
     case 0:
       c->GPRx = 0;
