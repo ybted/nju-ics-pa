@@ -16,16 +16,7 @@ void sys_write(Context *c) {
   int fd = c->GPR2;
   void* buf = (void*)c->GPR3;
   int count = c->GPR4;
-  if (fd == 1 || fd == 2) {
-    for (int i = 0; i < count; i ++) {
-      putch(*(char *)(buf+i));
-    } 
-    c->GPRx = count;
-  }
-  else {
-    c->GPRx = fs_write(fd, buf, count);
-  }
-  
+  c->GPRx = fs_write(fd, buf, count);
 }
 
 void sys_brk(Context *c) {

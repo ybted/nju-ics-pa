@@ -80,7 +80,12 @@ size_t fs_write(int fd, const void *buf, size_t len)
 {
   Finfo file = file_table[fd];
   // assert(file.open_offset + len <= file.size);
-  int write_size = ramdisk_write(buf, file.disk_offset + file.open_offset, len);
+  int write_size;
+  if (file.write) {
+    write_size = file.write(buf, file.disk_offset + file.open_offset, len);
+  } else {
+    write_size = ramdisk_write(buf, file.disk_offset + file.open_offset, len);
+  }
   file_table[fd].open_offset += write_size;
   return write_size;
 }
