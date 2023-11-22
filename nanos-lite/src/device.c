@@ -22,11 +22,10 @@ size_t serial_write(const void *buf, size_t offset, size_t len) {
 }
 
 size_t events_read(void *buf, size_t offset, size_t len) {
-  io_read(AM_INPUT_CONFIG);
   int keycode = io_read(AM_INPUT_KEYBRD).keycode; 
   bool keydown = io_read(AM_INPUT_KEYBRD).keydown; 
   if (keydown) {
-    memcpy(buf, &keyname[keycode], sizeof(keyname[keycode]));
+    strcpy(buf, keyname[keycode]);
     return sizeof(keyname[keycode]);
   }
   return 0;
