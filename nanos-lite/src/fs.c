@@ -58,7 +58,7 @@ size_t fs_read(int fd, void *buf, size_t len)
   printf("offset: %d\n", file.open_offset);
   assert(!file.open_offset);
   int read_size = ramdisk_read(buf, file.disk_offset, len);
-  file.open_offset += read_size;
+  file_table[fd].open_offset += read_size;
   return read_size;
 }
 
