@@ -23,11 +23,15 @@ void sys_write(Context *c) {
   c->GPRx = count;
 }
 
+void sys_brk(Context *c) {
+  c->GPRx = 0;
+}
+
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
   // #ifdef CONFIG_STRACE
-  printf("strace: %d\n", a[0]);
+  // printf("strace: %d\n", a[0]);
   // #endif
   switch (a[0]) {
     case SYS_exit:
@@ -38,6 +42,9 @@ void do_syscall(Context *c) {
       break;
     case SYS_write:
       sys_write(c);
+      break;
+    case SYS_brk:
+      sys_brk(c);
       break;
   }
 }
