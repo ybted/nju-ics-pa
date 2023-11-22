@@ -28,8 +28,10 @@ size_t events_read(void *buf, size_t offset, size_t len) {
  
   if (keydown) {
     memcpy(buf, &keyname[keycode], sizeof(keyname[keycode]));
+    return 0;
   }
-  return 0;
+  return 1;
+  
 }
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
