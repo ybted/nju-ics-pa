@@ -1,6 +1,7 @@
 #include <proc.h>
 #include <elf.h>
 #include <stdio.h>
+#include <fs.h>
 #ifdef __LP64__
 # define Elf_Ehdr Elf64_Ehdr
 # define Elf_Phdr Elf64_Phdr
@@ -11,6 +12,9 @@
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 static uintptr_t loader(PCB *pcb, const char *filename) {
+  int fd = fs_open(filename, 0, 0);
+  printf("fd: %d\n", fd);
+  assert(0);
   Elf_Ehdr elf;
   // Elf_Phdr ph;
   ramdisk_read(&elf, 0, sizeof(Elf_Ehdr) * 10);
