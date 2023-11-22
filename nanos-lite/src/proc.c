@@ -21,7 +21,7 @@ void hello_fun(void *arg) {
 
 void init_proc() {
   switch_boot_pcb();
-  naive_uload( NULL, "/bin/timer-test");
+  naive_uload( NULL, "/bin/event-test");
   Log("Initializing processes...");
   
   // load program here
