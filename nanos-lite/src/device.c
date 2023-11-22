@@ -25,7 +25,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   
   int keycode = io_read(AM_INPUT_KEYBRD).keycode; 
   bool keydown = io_read(AM_INPUT_KEYBRD).keydown; 
-  printf("events read!\n");
+  printf("%d\n", keydown);
   if (keydown) {
     
     memcpy(buf, &keyname[keycode], sizeof(keyname[keycode]));
