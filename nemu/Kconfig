@@ -149,6 +149,12 @@ config FTRACE
   bool "Enable function tracer"
   default n
 
+config STRACE
+  depends on TRACE && TARGET_NATIVE_ELF && ENGINE_INTERPRETER
+  bool "Enable syscall tracer"
+  default n
+
+
 
 config ITRACE_COND
   depends on ITRACE
