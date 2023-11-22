@@ -70,7 +70,7 @@ void * program_break = NULL;
 
 void *_sbrk(intptr_t increment) {
   if (program_break == NULL) {
-    program_break = end;
+    program_break = &end;
   }
   void * new_pb = program_break + increment;
   void * old_pb = program_break;
