@@ -56,7 +56,7 @@ int fs_open(const char *pathname, int flags, int mode)
 size_t fs_read(int fd, void *buf, size_t len) 
 {
   Finfo file = file_table[fd];
-  printf("filename: %s\n", file.name);
+  // printf("filename: %s\n", file.name);
   // assert(file.open_offset + len <=  file.size);
   int read_size;
   if (file.read) {
