@@ -30,12 +30,16 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   printf("elf.e_shstrndx: %d\n", (int)elf.e_shstrndx);
   assert(elf.e_phoff != 0);
   int num = elf.e_phnum;
-  // int offset = elf.e_phoff;
+  int offset = elf.e_phoff;
   int size = elf.e_phentsize;
   Elf_Phdr ph[num];
+  fs_lseek(fd, offset, SEEK_SET);
   for (int i = 0; i < num; i ++) {
+    fs_lseek(fd, offset+i*size, SEEK_SET);
     fs_read(fd, &ph[i], size);
   }
+  assert(ph[1].p_memsz == 0x05a7f);
+  assert(0);
   for (int i = 0; i < num; i ++) {
     if(ph[i].p_type == PT_LOAD) {
       ramdisk_read((void *)(ph[i].p_vaddr), ph[i].p_offset, ph[i].p_memsz);
