@@ -29,6 +29,7 @@ static Finfo file_table[] __attribute__((used)) = {
   [FD_STDIN]  = {"stdin", 0, 0, invalid_read, invalid_write},
   [FD_STDOUT] = {"stdout", 0, 0, invalid_read, serial_write},
   [FD_STDERR] = {"stderr", 0, 0, invalid_read, serial_write},
+  {"/dev/events", 0, 0, events_read, invalid_write},
 #include "files.h"
 };
 
@@ -56,7 +57,12 @@ size_t fs_read(int fd, void *buf, size_t len)
 {
   Finfo file = file_table[fd];
   // assert(file.open_offset + len <=  file.size);
-  int read_size = ramdisk_read(buf, file.disk_offset + file.open_offset, len);
+  int read_size;
+  if (file.read) {
+    read_size = file.read(buf, file.disk_offset + file.open_offset, len);
+  } else {
+    read_size = ramdisk_read(buf, file.disk_offset + file.open_offset, len);
+  }
   file_table[fd].open_offset += read_size;
   return read_size;
 }
