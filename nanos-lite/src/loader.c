@@ -29,12 +29,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   // printf("elf.e_shnum: %d\n", (int)elf.e_shnum);
   // printf("elf.e_shstrndx: %d\n", (int)elf.e_shstrndx);
   // assert(elf.e_phoff != 0);
-  assert(0);
   int num = elf.e_phnum;
   int offset = elf.e_phoff;
   int size = elf.e_phentsize;
   Elf_Phdr ph[num];
-
   for (int i = 0; i < num; i ++) {
     ramdisk_read(&ph[i], offset + i * size, size);
   }

@@ -52,3 +52,8 @@ size_t fs_read(int fd, void *buf, size_t len)
   Finfo file = file_table[fd];
   return ramdisk_read(buf, file.disk_offset, len);
 }
+
+int fs_close(int fd)
+{
+  return 0;
+}
