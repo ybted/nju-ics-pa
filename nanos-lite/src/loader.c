@@ -38,10 +38,11 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     fs_lseek(fd, offset+i*size, SEEK_SET);
     fs_read(fd, &ph[i], size);
   }
-  assert(ph[1].p_memsz == 0x05a7f);
+  printf("%d\n", ph[1].p_offset);
   assert(0);
   for (int i = 0; i < num; i ++) {
     if(ph[i].p_type == PT_LOAD) {
+      // fs_lseek(fd, , SEEK_SET);
       ramdisk_read((void *)(ph[i].p_vaddr), ph[i].p_offset, ph[i].p_memsz);
       memset((void*)(ph[i].p_vaddr+ph[i].p_filesz), 0, ph[i].p_memsz - ph[i].p_filesz);
     }
