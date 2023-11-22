@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 static int evtdev = -1;
 static int fbdev = -1;
@@ -15,12 +16,10 @@ uint32_t NDL_GetTicks() {
 }
 
 int NDL_PollEvent(char *buf, int len) {
-  int fd = open("/dev/events", "r+");
+  int fd = open("/dev/events", O_RDONLY);
   // printf("fd: %d\n", fd);
-  int size = read(fd, buf, len);
-  if (size != 0) 
-    return 1;
-  return 0;
+  return read(fd, buf, len);
+  
 }
 
 void NDL_OpenCanvas(int *w, int *h) {
