@@ -39,7 +39,7 @@ void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
   // #ifdef CONFIG_STRACE
-  // printf("strace: %d\n", a[0]);
+  printf("strace: %d\n", a[0]);
   // #endif
   switch (a[0]) {
     case SYS_exit:
