@@ -20,8 +20,12 @@ void sys_write(Context *c) {
     for (int i = 0; i < count; i ++) {
       putch(*(char *)(buf+i));
     }
+    c->GPRx = count;
   }
-  c->GPRx = count;
+  else {
+    c->GPRx = fs_write(fd, buf, count);
+  }
+  
 }
 
 void sys_brk(Context *c) {
@@ -33,6 +37,21 @@ void sys_open(Context* c) {
   int flags = (int)c->GPR3;
   int mode = (int)c->GPR4;
   c->GPRx = fs_open(pathname, flags, mode);
+}
+
+void sys_read(Context* c) {
+  int fd = c->GPR2;
+  void* buf = (void *)c->GPR3;
+  int count = c->GPR4;
+  c->GPRx = fs_read(fd, buf, count);
+}
+
+void sys_lseek(Context* c) {
+  c->GPRx = fs_lseek(c->GPR2, c->GPR3, c->GPR4);
+}
+
+void sys_close(Context* c) {
+  c->GPRx = fs_close(c->GPR2);
 }
 
 void do_syscall(Context *c) {
@@ -56,6 +75,15 @@ void do_syscall(Context *c) {
       break;
     case SYS_open:
       sys_open(c);
+      break;
+    case SYS_read:
+      sys_read(c);
+      break;
+    case SYS_lseek:
+      sys_lseek(c);
+      break;
+    case SYS_close:
+      sys_close(c);
       break;
   }
 }
