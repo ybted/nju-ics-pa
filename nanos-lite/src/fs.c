@@ -49,6 +49,6 @@ int fs_open(const char *pathname, int flags, int mode)
 
 size_t fs_read(int fd, void *buf, size_t len) 
 {
-  printf("fd: %d\n", fd);
-  assert(0);
+  Finfo file = file_table[fd];
+  return ramdisk_read(buf, file.disk_offset, len);
 }
