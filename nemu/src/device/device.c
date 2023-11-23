@@ -30,9 +30,8 @@ void device_update() {
   
 #ifndef CONFIG_TARGET_AM
   SDL_Event event;
-  int temp = SDL_PollEvent(&event);
-  printf("temp: %d\n", temp); 
-  while (temp) {
+  
+  while (SDL_PollEvent(&event)) {
     switch (event.type) {
       case SDL_QUIT:
         nemu_state.state = NEMU_QUIT;
