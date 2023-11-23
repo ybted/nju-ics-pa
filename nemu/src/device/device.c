@@ -35,9 +35,9 @@ void device_update() {
       case SDL_QUIT:
         nemu_state.state = NEMU_QUIT;
         break;
-#ifdef CONFIG_HAS_KEYBOARD
+// #ifdef CONFIG_HAS_KEYBOARD
       // If a key was pressed
-      
+      printf("keyboard!!\n");
       case SDL_KEYDOWN:
       case SDL_KEYUP: {
         uint8_t k = event.key.keysym.scancode;
@@ -45,7 +45,7 @@ void device_update() {
         send_key(k, is_keydown);
         break;
       }
-#endif
+// #endif
       default: break;
     }
   }
