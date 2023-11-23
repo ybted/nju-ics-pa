@@ -45,12 +45,12 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   int high = ev.height;
   char* w = "WIDTH:";
   char* h = "HEIGHT:";
-  char* temp = NUM(high);
-  printf("w: %s\n",  temp);
-  w = strcat(w, NUM(width));
-  strcat(h, NUM(high));
-  width ++;
-  high ++;
+  char wi[10];
+  char hi[10];
+  sprintf(wi, "%d", width); 
+  sprintf(hi, "%d", high);
+  strcat(w, wi);
+  strcat(h, hi);
   strcpy(buf, w);
   strcat(buf, h);
   
