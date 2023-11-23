@@ -31,9 +31,9 @@ void device_update() {
 #ifndef CONFIG_TARGET_AM
   SDL_Event event;
   while (SDL_PollEvent(&event)) {
-    printf("type: %d\n", event.type);
     switch (event.type) {
       case SDL_QUIT:
+        printf("1");
         nemu_state.state = NEMU_QUIT;
         break;
 #ifdef CONFIG_HAS_KEYBOARD
@@ -41,13 +41,14 @@ void device_update() {
       
       case SDL_KEYDOWN:
       case SDL_KEYUP: {
+        printf("2");
         uint8_t k = event.key.keysym.scancode;
         bool is_keydown = (event.key.type == SDL_KEYDOWN);
         send_key(k, is_keydown);
         break;
       }
 #endif
-      default: break;
+      default: printf("3"); break;
     }
   }
 #endif
