@@ -54,7 +54,7 @@ void NDL_OpenCanvas(int *w, int *h) {
   }
 
   
-  printf("w: %d h: %d\n", *w, *h);
+  
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
@@ -83,6 +83,7 @@ int NDL_Init(uint32_t flags) {
   int size = read(fd, buffer, 100);
   printf("buffer: %s\n", buffer);
   sscanf(buffer, "WIDTH:%dHEIGHT:%d", &screen_w, &screen_w);
+  printf("w: %d h: %d\n", screen_w, screen_h);
   return 0;
 }
 
