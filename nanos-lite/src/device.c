@@ -5,10 +5,14 @@
 #else
 # define MULTIPROGRAM_YIELD()
 #endif
-#define _NUM(x) #x 
-#define NUM(x) _NUM(x)
+
+
 #define NAME(key) \
   [AM_KEY_##key] = #key,
+
+
+#define _NUM(x) #x 
+#define NUM(x) _NUM(x)
 
 static const char *keyname[256] __attribute__((used)) = {
   [AM_KEY_NONE] = "NONE",
