@@ -42,6 +42,7 @@ static void key_enqueue(uint32_t am_scancode) {
 
 static uint32_t key_dequeue() {
   uint32_t key = _KEY_NONE;
+  printf("deque !!\n");
   if (key_f != key_r) {
     key = key_queue[key_f];
     key_f = (key_f + 1) % KEY_QUEUE_LEN;
@@ -71,8 +72,6 @@ static void i8042_data_io_handler(uint32_t offset, int len, bool is_write) {
   assert(!is_write);
   assert(offset == 0);
   i8042_data_port_base[0] = key_dequeue();
-  if (i8042_data_port_base[0])
-    printf("i8042: %d\n", i8042_data_port_base[0]);
 }
 
 void init_i8042() {
