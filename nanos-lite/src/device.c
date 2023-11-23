@@ -5,8 +5,8 @@
 #else
 # define MULTIPROGRAM_YIELD()
 #endif
-#define STR(x) #x
-#define NUM(x) STR(x)
+#define _NUM(x) #x 
+#define NUM(x) _NUM(x)
 #define NAME(key) \
   [AM_KEY_##key] = #key,
 
