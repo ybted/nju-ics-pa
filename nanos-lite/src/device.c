@@ -29,7 +29,6 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     return 0;
   char* tag = ev.keydown == 0 ? "ku" : "kd";
   strcpy(buf, tag);
-  printf("%s\n", NUM(123));
   strcat(buf, keyname[ev.keycode]);
   return sizeof(keyname[ev.keycode]);
 }
@@ -47,7 +46,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   high ++;
   strcpy(buf, w);
   strcat(buf, h);
-  return 0;
+  return sizeof(buf);
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
