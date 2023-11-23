@@ -42,11 +42,12 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   char* h = "HEIGHT:";
   strcat(w, NUM(width));
   strcat(h, NUM(high));
+  printf("w: %s\n", w);
   width ++;
   high ++;
   strcpy(buf, w);
   strcat(buf, h);
-  printf("%s\n", (char*)buf);
+  
   return sizeof(buf);
 }
 
