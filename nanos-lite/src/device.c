@@ -54,7 +54,8 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   strcat(buf, wi);
   strcat(buf, h);
   strcat(buf, hi);
-   printf("buf: %s\n", buf);
+  printf("buf: %s\n", buf);
+
   return sizeof(buf);
 }
 
