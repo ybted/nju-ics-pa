@@ -29,26 +29,28 @@ void device_update() {
   IFDEF(CONFIG_HAS_VGA, vga_update_screen());
   
 #ifndef CONFIG_TARGET_AM
-  printf("1");
+  
   SDL_Event event;
   while (SDL_PollEvent(&event)) {
     
     switch (event.type) {
       case SDL_QUIT:
         nemu_state.state = NEMU_QUIT;
+        printf("2");
         break;
 #ifdef CONFIG_HAS_KEYBOARD
       // If a key was pressed
       
       case SDL_KEYDOWN:
       case SDL_KEYUP: {
+        printf("1");
         uint8_t k = event.key.keysym.scancode;
         bool is_keydown = (event.key.type == SDL_KEYDOWN);
         send_key(k, is_keydown);
         break;
       }
 #endif
-      default: break;
+      default: printf("3");break;
     }
   }
 #endif
