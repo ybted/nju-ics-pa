@@ -37,6 +37,7 @@ void device_update() {
         break;
 #ifdef CONFIG_HAS_KEYBOARD
       // If a key was pressed
+      printf("keyboard!!\n");
       case SDL_KEYDOWN:
       case SDL_KEYUP: {
         uint8_t k = event.key.keysym.scancode;
