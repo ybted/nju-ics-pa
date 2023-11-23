@@ -42,3 +42,15 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 void __am_gpu_status(AM_GPU_STATUS_T *status) {
   status->ready = true;
 }
+
+
+void __am_gpu_memcpy(AM_GPU_MEMCPY_T *params) {
+  uint32_t *src = params->src, *dst = (uint32_t *)(FB_ADDR + params->dest);
+  for (int i = 0; i < params->size >> 2; i++, src++, dst++){
+    *dst = *src;
+  }
+  char *c_src = (char *)src, *c_dst = (char *)dst;
+  for (int i = 0; i < (params->size & 3); i++){
+    c_dst[i] = c_src[i];
+  }
+}
