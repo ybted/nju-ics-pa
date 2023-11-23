@@ -11,8 +11,8 @@
   [AM_KEY_##key] = #key,
 
 
-#define _NUM(x) #x 
-#define NUM(x) _NUM(x)
+#define NUM_temp(x) #x 
+#define NUM(x) NUM_temp(x)
 
 static const char *keyname[256] __attribute__((used)) = {
   [AM_KEY_NONE] = "NONE",
