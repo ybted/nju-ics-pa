@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
-
+#include <assert.h>
 static int evtdev = -1;
 static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
@@ -26,12 +26,12 @@ void NDL_OpenCanvas(int *w, int *h) {
   if (*w == 0){
     *w = screen_w;
   }else if(*w > screen_w){
-    assert(0);
+    assert(1 == 2);
   }
   if (*h == 0){
     *h = screen_h;
   }else if(*h > screen_h){
-    assert(0);
+    assert(1 == 2);
   }
   canvas_w = *w;
   canvas_h = *h;
