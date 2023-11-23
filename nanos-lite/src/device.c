@@ -41,7 +41,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   int high = ev.height;
   char* w = "WIDTH:";
   char* h = "HEIGHT:";
-  printf("w: %s\n", w);
+  printf("w: %s\n",  NUM(width));
   w = strcat(w, NUM(width));
   strcat(h, NUM(high));
   printf("w: %s\n", w);
