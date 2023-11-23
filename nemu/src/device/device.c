@@ -29,8 +29,8 @@ void device_update() {
   IFDEF(CONFIG_HAS_VGA, vga_update_screen());
   
 #ifndef CONFIG_TARGET_AM
-  SDL_Event event;
   printf("1");
+  SDL_Event event;
   while (SDL_PollEvent(&event)) {
     
     switch (event.type) {
