@@ -60,15 +60,14 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
-
-  uintptr_t *ptr;
-  ptr = (uintptr_t *)(&buf);
-
-  io_write(AM_GPU_MEMCPY, offset, (void *)*ptr, len);
-  io_write(AM_GPU_FBDRAW, 0, 0, NULL, 0, 0, true);
-  
+  // int x = offset % width;
+  // int y = offset / width;
+  // for (int i = 0; i < len; i ++) {
+  //   // io_write(AM_GPU_FBDRAW, x, y, &buf[i], 1, 1, true);
+  // }
   return len;
 }
+
 void init_device() {
   Log("Initializing devices...");
   ioe_init();
