@@ -5,7 +5,8 @@
 #else
 # define MULTIPROGRAM_YIELD()
 #endif
-#define NUM(x) #x
+#define STR(x) #x
+#define NUM(x) STR(x)
 #define NAME(key) \
   [AM_KEY_##key] = #key,
 
@@ -41,7 +42,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   char* w = "WIDTH:";
   char* h = "HEIGHT:";
   printf("w: %s\n", w);
-  strcat(w, NUM(width));
+  w = strcat(w, NUM(width));
   strcat(h, NUM(high));
   printf("w: %s\n", w);
   width ++;
