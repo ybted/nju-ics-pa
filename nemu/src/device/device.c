@@ -29,9 +29,9 @@ void device_update() {
   IFDEF(CONFIG_HAS_VGA, vga_update_screen());
   
 #ifndef CONFIG_TARGET_AM
-  printf("wtf!!\n");
   SDL_Event event;
   while (SDL_PollEvent(&event)) {
+    printf("type: %d\n", event.type);
     switch (event.type) {
       case SDL_QUIT:
         nemu_state.state = NEMU_QUIT;
