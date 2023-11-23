@@ -5,7 +5,7 @@
 #else
 # define MULTIPROGRAM_YIELD()
 #endif
-
+#define NUM(x) #x
 #define NAME(key) \
   [AM_KEY_##key] = #key,
 
@@ -29,13 +29,24 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     return 0;
   char* tag = ev.keydown == 0 ? "ku" : "kd";
   strcpy(buf, tag);
-  
+  printf("%s\n", NUM(123));
   strcat(buf, keyname[ev.keycode]);
   return sizeof(keyname[ev.keycode]);
 }
   
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
+  AM_GPU_CONFIG_T ev = io_read(AM_GPU_CONFIG);
+  int width = ev.width;
+  int high = ev.height;
+  char* w = "WIDTH:";
+  char* h = "HEIGHT:";
+  strcat(w, NUM(width));
+  strcat(h, NUM(high));
+  width ++;
+  high ++;
+  strcpy(buf, w);
+  strcat(buf, h);
   return 0;
 }
 
