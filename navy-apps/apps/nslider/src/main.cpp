@@ -14,7 +14,7 @@
 // number of slides
 const int N = 1;
 // slides path pattern (starts from 0)
-const char *path = "/share/slides/slides.bmp";
+const char *path = "/share/slides/slides-%d.bmp";
 
 static SDL_Surface *slide = NULL;
 static int cur = 0;
@@ -24,7 +24,7 @@ void render() {
     SDL_FreeSurface(slide);
   }
   char fname[256];
-  sprintf(fname, path);
+  sprintf(fname, path, cur);
   slide = SDL_LoadBMP(fname);
   assert(slide);
   SDL_UpdateRect(slide, 0, 0, 0, 0);

@@ -1,6 +1,6 @@
 #include <NDL.h>
 #include <SDL.h>
-
+#include <assert.h>
 int SDL_OpenAudio(SDL_AudioSpec *desired, SDL_AudioSpec *obtained) {
   assert(1 == 2);
   return 0;
