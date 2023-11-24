@@ -46,42 +46,42 @@ void next(int rep) {
 
 int main() {
   SDL_Init(0);
-  // SDL_Surface *screen = SDL_SetVideoMode(W, H, 32, SDL_HWSURFACE);
+  SDL_Surface *screen = SDL_SetVideoMode(W, H, 32, SDL_HWSURFACE);
 
-  // int rep = 0, g = 0;
+  int rep = 0, g = 0;
 
-  // render();
+  render();
 
-  // while (1) {
-  //   SDL_Event e;
-  //   SDL_WaitEvent(&e);
+  while (1) {
+    SDL_Event e;
+    SDL_WaitEvent(&e);
 
-  //   if (e.type == SDL_KEYDOWN) {
-  //     switch(e.key.keysym.sym) {
-  //       case SDLK_0: rep = rep * 10 + 0; break;
-  //       case SDLK_1: rep = rep * 10 + 1; break;
-  //       case SDLK_2: rep = rep * 10 + 2; break;
-  //       case SDLK_3: rep = rep * 10 + 3; break;
-  //       case SDLK_4: rep = rep * 10 + 4; break;
-  //       case SDLK_5: rep = rep * 10 + 5; break;
-  //       case SDLK_6: rep = rep * 10 + 6; break;
-  //       case SDLK_7: rep = rep * 10 + 7; break;
-  //       case SDLK_8: rep = rep * 10 + 8; break;
-  //       case SDLK_9: rep = rep * 10 + 9; break;
-  //       case SDLK_J:
-  //       case SDLK_DOWN: next(rep); rep = 0; g = 0; break;
-  //       case SDLK_K:
-  //       case SDLK_UP: prev(rep); rep = 0; g = 0; break;
-  //       case SDLK_G:
-  //         g ++;
-  //         if (g > 1) {
-  //           prev(100000);
-  //           rep = 0; g = 0;
-  //         }
-  //         break;
-  //     }
-  //   }
-  // }
+    if (e.type == SDL_KEYDOWN) {
+      switch(e.key.keysym.sym) {
+        case SDLK_0: rep = rep * 10 + 0; break;
+        case SDLK_1: rep = rep * 10 + 1; break;
+        case SDLK_2: rep = rep * 10 + 2; break;
+        case SDLK_3: rep = rep * 10 + 3; break;
+        case SDLK_4: rep = rep * 10 + 4; break;
+        case SDLK_5: rep = rep * 10 + 5; break;
+        case SDLK_6: rep = rep * 10 + 6; break;
+        case SDLK_7: rep = rep * 10 + 7; break;
+        case SDLK_8: rep = rep * 10 + 8; break;
+        case SDLK_9: rep = rep * 10 + 9; break;
+        case SDLK_J:
+        case SDLK_DOWN: next(rep); rep = 0; g = 0; break;
+        case SDLK_K:
+        case SDLK_UP: prev(rep); rep = 0; g = 0; break;
+        case SDLK_G:
+          g ++;
+          if (g > 1) {
+            prev(100000);
+            rep = 0; g = 0;
+          }
+          break;
+      }
+    }
+  }
 
   return 0;
 }
