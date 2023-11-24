@@ -60,7 +60,6 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
-  printf("len: %d\n", len);
   io_write(AM_GPU_MEMCPY, offset, (void *)buf, len);
   io_write(AM_GPU_FBDRAW, 0, 0, NULL, 0, 0, true);
   return len;
