@@ -86,11 +86,12 @@ int SDL_PushEvent(SDL_Event *ev) {
 static char key_buf[64], *key_action, *key_key;
 //To Be Fast
 static int inline read_keyinfo(uint8_t *type, uint8_t *sym){
+
   int ret = NDL_PollEvent(key_buf, sizeof(key_buf));
   if (!ret){
     return 0;
   }
-  //printf("%s\n", key_buf);
+  printf("key_buf: %s\n", key_buf);
   key_action = key_buf;
   int i;
   for (i = 0; key_buf[i] != ' '; i++){}
@@ -153,11 +154,9 @@ int SDL_WaitEvent(SDL_Event *event) {
   //SDL_PumpEvents();
 
   //while (!pop(&type, &sym)){
-  printf("start read\n");
   while (!read_keyinfo(&type, &sym)){
     //SDL_PumpEvents();
   }
-  printf("end read\n");
   event->type = type;
   event->key.keysym.sym = sym;
 
