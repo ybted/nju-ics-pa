@@ -156,6 +156,7 @@ int SDL_WaitEvent(SDL_Event *event) {
   //while (!pop(&type, &sym)){
   while (!read_keyinfo(&type, &sym)){
     //SDL_PumpEvents();
+    printf("read");
   }
   
   event->type = type;
