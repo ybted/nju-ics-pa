@@ -152,7 +152,7 @@ int SDL_PollEvent(SDL_Event *ev) {
 int SDL_WaitEvent(SDL_Event *event) {
   uint8_t type = 0, sym = 0;
   //SDL_PumpEvents();
-
+  printf("wait!\n");
   //while (!pop(&type, &sym)){
   while (!read_keyinfo(&type, &sym)){
     //SDL_PumpEvents();
