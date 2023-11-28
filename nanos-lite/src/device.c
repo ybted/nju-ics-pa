@@ -32,7 +32,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   //   printf("%d\n", ev.keycode);
   if (ev.keycode == AM_KEY_NONE) 
     return 0;
-  char* tag = ev.keydown == 0 ? "ku" : "kd";
+  char* tag = ev.keydown == 0 ? "ku " : "kd ";
   strcpy(buf, tag);
   strcat(buf, keyname[ev.keycode]);
   return sizeof(keyname[ev.keycode]);
