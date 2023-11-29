@@ -10,8 +10,9 @@ void sys_yield(Context *c) {
 
 void sys_exit(Context *c) {
   printf("EXIT!\n");
+  
+  naive_uload(NULL, "/bin/nterm");
   c->GPRx = 0;
-  halt(0);
 }
 
 void sys_write(Context *c) {
