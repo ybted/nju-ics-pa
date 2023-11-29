@@ -62,7 +62,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
   char* h = "HEIGHT:";
   char wi[10];
   char hi[10];
-  sprintf(wi, "%d\n", width); 
+  sprintf(wi, "%d", width); 
   sprintf(hi, "%d", high);
  
   strcpy(buf, w);
