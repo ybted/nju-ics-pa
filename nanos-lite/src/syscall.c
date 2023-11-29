@@ -58,7 +58,6 @@ void sys_gettimeofday(Context* c) {
 
 void sys_execve(Context *c) {
   char *fname = (char*)c->GPR2;
-  printf("fname exec: %s\n", fname);
   naive_uload(NULL, fname);
   c->GPRx = 0;
 }

@@ -11,6 +11,7 @@
 #endif
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
+  printf("filename loader: %s\n", filename);
   int fd = fs_open(filename, 0, 0);
   Elf_Ehdr elf;
   fs_read(fd, &elf, sizeof(elf));
@@ -54,7 +55,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
-
+  
   uintptr_t entry = loader(pcb, filename);
   Log("Jump to entry = %p", (void *)entry);
   ((void(*)())entry) ();
