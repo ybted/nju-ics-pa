@@ -13,6 +13,7 @@
 static uintptr_t loader(PCB *pcb, const char *filename) {
   printf("filename loader: %s\n", filename);
   int fd = fs_open(filename, 0, 0);
+  printf("filename loader: %s\n", filename);
   Elf_Ehdr elf;
   fs_read(fd, &elf, sizeof(elf));
   
