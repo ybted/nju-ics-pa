@@ -1,6 +1,8 @@
 #include <common.h>
 #include "syscall.h"
 #include "fs.h"
+#include "proc.h"
+void naive_uload(PCB *pcb, const char *filename);
 void sys_yield(Context *c) {
   yield();
   c->GPRx = 0;
@@ -53,8 +55,10 @@ void sys_gettimeofday(Context* c) {
   c->GPRx = 0;
 }
 
-void sys_exec(Context *c) {
-  
+void sys_execve(Context *c) {
+  char *fname = (char*)c->GPR2;
+  naive_uload(NULL, fname);
+  c->GPRx = 0;
 }
 
 
@@ -91,6 +95,9 @@ void do_syscall(Context *c) {
       break;
     case SYS_gettimeofday:
       sys_gettimeofday(c);
+      break;
+    case SYS_execve:
+      sys_execve(c);
       break;
   }
 }
