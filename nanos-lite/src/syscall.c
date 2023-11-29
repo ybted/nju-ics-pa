@@ -53,6 +53,10 @@ void sys_gettimeofday(Context* c) {
   c->GPRx = 0;
 }
 
+void sys_exec(Context *c) {
+  
+}
+
 
 void do_syscall(Context *c) {
   uintptr_t a[4];
