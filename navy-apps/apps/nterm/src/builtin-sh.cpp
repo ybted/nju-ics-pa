@@ -24,7 +24,7 @@ static void sh_prompt() {
 
 static void sh_handle_cmd(const char *cmd) {
   char buffer[100];
-  strcpu(buffer, cmd);
+  strcpy(buffer, cmd);
   buffer[strlen(cmd) - 1] = '\0';
   execve(buffer, NULL, NULL);
 }
