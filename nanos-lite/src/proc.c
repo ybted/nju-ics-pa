@@ -21,8 +21,8 @@ void hello_fun(void *arg) {
 
 void context_kload(PCB* pro, void (*func)(void *), void * arg) {
   Area kstack;
-  kstack.start = &pro->stack[STACK_SIZE - 1];
-  kstack.end = &pro->stack[0];
+  kstack.end = &pro->stack[STACK_SIZE - 1];
+  kstack.start = &pro->stack[0];
   Context* cp = kcontext(kstack, func, arg);
   pro->cp = cp;
 }
