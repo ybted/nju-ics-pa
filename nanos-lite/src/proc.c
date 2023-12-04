@@ -2,6 +2,8 @@
 
 #define MAX_NR_PROC 4
 extern void naive_uload(PCB *pcb, const char *filename);
+extern void context_uload(PCB* pro, char* name);
+extern void context_kload(PCB* pro, void (*func)(void *), void * arg);
 static PCB pcb[MAX_NR_PROC] __attribute__((used)) = {};
 static PCB pcb_boot = {};
 PCB *current = NULL;
@@ -20,17 +22,12 @@ void hello_fun(void *arg) {
   }
 }
 
-void context_kload(PCB* pro, void (*func)(void *), void * arg) {
-  Area kstack;
-  kstack.end = &pro->stack[STACK_SIZE - 1];
-  kstack.start = &pro->stack[0];
-  Context* cp = kcontext(kstack, func, arg);
-  pro->cp = cp;
-}
+
+
 
 void init_proc() {
   context_kload(&pcb[0], hello_fun, "I'm 1");
-  context_kload(&pcb[1], hello_fun, "I'm 2");
+  context_uload(&pcb[1], "/bin/bird");
   switch_boot_pcb();
   Log("Initializing processes...");
   

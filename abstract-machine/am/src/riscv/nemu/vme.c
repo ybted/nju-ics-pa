@@ -67,8 +67,14 @@ void __am_switch(Context *c) {
 }
 
 void map(AddrSpace *as, void *va, void *pa, int prot) {
+
 }
 
 Context *ucontext(AddrSpace *as, Area kstack, void *entry) {
-  return NULL;
+  Context *cp = kstack.end - sizeof(Context);
+  cp->mcause = 1;
+  cp->mepc = (uintptr_t)entry;
+  cp->mstatus  = 0;
+  cp->pdir = NULL;
+  return cp;
 }

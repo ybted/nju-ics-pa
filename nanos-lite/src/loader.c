@@ -60,3 +60,21 @@ void naive_uload(PCB *pcb, const char *filename) {
   ((void(*)())entry) ();
 }
 
+void context_uload(PCB* pro, char* name)
+{
+  Area ustack;
+  ustack.end = &pro->stack[STACK_SIZE - 1];
+  ustack.start = &pro->stack[0];
+  uintptr_t entry = loader(pro, name);
+  Context* cp = ucontext(NULL, ustack, (void *)entry);
+  pro->cp = cp;
+}
+
+
+void context_kload(PCB* pro, void (*func)(void *), void * arg) {
+  Area kstack;
+  kstack.end = &pro->stack[STACK_SIZE - 1];
+  kstack.start = &pro->stack[0];
+  Context* cp = kcontext(kstack, func, arg);
+  pro->cp = cp;
+}

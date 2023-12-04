@@ -59,6 +59,7 @@ int fs_open(const char *pathname, int flags, int mode)
   return i;
 }
 
+
 size_t fs_read(int fd, void *buf, size_t len) 
 {
   Finfo file = file_table[fd];
@@ -68,7 +69,9 @@ size_t fs_read(int fd, void *buf, size_t len)
   if (file.read) {
     read_size = file.read(buf, file.disk_offset + file.open_offset, len);
   } else {
-    read_size = ramdisk_read(buf, file.disk_offset + file.open_offset, len);
+    int real_len = file.open_offset + len <= file.size ? 
+        len : file.size - file.open_offset;
+    read_size = ramdisk_read(buf, file.disk_offset + file.open_offset, real_len);
   }
   file_table[fd].open_offset += read_size;
   return read_size;
