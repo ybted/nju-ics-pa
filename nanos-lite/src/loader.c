@@ -68,6 +68,7 @@ void context_uload(PCB* pro, char* name)
   uintptr_t entry = loader(pro, name);
   Context* cp = ucontext(NULL, ustack, (void *)entry);
   pro->cp = cp;
+  cp->GPRx = (int)cp;
 }
 
 
