@@ -64,7 +64,6 @@ void context_uload(PCB* pro, char* name)
 {
   Area ustack;
   ustack.end = heap.end;
-  ustack.start = ustack.end - sizeof(Context);
   uintptr_t entry = loader(pro, name);
   Context* cp = ucontext(NULL, ustack, (void *)entry);
   pro->cp = cp;
