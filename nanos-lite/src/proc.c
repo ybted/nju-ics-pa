@@ -2,7 +2,7 @@
 
 #define MAX_NR_PROC 4
 extern void naive_uload(PCB *pcb, const char *filename);
-void context_uload(PCB* pro, char* name, char* const argv[], char *const envp[]);
+void context_uload(PCB* pro, char* name);
 extern void context_kload(PCB* pro, void (*func)(void *), void * arg);
 static PCB pcb[MAX_NR_PROC] __attribute__((used)) = {};
 static PCB pcb_boot = {};
@@ -26,7 +26,7 @@ void hello_fun(void *arg) {
 
 void init_proc() {
   context_kload(&pcb[0], hello_fun, "I'm 1");
-  context_uload(&pcb[1], "/bin/bird", NULL, NULL);
+  context_uload(&pcb[1], "/bin/bird");
   switch_boot_pcb();
   Log("Initializing processes...");
   
