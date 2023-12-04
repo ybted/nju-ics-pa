@@ -60,7 +60,7 @@ void naive_uload(PCB *pcb, const char *filename) {
   ((void(*)())entry) ();
 }
 
-void context_uload(PCB* pro, char* name)
+void context_uload(PCB* pro, char* name, char* const argv[], char *const envp[])
 {
   Area ustack;
   ustack.end = &pro->stack[STACK_SIZE - 1];

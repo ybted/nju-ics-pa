@@ -24,7 +24,6 @@ void hello_fun(void *arg) {
 
 
 
-
 void init_proc() {
   context_kload(&pcb[0], hello_fun, "I'm 1");
   context_uload(&pcb[1], "/bin/bird");
